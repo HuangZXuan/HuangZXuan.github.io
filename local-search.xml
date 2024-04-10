@@ -31,61 +31,11 @@
   
   
   <entry>
-    <title>Try</title>
-    <link href="/2024/04/09/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
-    <url>/2024/04/09/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>origin</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>原生</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>博客二</title>
-    <link href="/2024/04/09/blog02/"/>
-    <url>/2024/04/09/blog02/</url>
-    
-    <content type="html"><![CDATA[<h1 id="嘿嘿嘿02"><a href="#嘿嘿嘿02" class="headerlink" title="嘿嘿嘿02"></a>嘿嘿嘿02</h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>try</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>分类一</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>关于fluid</title>
     <link href="/2024/04/09/blog01/"/>
     <url>/2024/04/09/blog01/</url>
     
-    <content type="html"><![CDATA[<p>一款 Material Design 风格的主题</p><h1 id="搭建-Hexo-博客"><a href="#搭建-Hexo-博客" class="headerlink" title="搭建 Hexo 博客"></a>搭建 Hexo 博客</h1><p>如果你还没有 Hexo 博客，请按照 <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p><h1 id="获取主题最新版本"><a href="#获取主题最新版本" class="headerlink" title="获取主题最新版本"></a>获取主题最新版本</h1><p>方式一：<br>Hexo 5.0.0 版本以上，推荐通过 npm 直接安装，进入博客目录执行命令：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-theme-fluid</span><br></code></pre></td></tr></table></figure><p>然后在博客目录下创建 _config.fluid.yml，将主题的<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制进去<br>方式二：<br>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新release</a>解压导themes目录，并解压出的文件夹命名为fluid</p><h1 id="指定主题"><a href="#指定主题" class="headerlink" title="指定主题"></a>指定主题</h1><p>如下修改 Hexo 博客目录中的 _config.yml：</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span><br><br><span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure><h1 id="创建关于页"><a href="#创建关于页" class="headerlink" title="创建关于页"></a>创建关于页</h1><p>首次使用主题的「关于页」需要手动创建：</p><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure><p>创建成功后，编辑博客目录下 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性。<br>修改后的文件示例如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">about</span><br><span class="hljs-attr">layout:</span> <span class="hljs-string">about</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-string">这里写关于页的正文，支持</span> <span class="hljs-string">Markdown,</span> <span class="hljs-string">HTML</span><br></code></pre></td></tr></table></figure><h1 id="更新主题"><a href="#更新主题" class="headerlink" title="更新主题"></a><a href="https://hexo.fluid-dev.com/docs/start/#%E6%9B%B4%E6%96%B0%E4%B8%BB%E9%A2%98">更新主题</a></h1><h1 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h1><img src="/2024/04/09/blog01/04/09/blog01/image-20240409114607435.png" class title="image-20240409114607435">]]></content>
+    <content type="html"><![CDATA[<p>一款 Material Design 风格的主题</p><h1 id="搭建-Hexo-博客"><a href="#搭建-Hexo-博客" class="headerlink" title="搭建 Hexo 博客"></a>搭建 Hexo 博客</h1><p>如果你还没有 Hexo 博客，请按照 <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p><h1 id="获取主题最新版本"><a href="#获取主题最新版本" class="headerlink" title="获取主题最新版本"></a>获取主题最新版本</h1><p>方式一：<br>Hexo 5.0.0 版本以上，推荐通过 npm 直接安装，进入博客目录执行命令：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-theme-fluid</span><br></code></pre></td></tr></table></figure><p>然后在博客目录下创建 _config.fluid.yml，将主题的<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制进去<br>方式二：<br>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新release</a>解压导themes目录，并解压出的文件夹命名为fluid</p><h1 id="指定主题"><a href="#指定主题" class="headerlink" title="指定主题"></a>指定主题</h1><p>如下修改 Hexo 博客目录中的 _config.yml：</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span><br><br><span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure><h1 id="创建关于页"><a href="#创建关于页" class="headerlink" title="创建关于页"></a>创建关于页</h1><p>首次使用主题的「关于页」需要手动创建：</p><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure><p>创建成功后，编辑博客目录下 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性。<br>修改后的文件示例如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">about</span><br><span class="hljs-attr">layout:</span> <span class="hljs-string">about</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-string">这里写关于页的正文，支持</span> <span class="hljs-string">Markdown,</span> <span class="hljs-string">HTML</span><br></code></pre></td></tr></table></figure><h1 id="更新主题"><a href="#更新主题" class="headerlink" title="更新主题"></a><a href="https://hexo.fluid-dev.com/docs/start/#%E6%9B%B4%E6%96%B0%E4%B8%BB%E9%A2%98">更新主题</a></h1><h1 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h1><img src="/2024/04/09/blog01/04/09/blog01/image-20240410170406072.png" class title="image-20240410170406072">]]></content>
     
     
     <categories>
