@@ -4,6 +4,62 @@
   
   
   <entry>
+    <title>数据分析</title>
+    <link href="/2024/04/12/20240412_dataAnalysis/"/>
+    <url>/2024/04/12/20240412_dataAnalysis/</url>
+    
+    <content type="html"><![CDATA[<img src="/2024/04/12/20240412_dataAnalysis/image-20240412163256908.png" class="" title="image-20240412163256908">]]></content>
+    
+    
+    <categories>
+      
+      <category>人工智能</category>
+      
+      <category>数据分析</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>人工智能</tag>
+      
+      <tag>数据分析</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>逻辑回归</title>
+    <link href="/2024/04/12/20240412_LogisticRegression/"/>
+    <url>/2024/04/12/20240412_LogisticRegression/</url>
+    
+    <content type="html"><![CDATA[<img src="/2024/04/12/20240412_LogisticRegression/image-20240412163438609.png" class="" title="image-20240412163438609">]]></content>
+    
+    
+    <categories>
+      
+      <category>人工智能</category>
+      
+      <category>机器学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>机器学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>如何在博客中渲染数学公式</title>
     <link href="/2024/04/12/20240412_AddMathToBlogs/"/>
     <url>/2024/04/12/20240412_AddMathToBlogs/</url>
@@ -32,10 +88,10 @@
   
   <entry>
     <title>线性回归</title>
-    <link href="/2024/04/10/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
-    <url>/2024/04/10/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</url>
+    <link href="/2024/04/10/20240411_linearRegression/"/>
+    <url>/2024/04/10/20240411_linearRegression/</url>
     
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>​    一个事物唯一由另一个事物决定</p><h2 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h2><p>​    类似二元直角坐标系，描出关系图形是一条直线，称为线性关系</p><h2 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h2><p>​    回归分析是一种统计方法,于对具有一个或多个自变量的因变量(目标变量)和自变量(预测变量)之间的关系进行建模。具体地说，回归分析有助于我们理解在其他自变量保持固定的情况下，自变量的值对应于自变量的变化方式。它可以预测连续/实际值,例如温度,年龄,工资,价格等。</p><p>​    回归是一种<strong>有监督</strong>的学习技术，有助于<strong>发现变量之间的相关性</strong>,并使我们能够基于一个或多个预测变量来预测连续输出变量。它主要用于<strong>预测，时间序列建模以及确定变量之间的因果关系</strong>。</p><h2 id="线性函数"><a href="#线性函数" class="headerlink" title="线性函数"></a>线性函数</h2>]]></content>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>​    一个事物唯一由另一个事物决定</p><h2 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h2><p>​    类似二元直角坐标系，描出关系图形是一条直线，称为线性关系</p><h2 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h2><p>​    回归分析是一种统计方法,于对具有一个或多个自变量的因变量(目标变量)和自变量(预测变量)之间的关系进行建模。具体地说，回归分析有助于我们理解在其他自变量保持固定的情况下，自变量的值对应于自变量的变化方式。它可以预测连续/实际值,例如温度,年龄,工资,价格等。</p><p>​    回归是一种<strong>有监督</strong>的学习技术，有助于<strong>发现变量之间的相关性</strong>,并使我们能够基于一个或多个预测变量来预测连续输出变量。它主要用于<strong>预测，时间序列建模以及确定变量之间的因果关系</strong>。</p><h1 id="简单线性回归模型"><a href="#简单线性回归模型" class="headerlink" title="简单线性回归模型"></a><strong>简单线性回归模型</strong></h1> $$\hat{y}= h(x) = w*x +b  $$<p>其中$w$叫权重参数，$b$叫偏置或者截距。当求解得到未知参数$w$，$b$之后，也就意味着我们得到了这个预测模型。假设给定一个房屋面积$x$，就能够预测出其对应的房价。</p><h1 id="求解线性回归模型"><a href="#求解线性回归模型" class="headerlink" title="求解线性回归模型"></a><strong>求解线性回归模型</strong></h1><p>​    当建立好一个模型后，自然而然想到的就是如何通过给定的数据，也叫训练集（Training Data），来对模型$h(x)$进行求解。在中学时期我们倒是学过如何通过两个坐标点来求解过这两点的直线，可在上述的场景中这种做法显然行不通的（因为所有的点并不在一条直线上），那有没有什么好的解决的办法呢？</p><p>​    此时就需要我们转换一下思路了，既然不能直接来进行求解那就换一种间接的方式。现在来想象一下，当$h(x)$满足一个什么样的条件时，它才能称得上是一个好的$h(x)$? 回想一下求解$h(x)$的目的是什么，不就是希望输入面积$x$后能够输出”准确”的房价$h(x)$吗 ？既然直接求解$h(x)$不好入手，那么我们就从“准确”来入手。</p><p>​    可又怎么来定义准确呢？在这里，我们可以通过计算每个样本的真实房价与预测房价之间的均方误差来对“准确”进行刻画</p>]]></content>
     
     
     <categories>
@@ -83,36 +139,11 @@
   
   
   <entry>
-    <title>光纤通信</title>
-    <link href="/2024/04/10/%E9%80%9A%E4%BF%A1%E8%AF%BE%E7%A8%8B/"/>
-    <url>/2024/04/10/%E9%80%9A%E4%BF%A1%E8%AF%BE%E7%A8%8B/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>光纤通信</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>光纤</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>使用Hexo+GitHub搭建个人免费博客</title>
-    <link href="/2024/04/09/github&amp;hexo/"/>
-    <url>/2024/04/09/github&amp;hexo/</url>
+    <link href="/2024/04/09/20240409_github&amp;hexo/"/>
+    <url>/2024/04/09/20240409_github&amp;hexo/</url>
     
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="GitHub-Pages与Hexo"><a href="#GitHub-Pages与Hexo" class="headerlink" title="GitHub Pages与Hexo"></a>GitHub Pages与Hexo</h2><ul><li><p>GitHub Pages 是由 GitHub 官方提供的一种免费的静态站点托管服务，让我们可以在 GitHub 仓库里托管和发布自己的静态网站页面。</p></li><li><p>Hexo 是一个快速、简洁且高效的静态博客框架，它基于 Node.js 运行，可以将我们撰写的 Markdown 文档解析渲染成静态的 HTML 网页。</p></li><li><p>在本地撰写 Markdown 格式文章后，通过 Hexo 解析文档，渲染生成具有主题样式的 HTML 静态网页，再推送到 GitHub 上完成博文的发布。（注意，在GitHub上没有存储你的md文件）</p><img src="/2024/04/09/github&hexo/image-20240409225733759.png" class="" title="image-20240409225733759"></li></ul><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul><li>输入代码时，核对准确，最好切换成英文输入法；</li><li>将文中的 “用户名” 和 “邮箱” 替换为自己的 GitHub 账户名和绑定的邮箱；</li><li>统一使用 Git Bash 进行操作（其实vscode控制台也可以，但是这样子真的好方便，以后就用typora写完直接hexo clean和hexo d就可以了）；</li><li>hhh小白请严格按步骤进行，不要跳！</li></ul><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git</p><ul><li><a href="https://nodejs.org/zh-cn">Node.js</a></li><li><a href="https://git-scm.com/downloads">Git</a></li></ul><p>下载 Node.js 和 Git 程序并安装，一路点 “下一步” 按默认配置完成安装。</p><p>安装完成后，Win+R 输入 cmd 并打开，依次输入 node -v、npm -v 和 git —version 并回车，如下图出现程序版本号即可。</p><h1 id="连接GitHub"><a href="#连接GitHub" class="headerlink" title="连接GitHub"></a>连接GitHub</h1><ol><li><p>使用邮箱注册<a href="https://github.com/">GitHub</a>账户(在github官网)</p></li><li><p>右键 -&gt; Git Bash Here , 设置_用户名和邮箱_（在自己电脑，随便找个地方，因为是全局的）</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.name</span> <span class="hljs-string">&quot;GitHub 用户名&quot;</span><br>git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.email</span> <span class="hljs-string">&quot;GitHub 邮箱&quot;</span><br></code></pre></td></tr></table></figure></li><li><p><strong>创建 SSH 密匙</strong>：输入 <code>ssh-keygen -t rsa -C &quot;GitHub 邮箱&quot;</code>，然后一路回车。获取生成了密钥。</p><p>（注意，如果不一直回车，自定义名称，则后面需要在。ssh后添加一个config文件，且内容为</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># github</span><br>Host github.com<br>HostName github.com<br>PreferredAuthentications publickey<br>IdentityFile ~<span class="hljs-regexp">/.ssh/</span>你的自定义名称<br></code></pre></td></tr></table></figure><p>）</p></li><li><p><strong>添加密匙：</strong></p><p>进入 [C:\Users\用户名.ssh] 目录（要勾选显示“隐藏的项目”），用记事本打开公钥 id_rsa.pub 文件并复制里面的内容。</p><p>登陆 GitHub ，进入 Settings 页面，选择左边栏的 SSH and GPG keys，点击 New SSH key。</p><p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p><img src="/2024/04/09/github&hexo/image-20240409232327677.png" class="" title="image-20240409232327677"></li><li><p><strong>验证连接：</strong></p><p>打开 Git Bash，输入 <code>ssh -T git@github.com</code> 出现 “Are you sure……”，输入 yes 回车确认</p></li></ol><h1 id="创建Github-Pages仓库"><a href="#创建Github-Pages仓库" class="headerlink" title="创建Github Pages仓库"></a>创建Github Pages仓库</h1><p>创建后默认自动启用 HTTPS，博客地址为：<code>https://用户名.github.io</code></p><img src="/2024/04/09/github&hexo/image-20240409232820900.png" class="" title="image-20240409232820900"><h2 id="本地安装-Hexo-博客程序"><a href="#本地安装-Hexo-博客程序" class="headerlink" title="本地安装 Hexo 博客程序"></a>本地安装 Hexo 博客程序</h2><p> <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a></p><p><a href="https://huangzxuan.github.io/2024/04/09/blog01/">如何选主题更换主题呀，例如我的fluid</a></p><h1 id="部署Hexo到GitHub-Pages"><a href="#部署Hexo到GitHub-Pages" class="headerlink" title="部署Hexo到GitHub Pages"></a>部署Hexo到GitHub Pages</h1><p>本地博客测试成功后，就是上传到 GitHub 进行部署，使其能够在网络上访问。</p><p>首先<strong>安装 hexo-deployer-git</strong>：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><p>然后<strong>修改 _config.yml</strong> 文件末尾的 Deployment 部分，修改成如下：</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repository:</span> git@github.com:用户名/用户名.github.io.git<br><span class="hljs-symbol">  branch:</span> master（这里可能是main，看你github仓库的主要分支）<br></code></pre></td></tr></table></figure><p>完成后运行 <code>hexo d</code> 将网站上传部署到 GitHub Pages。</p><p>完成！这时访问我们的 GitHub 域名 <code>https://用户名.github.io</code> 就可以看到 Hexo 网站了。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="GitHub-Pages与Hexo"><a href="#GitHub-Pages与Hexo" class="headerlink" title="GitHub Pages与Hexo"></a>GitHub Pages与Hexo</h2><ul><li><p>GitHub Pages 是由 GitHub 官方提供的一种免费的静态站点托管服务，让我们可以在 GitHub 仓库里托管和发布自己的静态网站页面。</p></li><li><p>Hexo 是一个快速、简洁且高效的静态博客框架，它基于 Node.js 运行，可以将我们撰写的 Markdown 文档解析渲染成静态的 HTML 网页。</p></li><li><p>在本地撰写 Markdown 格式文章后，通过 Hexo 解析文档，渲染生成具有主题样式的 HTML 静态网页，再推送到 GitHub 上完成博文的发布。（注意，在GitHub上没有存储你的md文件）</p><img src="/2024/04/09/20240409_github&hexo/image-20240409225733759.png" class="" title="image-20240409225733759"></li></ul><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul><li>输入代码时，核对准确，最好切换成英文输入法；</li><li>将文中的 “用户名” 和 “邮箱” 替换为自己的 GitHub 账户名和绑定的邮箱；</li><li>统一使用 Git Bash 进行操作（其实vscode控制台也可以，但是这样子真的好方便，以后就用typora写完直接hexo clean和hexo d就可以了）；</li><li>hhh小白请严格按步骤进行，不要跳！</li></ul><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git</p><ul><li><a href="https://nodejs.org/zh-cn">Node.js</a></li><li><a href="https://git-scm.com/downloads">Git</a></li></ul><p>下载 Node.js 和 Git 程序并安装，一路点 “下一步” 按默认配置完成安装。</p><p>安装完成后，Win+R 输入 cmd 并打开，依次输入 node -v、npm -v 和 git —version 并回车，如下图出现程序版本号即可。</p><h1 id="连接GitHub"><a href="#连接GitHub" class="headerlink" title="连接GitHub"></a>连接GitHub</h1><ol><li><p>使用邮箱注册<a href="https://github.com/">GitHub</a>账户(在github官网)</p></li><li><p>右键 -&gt; Git Bash Here , 设置_用户名和邮箱_（在自己电脑，随便找个地方，因为是全局的）</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.name</span> <span class="hljs-string">&quot;GitHub 用户名&quot;</span><br>git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.email</span> <span class="hljs-string">&quot;GitHub 邮箱&quot;</span><br></code></pre></td></tr></table></figure></li><li><p><strong>创建 SSH 密匙</strong>：输入 <code>ssh-keygen -t rsa -C &quot;GitHub 邮箱&quot;</code>，然后一路回车。获取生成了密钥。</p><p>（注意，如果不一直回车，自定义名称，则后面需要在。ssh后添加一个config文件，且内容为</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># github</span><br>Host github.com<br>HostName github.com<br>PreferredAuthentications publickey<br>IdentityFile ~<span class="hljs-regexp">/.ssh/</span>你的自定义名称<br></code></pre></td></tr></table></figure><p>）</p></li><li><p><strong>添加密匙：</strong></p><p>进入 [C:\Users\用户名.ssh] 目录（要勾选显示“隐藏的项目”），用记事本打开公钥 id_rsa.pub 文件并复制里面的内容。</p><p>登陆 GitHub ，进入 Settings 页面，选择左边栏的 SSH and GPG keys，点击 New SSH key。</p><p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p><img src="/2024/04/09/20240409_github&hexo/image-20240409232327677-1712911016461.png" class="" title="image-20240409232327677"></li><li><p><strong>验证连接：</strong></p><p>打开 Git Bash，输入 <code>ssh -T git@github.com</code> 出现 “Are you sure……”，输入 yes 回车确认</p></li></ol><h1 id="创建Github-Pages仓库"><a href="#创建Github-Pages仓库" class="headerlink" title="创建Github Pages仓库"></a>创建Github Pages仓库</h1><p>创建后默认自动启用 HTTPS，博客地址为：<code>https://用户名.github.io</code></p><img src="/2024/04/09/20240409_github&hexo/image-20240409232820900.png" class="" title="image-20240409232820900"><h2 id="本地安装-Hexo-博客程序"><a href="#本地安装-Hexo-博客程序" class="headerlink" title="本地安装 Hexo 博客程序"></a>本地安装 Hexo 博客程序</h2><p> <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a></p><p><a href="https://huangzxuan.github.io/2024/04/09/blog01/">如何选主题更换主题呀，例如我的fluid</a></p><h1 id="部署Hexo到GitHub-Pages"><a href="#部署Hexo到GitHub-Pages" class="headerlink" title="部署Hexo到GitHub Pages"></a>部署Hexo到GitHub Pages</h1><p>本地博客测试成功后，就是上传到 GitHub 进行部署，使其能够在网络上访问。</p><p>首先<strong>安装 hexo-deployer-git</strong>：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><p>然后<strong>修改 _config.yml</strong> 文件末尾的 Deployment 部分，修改成如下：</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repository:</span> git@github.com:用户名/用户名.github.io.git<br><span class="hljs-symbol">  branch:</span> master（这里可能是main，看你github仓库的主要分支）<br></code></pre></td></tr></table></figure><p>完成后运行 <code>hexo d</code> 将网站上传部署到 GitHub Pages。</p><p>完成！这时访问我们的 GitHub 域名 <code>https://用户名.github.io</code> 就可以看到 Hexo 网站了。</p>]]></content>
     
     
     <categories>
@@ -136,10 +167,10 @@
   
   <entry>
     <title>关于fluid</title>
-    <link href="/2024/04/09/blog01/"/>
-    <url>/2024/04/09/blog01/</url>
+    <link href="/2024/04/09/20240410_hexo/"/>
+    <url>/2024/04/09/20240410_hexo/</url>
     
-    <content type="html"><![CDATA[<p>一款 Material Design 风格的主题</p><h1 id="搭建-Hexo-博客"><a href="#搭建-Hexo-博客" class="headerlink" title="搭建 Hexo 博客"></a>搭建 Hexo 博客</h1><p>如果你还没有 Hexo 博客，请按照 <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p><h1 id="获取主题最新版本"><a href="#获取主题最新版本" class="headerlink" title="获取主题最新版本"></a>获取主题最新版本</h1><p>方式一：<br>Hexo 5.0.0 版本以上，推荐通过 npm 直接安装，进入博客目录执行命令：<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-theme-fluid</span><br></code></pre></td></tr></table></figure><br>然后在博客目录下创建 _config.fluid.yml，将主题的<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制进去<br>方式二：<br>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新release</a>解压导themes目录，并解压出的文件夹命名为fluid</p><h1 id="指定主题"><a href="#指定主题" class="headerlink" title="指定主题"></a>指定主题</h1><p>如下修改 Hexo 博客目录中的 _config.yml：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span><br><br><span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure></p><h1 id="创建关于页"><a href="#创建关于页" class="headerlink" title="创建关于页"></a>创建关于页</h1><p>首次使用主题的「关于页」需要手动创建：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure><br>创建成功后，编辑博客目录下 /source/about/index.md，添加 layout 属性。<br>修改后的文件示例如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">about</span><br><span class="hljs-attr">layout:</span> <span class="hljs-string">about</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-string">这里写关于页的正文，支持</span> <span class="hljs-string">Markdown,</span> <span class="hljs-string">HTML</span><br></code></pre></td></tr></table></figure></p><h1 id="更新主题"><a href="#更新主题" class="headerlink" title="更新主题"></a><a href="https://hexo.fluid-dev.com/docs/start/#%E6%9B%B4%E6%96%B0%E4%B8%BB%E9%A2%98">更新主题</a></h1><h1 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h1><img src="/2024/04/09/blog01/image-20240410180425918.png" class="" title="image-20240410180425918">]]></content>
+    <content type="html"><![CDATA[<p>一款 Material Design 风格的主题</p><h1 id="搭建-Hexo-博客"><a href="#搭建-Hexo-博客" class="headerlink" title="搭建 Hexo 博客"></a>搭建 Hexo 博客</h1><p>如果你还没有 Hexo 博客，请按照 <a href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p><h1 id="获取主题最新版本"><a href="#获取主题最新版本" class="headerlink" title="获取主题最新版本"></a>获取主题最新版本</h1><p>方式一：<br>Hexo 5.0.0 版本以上，推荐通过 npm 直接安装，进入博客目录执行命令：<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-theme-fluid</span><br></code></pre></td></tr></table></figure><br>然后在博客目录下创建 _config.fluid.yml，将主题的<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制进去<br>方式二：<br>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新release</a>解压导themes目录，并解压出的文件夹命名为fluid</p><h1 id="指定主题"><a href="#指定主题" class="headerlink" title="指定主题"></a>指定主题</h1><p>如下修改 Hexo 博客目录中的 _config.yml：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span><br><br><span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure></p><h1 id="创建关于页"><a href="#创建关于页" class="headerlink" title="创建关于页"></a>创建关于页</h1><p>首次使用主题的「关于页」需要手动创建：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure><br>创建成功后，编辑博客目录下 /source/about/index.md，添加 layout 属性。<br>修改后的文件示例如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">about</span><br><span class="hljs-attr">layout:</span> <span class="hljs-string">about</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-string">这里写关于页的正文，支持</span> <span class="hljs-string">Markdown,</span> <span class="hljs-string">HTML</span><br></code></pre></td></tr></table></figure></p><h1 id="更新主题"><a href="#更新主题" class="headerlink" title="更新主题"></a><a href="https://hexo.fluid-dev.com/docs/start/#%E6%9B%B4%E6%96%B0%E4%B8%BB%E9%A2%98">更新主题</a></h1><h1 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h1><img src="/2024/04/09/20240410_hexo/image-20240410180425918.png" class="" title="image-20240410180425918">]]></content>
     
     
     <categories>
