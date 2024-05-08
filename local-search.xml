@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Python虚拟环境</title>
+    <link href="/2024/05/08/20240508_virtualEnv/"/>
+    <url>/2024/05/08/20240508_virtualEnv/</url>
+    
+    <content type="html"><![CDATA[<h1 id="系统解释器"><a href="#系统解释器" class="headerlink" title="系统解释器"></a>系统解释器</h1><ol><li><p>在<a href="https://www.python.org/">python官网</a>下载了python解释器(实际上就是一个软件)</p></li><li><p>将下载好的python解释器安装在<code>D:\Python39</code>目录下</p></li><li><p>那么，在这个目录下就会生成一系列的文件，下面我们了解一下最主要的几个内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cobol">D:\Python39<br>    - python.exe#python解释器<br>    - Scripts#目录：存放可执行文件<br>        - pip.exe<br>        - pip3.exe<br>        - pip3.9.exe<br>    - Lib#目录：存放python内置的模块<br>        - random.py<br>        - re.py<br>        - json.py<br>        - site-packages#目录：存放通过pip安装的第三方模块<br>            - requests.py<br></code></pre></td></tr></table></figure></li></ol><p>在我们的电脑上，同时可以安装多个版本的系统解释器(如：python3.8，python3.9，python3.10)</p><h1 id="环境变量的配置"><a href="#环境变量的配置" class="headerlink" title="环境变量的配置"></a>环境变量的配置</h1><ol><li><p>我们的电脑可以安装多个版本的解释器</p></li><li><p>但是，我们在日常开发中会选择一个系统解释器作为主运用的解释器</p></li><li><p>我们就会将这个版本的解释器的目录添加到环境变量中</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cobol">D:\Python39<br>D:\Python39\Scripts\<br></code></pre></td></tr></table></figure></li><li><p>那么，我们就可以在cmd终端中直接用python来调用解释器</p></li><li><p>实际就是通过环境变量中的D:\Python39路径来找到 python.exe</p></li><li><p>在cmd中运行pip install安装第三方模块</p></li><li><p>实际就是通过环境变量中的 D:\Python39\Scripts\ 路径来找到 pip.exe</p></li></ol><h1 id="如何使用虚拟环境"><a href="#如何使用虚拟环境" class="headerlink" title="如何使用虚拟环境"></a>如何使用虚拟环境</h1><h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">conda create –n py37 python=<span class="hljs-number">3.7</span><br><span class="hljs-comment"># -n : 虚拟环境的名称</span><br><span class="hljs-comment"># python= : 下载的版本号</span><br><span class="hljs-comment"># 如果下载的不是python3.7版本，将python=()改成相应的版本</span><br></code></pre></td></tr></table></figure><h2 id="进入虚拟环境"><a href="#进入虚拟环境" class="headerlink" title="进入虚拟环境"></a>进入虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">conda activate py37<br></code></pre></td></tr></table></figure><h2 id="退出虚拟环境"><a href="#退出虚拟环境" class="headerlink" title="退出虚拟环境"></a>退出虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">conda deactivate<br></code></pre></td></tr></table></figure><h2 id="删除自定义环境"><a href="#删除自定义环境" class="headerlink" title="删除自定义环境"></a>删除自定义环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">conda remove --name py38 --<span class="hljs-built_in">all</span><br></code></pre></td></tr></table></figure><h2 id="查看虚拟环境"><a href="#查看虚拟环境" class="headerlink" title="查看虚拟环境"></a>查看虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">conda env <span class="hljs-built_in">list</span><br></code></pre></td></tr></table></figure><h2 id="查看环境中的包"><a href="#查看环境中的包" class="headerlink" title="查看环境中的包"></a>查看环境中的包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">conda <span class="hljs-built_in">list</span><br></code></pre></td></tr></table></figure><h2 id="在虚拟环境中安装、卸载、更新包"><a href="#在虚拟环境中安装、卸载、更新包" class="headerlink" title="在虚拟环境中安装、卸载、更新包"></a>在虚拟环境中安装、卸载、更新包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">conda install python=<span class="hljs-number">3.6</span>  激活虚拟环境后安装包 (可以指定版本)<br>conda remove packname 激活虚拟环境后移除包<br>conda update packname 激活虚拟环境后更新包<br></code></pre></td></tr></table></figure><h1 id="在miniconda3安装spyter"><a href="#在miniconda3安装spyter" class="headerlink" title="在miniconda3安装spyter"></a>在miniconda3安装spyter</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install sip <span class="hljs-comment">##下载太慢了自己用vpn或者换源</span><br>pip.exe install --pre pyqt5-tools~=<span class="hljs-number">5.11</span> <span class="hljs-comment">##这里记得切换环境到3.11</span><br>pip install spyder<br>spyder<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>人工智能</category>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>环境配置</tag>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>NumPy库入门</title>
     <link href="/2024/04/30/20240430_numPy/"/>
     <url>/2024/04/30/20240430_numPy/</url>
