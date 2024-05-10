@@ -23,12 +23,24 @@
 <meta property="og:site_name" content="冯宝宝">
 <meta property="og:description" content="掌握表示、清洗、统计和展示数据的能力 简介NumPy是一个开源的Python科学计算基础库，底层实现是用C语言实现，实现数组时底层提供高效运算性能。  一个强大的N维数组对象ndarray 广播功能函数 整合C&#x2F;C++&#x2F;Fortran代码的工具 线性代数、傅里叶变换、随机数生成等功能  Numpy是SciPy、Pandas等数据处理或科学计算库的基础。 12#引用import numpy as n">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509213311585.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509213328557.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509213349887.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509220524222.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509222102454.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509223340872.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510113434901.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510113721159.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510120735787.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510154944785.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510155229646.png">
 <meta property="article:published_time" content="2024-04-30T13:42:05.521Z">
-<meta property="article:modified_time" content="2024-05-08T16:18:49.705Z">
+<meta property="article:modified_time" content="2024-05-10T10:17:30.365Z">
 <meta property="article:author" content="XuanYa">
 <meta property="article:tag" content="数据分析">
 <meta property="article:tag" content="分析工具">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240509213311585.png">
   
   
   
@@ -223,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          4.1k 字
         
       </span>
     
@@ -234,7 +246,7 @@
         
         
         
-          18 分钟
+          34 分钟
         
       </span>
     
@@ -381,7 +393,7 @@
 </div>
 <h3 id="高维数据"><a href="#高维数据" class="headerlink" title="高维数据"></a>高维数据</h3><p>高维数据仅仅利用最基本的二元关系展示数据间的复杂结构。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123;<br>	<span class="hljs-string">&quot;firstName&quot;</span>:<span class="hljs-string">&quot;Tian&quot;</span>,<br>	<span class="hljs-string">&quot;lastName&quot;</span>:<span class="hljs-string">&quot;Song&quot;</span>,<br>	<span class="hljs-string">&quot;address&quot;</span>:&#123;<br>		<span class="hljs-string">&quot;streetAddr&quot;</span>:<span class="hljs-string">&quot;中关村南大街5号&quot;</span>,<br>		<span class="hljs-string">&quot;city&quot;</span>:<span class="hljs-string">&quot;北京市&quot;</span>,<br>		<span class="hljs-string">&quot;zipcode&quot;</span>:<span class="hljs-string">&quot;1000081&quot;</span><br>	&#125;,<br>	<span class="hljs-string">&quot;prof&quot;</span>:[<span class="hljs-string">&quot;Computer System&quot;</span>,<span class="hljs-string">&quot;Security&quot;</span>]<br>&#125;<br><span class="hljs-comment">#键值对组织</span><br><span class="hljs-comment">#没有数据规整的组织方式，却有数据间的包含关系、数据间的并列关系以及数据间的属性关系等，形成了数据的组织方式</span><br></code></pre></td></tr></table></figure>
-<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#一维数据</span><br>[<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>]有序、列表<br>&#123;<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>&#125;无序、集合<br><br><span class="hljs-comment">#二维数据</span><br>[[<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>],<br> [<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>]]列表<br><br><span class="hljs-comment">#多维数据</span><br>列表<br><br><span class="hljs-comment">#高维数据</span><br>字典类型或数据表示格式(JSON、XML和YAML格式)<br><span class="hljs-built_in">dict</span> = &#123;<br>    <span class="hljs-string">&quot;firstName&quot;</span>:<span class="hljs-string">&quot;Tian&quot;</span>,<br>    <span class="hljs-string">&quot;lastName&quot;</span>:<span class="hljs-string">&quot;Song&quot;</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="如何表示"><a href="#如何表示" class="headerlink" title="如何表示"></a>如何表示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#一维数据</span><br>[<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>]有序、列表<br>&#123;<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>&#125;无序、集合<br><br><span class="hljs-comment">#二维数据</span><br>[[<span class="hljs-number">3.1413</span>，<span class="hljs-number">3.1313</span>，<span class="hljs-number">3.1234</span>],<br> [<span class="hljs-number">3.1234</span>，<span class="hljs-number">3.1451</span>，<span class="hljs-number">3.5161</span>]]列表<br><br><span class="hljs-comment">#多维数据</span><br>列表<br><br><span class="hljs-comment">#高维数据</span><br>字典类型或数据表示格式(JSON、XML和YAML格式)<br><span class="hljs-built_in">dict</span> = &#123;<br>    <span class="hljs-string">&quot;firstName&quot;</span>:<span class="hljs-string">&quot;Tian&quot;</span>,<br>    <span class="hljs-string">&quot;lastName&quot;</span>:<span class="hljs-string">&quot;Song&quot;</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="数组对象-ndarray"><a href="#数组对象-ndarray" class="headerlink" title="数组对象:ndarray"></a>数组对象:ndarray</h2><ul>
 <li><p>数组对象可以去掉元素间运算间运算所需的循环，使一维向量更像单个数据。</p>
 </li>
@@ -511,35 +523,194 @@
 <li><p>从字节流(raw bytes)中创建ndarry数组。</p>
 </li>
 </ol>
-<h3 id="ndarray数组的变换"><a href="#ndarray数组的变换" class="headerlink" title="ndarray数组的变换"></a>ndarray数组的变换</h3><p>对于创建后的ndarray数组，可以对其进行维度变换和元素类型变换。</p>
+<h3 id="ndarray数组的变换"><a href="#ndarray数组的变换" class="headerlink" title="ndarray数组的变换"></a>ndarray数组的变换</h3><h4 id="维度变换"><a href="#维度变换" class="headerlink" title="维度变换"></a>维度变换</h4><p>对于创建后的ndarray数组，可以对其进行维度变换和元素类型变换。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">a = np.ones((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>) , dtype = np.int32)<br></code></pre></td></tr></table></figure>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th>方法</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
+<td>.reshape(shape)</td>
+<td>不改变数组元素，返回一个shape形状的数组，<strong>原数组不变</strong></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>.resize(shape)</td>
+<td>与.reshape()功能一致，但修改原数组</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>.swapaxes(ax1,ax2)</td>
+<td>将数组n个维度中两个维度进行调换</td>
 </tr>
 <tr>
-<td></td>
+<td>.flatten()</td>
+<td>对数组进行降维，放回折叠后的一维数组，<strong>原数组不变</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">105</span>]: a.reshape((<span class="hljs-number">3</span>,<span class="hljs-number">8</span>))			<span class="hljs-comment">###a.reshape</span><br>Out[<span class="hljs-number">105</span>]:<br>array([[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]])<br>	   <br>In [<span class="hljs-number">106</span>]: a<br>Out[<span class="hljs-number">106</span>]:<br>array([[[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]],<br>	    <br>	   [[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]]])<br>	    <br>In [<span class="hljs-number">107</span>]: a.resize((<span class="hljs-number">3</span>,<span class="hljs-number">8</span>))			<span class="hljs-comment">###a.resize</span><br><br>In [<span class="hljs-number">108</span>]: a<br>Out[<span class="hljs-number">108</span>]:<br>array([[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]])<br><br>In [<span class="hljs-number">109</span>]: a.flatten()				<span class="hljs-comment">###a.flatten</span><br>Out[<span class="hljs-number">109</span>]: array([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,...,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>])<br><br>In [<span class="hljs-number">110</span>]: a<br>Out[<span class="hljs-number">110</span>]:<br>array([[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,...,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,...,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	   [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,...,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]])<br>	   <br>In [<span class="hljs-number">111</span>]: b = a.flatten()<br><br>In [<span class="hljs-number">112</span>]: b<br>Out[<span class="hljs-number">112</span>]: array([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,...,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>])<br></code></pre></td></tr></table></figure>
+<h4 id="类型变换"><a href="#类型变换" class="headerlink" title="类型变换"></a>类型变换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">new_a = a.astype(new_type)<br></code></pre></td></tr></table></figure>
+<p>astype()方法一定会创建新的数组(原始数据的一个拷贝)，即使两个类型一致。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">119</span>]: a = np.ones((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>),dtype = np.<span class="hljs-built_in">int</span>)<br><br>In [<span class="hljs-number">120</span>]: a<br>Out[<span class="hljs-number">120</span>]:<br>array([[[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]],<br>	    <br>	   [[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]]])<br>	    <br>In [<span class="hljs-number">121</span>]: b = a.astype(np.<span class="hljs-built_in">float</span>)			<span class="hljs-comment">###a.astype，可以改变类型</span><br><br>In [<span class="hljs-number">122</span>]: b<br>Out[<span class="hljs-number">122</span>]:<br>array([[[<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>],<br>	    [<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>],<br>	    [<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>]],<br>	    <br>	   [[<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>],<br>	    [<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>],<br>	    [<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>,<span class="hljs-number">1.</span>]]])<br></code></pre></td></tr></table></figure>
+<h4 id="向列表的转换"><a href="#向列表的转换" class="headerlink" title="向列表的转换"></a>向列表的转换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">Ls = a.tolist()<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">128</span>]: a = np.full((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>),<span class="hljs-number">25</span>,dtype=np.int32)<br><br>In [<span class="hljs-number">129</span>]: a<br>Out[<span class="hljs-number">129</span>]:([[[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],<br>		   [<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],<br>		   [<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>]],<br>		  [[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],<br>		   [<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],<br>		   [<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>]]])<br>		   <br>In [<span class="hljs-number">130</span>]: a.tolist()			<span class="hljs-comment">###a.tolist</span><br>Out[<span class="hljs-number">130</span>]:<br>[[[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>]],<br> [[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>],[<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>,<span class="hljs-number">25</span>]]]<br></code></pre></td></tr></table></figure>
+<h2 id="ndarray数组的操作"><a href="#ndarray数组的操作" class="headerlink" title="ndarray数组的操作"></a>ndarray数组的操作</h2><h3 id="数组的索引和切片"><a href="#数组的索引和切片" class="headerlink" title="数组的索引和切片"></a>数组的索引和切片</h3><p>索引：获取数组中特定位置元素的过程</p>
+<p>切片：获取数组元素子集的过程</p>
+<h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><p>与python的列表类似</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus">In <span class="hljs-selector-attr">[131]</span>: <span class="hljs-selector-tag">a</span> = np<span class="hljs-selector-class">.array</span>(<span class="hljs-selector-attr">[9,8,7,6,5]</span>)<br><br>In <span class="hljs-selector-attr">[132]</span>: <span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[2]</span><br>Out<span class="hljs-selector-attr">[132]</span>: <span class="hljs-number">7</span><br><br>In <span class="hljs-selector-attr">[133]</span>: <span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[ 1 : 4 : 2]</span>			###起始编号：终止编号(不含)：步长<br>Out<span class="hljs-selector-attr">[133]</span>: <span class="hljs-built_in">array</span>(<span class="hljs-selector-attr">[8,6]</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><p><strong>索引</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">146</span>]: a = np.arrange(<span class="hljs-number">24</span>).reshape((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><br>In [<span class="hljs-number">147</span>]: a<br>Out[<span class="hljs-number">147</span>]:<br>array([[[<span class="hljs-number">0</span>,  <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>],<br>	    [<span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],<br>	    [<span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]],<br>	    <br>	   [[<span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>],<br>	    [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>],<br>	    [<span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>]]])<br><br>In [<span class="hljs-number">148</span>]: a[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>Out[<span class="hljs-number">148</span>]: <span class="hljs-number">23</span><br><br>In [<span class="hljs-number">149</span>]: a[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>Out[<span class="hljs-number">149</span>]: <span class="hljs-number">6</span><br><br>In [<span class="hljs-number">150</span>]: a[-<span class="hljs-number">1</span>,-<span class="hljs-number">2</span>,-<span class="hljs-number">3</span>]<br>Out[<span class="hljs-number">150</span>]: <span class="hljs-number">17</span><br></code></pre></td></tr></table></figure>
+<p><strong>切片</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">146</span>]: a = np.arrange(<span class="hljs-number">24</span>).reshape((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><br>In [<span class="hljs-number">147</span>]: a<br>Out[<span class="hljs-number">147</span>]:<br>array([[[<span class="hljs-number">0</span>,  <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>],<br>	    [<span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],<br>	    [<span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]],<br>	    <br>	   [[<span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>],<br>	    [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>],<br>	    [<span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>]]])<br>	    <br>In [<span class="hljs-number">158</span>]: a[:,<span class="hljs-number">1</span>,-<span class="hljs-number">3</span>]			<span class="hljs-comment">###a[第一个维度的要求，第二个维度的要求，第三个维度的要求]</span><br>Out[<span class="hljs-number">158</span>]: array([<span class="hljs-number">5</span>,<span class="hljs-number">17</span>])		<span class="hljs-comment">###选取一个维度用：</span><br><br>In [<span class="hljs-number">159</span>]: a[:,<span class="hljs-number">1</span>:<span class="hljs-number">3</span>,:]<br>Out[<span class="hljs-number">159</span>]:<br>array([[[<span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],<br>	    [<span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]],<br>	    <br>	   [[<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>],<br>	    [<span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>]]])<br>	    <br>In [<span class="hljs-number">160</span>]: a[:,:,::<span class="hljs-number">2</span>]		<span class="hljs-comment">###每个维度可以使用步长跳跃切片</span><br>Out[<span class="hljs-number">160</span>]:<br>array([[[<span class="hljs-number">0</span>,<span class="hljs-number">2</span>],<br>	    [<span class="hljs-number">4</span>,<span class="hljs-number">6</span>],<br>	    [<span class="hljs-number">8</span>,<span class="hljs-number">10</span>]],<br>	    <br>	   [[<span class="hljs-number">12</span>,<span class="hljs-number">14</span>],<br>	    [<span class="hljs-number">16</span>,<span class="hljs-number">18</span>],<br>	    [<span class="hljs-number">20</span>,<span class="hljs-number">22</span>]]])<br></code></pre></td></tr></table></figure>
+<h2 id="ndarry数组的运算"><a href="#ndarry数组的运算" class="headerlink" title="ndarry数组的运算"></a>ndarry数组的运算</h2><h3 id="数组与标量之间的运算"><a href="#数组与标量之间的运算" class="headerlink" title="数组与标量之间的运算"></a>数组与标量之间的运算</h3><p>数组与标量之间的运算作用域数组的每一个元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">###实例：计算a与元素平均值的商</span><br><br>In [<span class="hljs-number">146</span>]: a = np.arrange(<span class="hljs-number">24</span>).reshape((<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><br>In [<span class="hljs-number">147</span>]: a<br>Out[<span class="hljs-number">147</span>]:<br>array([[[<span class="hljs-number">0</span>,  <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>],<br>	    [<span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],<br>	    [<span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]],<br>	    <br>	   [[<span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>],<br>	    [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>],<br>	    [<span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>]]])<br>	    <br>In [<span class="hljs-number">169</span>]: a.mean()<br>Out[<span class="hljs-number">169</span>]: <span class="hljs-number">11.5</span><br><br>In [<span class="hljs-number">170</span>]: a = a / a.mean()<br><br>In [<span class="hljs-number">171</span>]: a<br>Out[<span class="hljs-number">171</span>]:<br>array([[[<span class="hljs-number">0.</span>		   ,<span class="hljs-number">0.08695652</span>,<span class="hljs-number">0.17391304</span>,<span class="hljs-number">0.26086957</span>],<br>	    [<span class="hljs-number">0.34782609</span>,<span class="hljs-number">0.43478261</span>,<span class="hljs-number">0.52173913</span>,<span class="hljs-number">0.60869565</span>],<br>	    [<span class="hljs-number">0.69565217</span>,<span class="hljs-number">0.7826087</span> ,<span class="hljs-number">0.86956522</span>,<span class="hljs-number">0.95652174</span>]],<br>	    <br>	   [[<span class="hljs-number">1.04347826</span>,<span class="hljs-number">1.13043478</span>,<span class="hljs-number">1.2173913</span> ,<span class="hljs-number">1.30434783</span>],<br>	    [<span class="hljs-number">1.39130435</span>,<span class="hljs-number">1.47826087</span>,<span class="hljs-number">1.56521739</span>,<span class="hljs-number">1.65217391</span>],<br>	    [<span class="hljs-number">1.73913043</span>,<span class="hljs-number">1.82608696</span>,<span class="hljs-number">1.91304348</span>,<span class="hljs-number">2.</span>	    ]]])<br></code></pre></td></tr></table></figure>
+<h3 id="NumPy一元函数"><a href="#NumPy一元函数" class="headerlink" title="NumPy一元函数"></a>NumPy一元函数</h3><p>对ndarray中的数据执行元素级运算的函数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>np.abs(x)    np.fabs(x)</td>
+<td>计算数组各元素的绝对值</td>
+</tr>
+<tr>
+<td>np.sqrt(x)</td>
+<td>计算数组个元素的平方根</td>
+</tr>
+<tr>
+<td>np.square(x)</td>
+<td>计算数组各元素的平方</td>
+</tr>
+<tr>
+<td>np.log(x) np.log10(x) np.log2(x)</td>
+<td>计算数组各元素的自然对数、10底对数和2底对数</td>
+</tr>
+<tr>
+<td>np.ceil(x) np.floor(x)</td>
+<td>计算数组各元素的ceiling值或floor值</td>
+</tr>
+<tr>
+<td>np.rint(x)</td>
+<td>计算数组各元素的四舍五入值</td>
+</tr>
+<tr>
+<td>np.modf(x)</td>
+<td>将数组各元素的小数和整数部分以两个独立数组形式返回</td>
+</tr>
+<tr>
+<td>np.cos(x) np.cosh(x)<br />np.sin(x) np.sinh(x)<br />np.tan(x) np.tanh(x)</td>
+<td>计算数组各元素的普通型和双曲型三角函数</td>
+</tr>
+<tr>
+<td>np.exp(x)</td>
+<td>计算数组各元素的指数值</td>
+</tr>
+<tr>
+<td>np.sign(x)</td>
+<td>计算数组各元素的符号值，1(+),0,-1(-)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>注意数组是否被真实改变</strong></p>
+<img src="/2024/04/30/20240430_numPy/image-20240509213311585.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509213311585">
+<h3 id="NumPy二元函数"><a href="#NumPy二元函数" class="headerlink" title="NumPy二元函数"></a>NumPy二元函数</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+ - <em> / *</em></td>
+<td>两个数组各元素进行对应运算</td>
+</tr>
+<tr>
+<td>np.maximum(x,y) np.fmax()<br />np.minimum(x,y) np.fmin()</td>
+<td>元素级的最大值、最小值计算</td>
+</tr>
+<tr>
+<td>np.mod(x,y)</td>
+<td>元素级的模运算</td>
+</tr>
+<tr>
+<td>np.copysign(x,y)</td>
+<td>将数组y中各元素的符号赋值给数组x对应元素</td>
+</tr>
+<tr>
+<td>&gt; &lt; &gt;= &lt;= == !=</td>
+<td>算数比较，产生布尔型数组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/04/30/20240430_numPy/image-20240509213328557.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509213328557">
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><img src="/2024/04/30/20240430_numPy/image-20240509213349887.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509213349887">
+<h1 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h1><h2 id="一维：CSV文件存取"><a href="#一维：CSV文件存取" class="headerlink" title="一维：CSV文件存取"></a>一维：CSV文件存取</h2><p>CSV是一种常见的文件格式，用来存储批量数据</p>
+<p>局限性：只能有效存储一维和二维数组</p>
+<img src="/2024/04/30/20240430_numPy/image-20240509220524222.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509220524222">
+<h3 id="savetxt"><a href="#savetxt" class="headerlink" title="savetxt"></a>savetxt</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">np.savetxt(frame,array,fmt=<span class="hljs-string">&#x27;%.18e&#x27;</span>,delimiter=<span class="hljs-literal">None</span>)<br><span class="hljs-comment">#frame: 文件、字符串或产生器，可以是.gz或.bz2的压缩文件</span><br><span class="hljs-comment">#array：存入文件的数组</span><br><span class="hljs-comment">#fmt: 写入文件的格式，例如：%d %.2f %.18e</span><br><span class="hljs-comment">#delimiter: 分割字符串，默认是任何空格</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">a = np.arange(<span class="hljs-number">100</span>).reshape(<span class="hljs-number">5</span>,<span class="hljs-number">20</span>)<br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240509222102454.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509222102454">
+<h3 id="loadtxt"><a href="#loadtxt" class="headerlink" title="loadtxt"></a>loadtxt</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">np.loadtxt(frame,dtype=np.<span class="hljs-built_in">float</span>,delimiter=<span class="hljs-literal">None</span>,unpack=<span class="hljs-literal">False</span>)<br><span class="hljs-comment">#frame: 文件、字符串或产生器，可以是.gz或.bz2的压缩文件</span><br><span class="hljs-comment">#dtype：数据类型，可选</span><br><span class="hljs-comment">#delimiter：分割字符串，默认是任何空格</span><br><span class="hljs-comment">#unpack：如果True，读入属性将分别写入不同变量</span><br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240509223340872.png" srcset="/img/loading.gif" lazyload class="" title="image-20240509223340872">
+<h2 id="多维数据存取"><a href="#多维数据存取" class="headerlink" title="多维数据存取"></a>多维数据存取</h2><h3 id="tofile"><a href="#tofile" class="headerlink" title="tofile"></a>tofile</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">a.tofile(frame,sep=<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-built_in">format</span>=<span class="hljs-string">&#x27;%s&#x27;</span>)<br><br><span class="hljs-comment"># frame : 文件、字符串</span><br><span class="hljs-comment"># sep   ：数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="hljs-comment"># format：写入数据的格式</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">125</span>]: a = np.arange(<span class="hljs-number">100</span>).reshape(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In [<span class="hljs-number">126</span>]: a.tofile(<span class="hljs-string">&quot;b.dat&quot;</span>,sep=<span class="hljs-string">&quot;,&quot;</span>,<span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%d&quot;</span>)<br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240510113434901.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510113434901">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">127</span>]: a = np.arange(<span class="hljs-number">100</span>).reshape(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In [<span class="hljs-number">128</span>]: a.tofile(<span class="hljs-string">&quot;b.dat&quot;</span>,<span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%d&quot;</span>)<br><span class="hljs-comment">#如果不知道分割符，则生成二进制文件，二进制文件占用更小的空间</span><br><span class="hljs-comment">#看不到内容，只能作为数据备份的一种方式</span><br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240510113721159.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510113721159">
+<h3 id="fromfile"><a href="#fromfile" class="headerlink" title="fromfile"></a>fromfile</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">np.fromfile<span class="hljs-params">(frame,<span class="hljs-attr">dtype</span>=float,<span class="hljs-attr">cont</span>=-1,<span class="hljs-attr">sep</span>=&#x27;&#x27;)</span><br><span class="hljs-comment"># frame:文件、字符串</span><br><span class="hljs-comment"># dtype:读取的数据类型</span><br><span class="hljs-comment"># count:读入元素个数，-1表示读入整个文件</span><br><span class="hljs-comment"># sep:数据分割字符串，如果是空串，写入文件为二进制</span><br></code></pre></td></tr></table></figure>
+<h4 id="文本文件"><a href="#文本文件" class="headerlink" title="文本文件"></a>文本文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">129</span>]: a = np.arange(<span class="hljs-number">100</span>).reshape(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In [<span class="hljs-number">130</span>]: a.tofile(<span class="hljs-string">&quot;b.dat&quot;</span>,sep=<span class="hljs-string">&quot;,&quot;</span>,<span class="hljs-built_in">format</span>=<span class="hljs-string">&#x27;%d&#x27;</span>)<br>In [<span class="hljs-number">131</span>]: c = np.fromfile(<span class="hljs-string">&quot;b.dat&quot;</span>,dtype=np.<span class="hljs-built_in">int</span>,sep=<span class="hljs-string">&quot;,&quot;</span>)<br>In [<span class="hljs-number">132</span>]: c<br>Out[<span class="hljs-number">132</span>]: array([<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,...,<span class="hljs-number">97</span>,<span class="hljs-number">98</span>,<span class="hljs-number">99</span>])<br>In [<span class="hljs-number">133</span>]: c = np.fromfile(<span class="hljs-string">&quot;b.dat&quot;</span>,dtype=np.<span class="hljs-built_in">int</span>,sep=<span class="hljs-string">&quot;,&quot;</span>).reshape(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In [<span class="hljs-number">134</span>]: c<br>Out[<span class="hljs-number">134</span>]:<br>array([[[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>	    [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>	    [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>],<br>	    ...,<br>	    [<span class="hljs-number">14</span>,<span class="hljs-number">15</span>],<br>	    [<span class="hljs-number">16</span>,<span class="hljs-number">17</span>],<br>	    [<span class="hljs-number">18</span>,<span class="hljs-number">19</span>]],<br></code></pre></td></tr></table></figure>
+<h4 id="二进制文件"><a href="#二进制文件" class="headerlink" title="二进制文件"></a>二进制文件</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stylus">In <span class="hljs-selector-attr">[125]</span>: <span class="hljs-selector-tag">a</span> = np<span class="hljs-selector-class">.arange</span>(<span class="hljs-number">100</span>)<span class="hljs-selector-class">.reshape</span>(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In <span class="hljs-selector-attr">[136]</span>: <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.tofile</span>(<span class="hljs-string">&quot;b.dat&quot;</span>,format=<span class="hljs-string">&#x27;%d&#x27;</span>)<br>In <span class="hljs-selector-attr">[137]</span>: c = np<span class="hljs-selector-class">.fromfile</span>(<span class="hljs-string">&quot;b.dat&quot;</span>,dtype=np.int)<span class="hljs-selector-class">.reshape</span>(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>In <span class="hljs-selector-attr">[138]</span>: c<br>Out<span class="hljs-selector-attr">[138]</span>:<br><span class="hljs-built_in">array</span>(<span class="hljs-selector-attr">[[[0,1]</span>,<br>	    <span class="hljs-selector-attr">[2,3]</span>,<br>	    <span class="hljs-selector-attr">[4,5]</span>,<br>	    ...,<br>	    <span class="hljs-selector-attr">[14,15]</span>,<br>	    <span class="hljs-selector-attr">[16,17]</span>,<br>	    <span class="hljs-selector-attr">[18,19]</span>],<br></code></pre></td></tr></table></figure>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>该方法需要读取时知道存入文件时数组的维度和元素类型</li>
+<li>a.tofile()和np.fromfile()需要配合使用</li>
+<li>可以通过元素据文件来存储额外信息</li>
+</ul>
+<h2 id="NumPy的便捷文件存取"><a href="#NumPy的便捷文件存取" class="headerlink" title="NumPy的便捷文件存取"></a>NumPy的便捷文件存取</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">np.save(fname,array)或np.savez(fname,array)<br><span class="hljs-comment"># frame:文件名，以.npy为扩展名，压缩扩展名为.npz</span><br><span class="hljs-comment"># array:数组变量</span><br>np.load(fname)<br><span class="hljs-comment"># fname:文件名，以.npy为扩展名，压缩扩展名为.npz</span><br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240510120735787.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510120735787">
+<h1 id="NumPy函数"><a href="#NumPy函数" class="headerlink" title="NumPy函数"></a>NumPy函数</h1><h2 id="随机数函数子库"><a href="#随机数函数子库" class="headerlink" title="随机数函数子库"></a>随机数函数子库</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rand(d0,d1,..,dn)</td>
+<td>根据d0-dn创建随机数数组，浮点数，[0,1)，均匀分布</td>
+</tr>
+<tr>
+<td>randn(d0,d1,..,dn)</td>
+<td>根据d0-dn创建随机数数组，标准正态分布</td>
+</tr>
+<tr>
+<td>randint(low[,high,shape])</td>
+<td>根据shape创建随机整数或整数数组，范围时[low,high)</td>
+</tr>
+<tr>
+<td>seed(s)</td>
+<td>随机数种子，s时给定的种子值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/04/30/20240430_numPy/image-20240510154944785.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510154944785">
+<img src="/2024/04/30/20240430_numPy/image-20240510155229646.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510155229646">
 
                 
               </div>
