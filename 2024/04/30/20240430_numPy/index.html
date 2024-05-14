@@ -34,8 +34,21 @@
 <meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510120735787.png">
 <meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510154944785.png">
 <meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240510155229646.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513213509000.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513213522365.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513214549045.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513220237680.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513221333288.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513222346917.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240513222627439.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514210910331.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514212717293.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514214108604.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514214252567.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514214352038.png">
+<meta property="og:image" content="http://example.com/2024/04/30/20240430_numPy/image-20240514220453292.png">
 <meta property="article:published_time" content="2024-04-30T13:42:05.521Z">
-<meta property="article:modified_time" content="2024-05-10T10:17:30.365Z">
+<meta property="article:modified_time" content="2024-05-14T14:30:57.017Z">
 <meta property="article:author" content="XuanYa">
 <meta property="article:tag" content="数据分析">
 <meta property="article:tag" content="分析工具">
@@ -235,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k 字
+          5.2k 字
         
       </span>
     
@@ -246,7 +259,7 @@
         
         
         
-          34 分钟
+          44 分钟
         
       </span>
     
@@ -696,7 +709,7 @@
 </tr>
 <tr>
 <td>randn(d0,d1,..,dn)</td>
-<td>根据d0-dn创建随机数数组，标准正态分布</td>
+<td>根据d0-d  n创建随机数数组，标准正态分布</td>
 </tr>
 <tr>
 <td>randint(low[,high,shape])</td>
@@ -711,6 +724,161 @@
 </div>
 <img src="/2024/04/30/20240430_numPy/image-20240510154944785.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510154944785">
 <img src="/2024/04/30/20240430_numPy/image-20240510155229646.png" srcset="/img/loading.gif" lazyload class="" title="image-20240510155229646">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shuffle(a)</td>
+<td>根据数组a的第1轴进行随排列，改变数组x</td>
+</tr>
+<tr>
+<td>permutation(a)</td>
+<td>根据数组a的第一轴产生一个新的乱序数组，不改变数组x</td>
+</tr>
+<tr>
+<td>choice(a[,size,replace,p])</td>
+<td>从一维数组中以概率p抽取元素，形成size形状新数组<br />replace表示是否可以重用元素，默认为False</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/04/30/20240430_numPy/image-20240513213509000.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513213509000">
+<img src="/2024/04/30/20240430_numPy/image-20240513213522365.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513213522365">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uniform(low,high,size)</td>
+<td>产生具有均匀分布的数组，low起始值，high结束值，size形状</td>
+</tr>
+<tr>
+<td>normal(loc,scale,size)</td>
+<td>产生具有正态分布的数组，loc均值，scale标准差，size形状</td>
+</tr>
+<tr>
+<td>poisson(lam,size)</td>
+<td>产生具有泊松分布的数组，lam随机事件发生率，size形状</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/04/30/20240430_numPy/image-20240513214549045.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513214549045">
+<h2 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h2><p>NumPy直接提供的统计累函数，可以直接np.*使用</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sum(a,axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素之和，axis整数或元组</td>
+</tr>
+<tr>
+<td>mean(a,axis=None)</td>
+<td>根据给定轴axis计算数组相关元素的期望，axis整数或元组</td>
+</tr>
+<tr>
+<td>average(a,axis=None,weights=None)</td>
+<td>根据给定轴axis计算数组a相关元素的加权平均值</td>
+</tr>
+<tr>
+<td>std(a,axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素的标准差</td>
+</tr>
+<tr>
+<td>var(a,axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素的方差</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/04/30/20240430_numPy/image-20240513220237680.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513220237680">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min(a) max(a)</td>
+<td>计算数组a中元素的最小值、最大值</td>
+</tr>
+<tr>
+<td>argmin(a) argmax(a)</td>
+<td>计算数组a中元素最小值、最大值的降一维后下标</td>
+</tr>
+<tr>
+<td>unravel_index(index,shape)</td>
+<td>根据shape将一维下标index转换成多维下标</td>
+</tr>
+<tr>
+<td>ptp(a)</td>
+<td>计算数组a中元素最大值与最小值的差</td>
+</tr>
+<tr>
+<td>median(a)</td>
+<td>计算数组a中元素的中位数(中值)</td>
+</tr>
+</tbody>
+</table>
+</div>
+ <img src="/2024/04/30/20240430_numPy/image-20240513221333288.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513221333288">
+<h2 id="梯度函数"><a href="#梯度函数" class="headerlink" title="梯度函数"></a>梯度函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>np.gradient(f)</td>
+<td>计算数组f中元素的梯度，当f为多维时，返回每个维度梯度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>梯度：连续值之间的变化率，即斜率</p>
+<p>XY坐标轴连续三个X坐标对应的Y轴值：a,b,c，其中，b的梯度是：(c-a)/2</p>
+<img src="/2024/04/30/20240430_numPy/image-20240513222346917.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513222346917">
+<p>如果数组是n维，的那么gradient生成n个数组</p>
+<img src="/2024/04/30/20240430_numPy/image-20240513222627439.png" srcset="/img/loading.gif" lazyload class="" title="image-20240513222627439">
+<h1 id="图像的手绘效果"><a href="#图像的手绘效果" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h1><h2 id="图像的数组表示"><a href="#图像的数组表示" class="headerlink" title="图像的数组表示"></a>图像的数组表示</h2><p>图像一般使用RGB色彩模式，即每个像素点的颜色由红(R)、绿(G)、蓝(B)组成，其中每个通道的取值范围均为0-255，叠加起来色彩空间为255^3。RGB形成的颜色包括了人类视力所能感知的所有颜色。</p>
+<h3 id="PIL库"><a href="#PIL库" class="headerlink" title="PIL库"></a>PIL库</h3><p>一个具有强大图像处理能力的第三方库。</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs capnproto">pip install pillow	<span class="hljs-comment">#安装</span><br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image <span class="hljs-comment">#Image是PIL库代表一个图像的类（对象）</span><br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240514210910331.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514210910331">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">64</span>]:<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br>In [<span class="hljs-number">65</span>]:<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>In [<span class="hljs-number">66</span>]:im = np.array(Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;D:/pycodes/demo.jpg&quot;</span>))<br>In [<span class="hljs-number">67</span>]:<span class="hljs-built_in">print</span>(im.shape,im.dtype)<br>(<span class="hljs-number">669</span>,<span class="hljs-number">1012</span>,<span class="hljs-number">3</span>)uint8<br><span class="hljs-comment">###图像是一个三维数组，维度分别是高度、宽度和像素RGB值</span><br></code></pre></td></tr></table></figure>
+<h2 id="图像的变换"><a href="#图像的变换" class="headerlink" title="图像的变换"></a>图像的变换</h2><p>读入图像后，获得像素RGB值，修改后保存为新的文件。</p>
+<img src="/2024/04/30/20240430_numPy/image-20240514212717293.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514212717293">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">81</span>]:<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br>In [<span class="hljs-number">82</span>]:<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>In [<span class="hljs-number">83</span>]:a = np.array(Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;D:/demo.jpg&quot;</span>))<br>In [<span class="hljs-number">84</span>]:<span class="hljs-built_in">print</span>(a.shape,a.dtype)<br>(<span class="hljs-number">669</span>,<span class="hljs-number">1012</span>,<span class="hljs-number">3</span>)uint8<br>In [<span class="hljs-number">85</span>]:b = [<span class="hljs-number">255</span>,<span class="hljs-number">255</span>,<span class="hljs-number">255</span>]-a<br>In [<span class="hljs-number">86</span>]:im = Image.fromarray(b.astype(<span class="hljs-string">&#x27;uint8&#x27;</span>))<br>In [<span class="hljs-number">87</span>]:im.save(<span class="hljs-string">&quot;D:/demo1.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+<img src="/2024/04/30/20240430_numPy/image-20240514214108604.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514214108604">
+<img src="/2024/04/30/20240430_numPy/image-20240514214252567.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514214252567">
+<img src="/2024/04/30/20240430_numPy/image-20240514214352038.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514214352038">
+<h2 id="“图像手绘效果”实例分析"><a href="#“图像手绘效果”实例分析" class="headerlink" title="“图像手绘效果”实例分析"></a>“图像手绘效果”实例分析</h2><p>手绘效果几个特征：黑白灰色，线条比较重，相同或相近色彩趋于白色，略有光源效果</p>
+<p>利用像素之间的梯度值和虚拟深度值对图像进行重构</p>
+<p>根据灰度变化来模拟人类视觉明暗程度</p>
+<img src="/2024/04/30/20240430_numPy/image-20240514220453292.png" srcset="/img/loading.gif" lazyload class="" title="image-20240514220453292">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>a = np.asarray(Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;G:/1.jpg&#x27;</span>).convert(<span class="hljs-string">&#x27;L&#x27;</span>)).astype(<span class="hljs-string">&#x27;float&#x27;</span>)<br><br>depth = <span class="hljs-number">10.</span>								<span class="hljs-comment">#预设深度值为10，取值范围(0-100)</span><br>grad = np.gradient(a)					 <span class="hljs-comment">#取图像灰度的梯度值，表示灰度的变化率</span><br>grad_x,grad_y = grad					 <span class="hljs-comment">#分别取横纵图像梯度值</span><br>grad_x = grad_x*depth/<span class="hljs-number">100.</span><br>grad_y = grad_y*depth/<span class="hljs-number">100.</span>				 <span class="hljs-comment">#根据深度调整x和y方向的梯度值</span><br><br>A = np.sqrt(grad_x**<span class="hljs-number">2</span> + grad_y**<span class="hljs-number">2</span> + <span class="hljs-number">1.</span>)	  <span class="hljs-comment">#构造x和y轴梯度的三维归一单位坐标系</span><br><br>uni_x = grad_x/A<br>uni_y = grad_y/A<br>uni_z = <span class="hljs-number">1.</span>/A<br><br>vec_el = np.pi/<span class="hljs-number">2.2</span>						 <span class="hljs-comment">#光源的俯视角度，弧度值</span><br>vec_az = np.pi/<span class="hljs-number">4.</span>						 <span class="hljs-comment">#光源的方位角度，弧度值</span><br>dx = np.cos(vec_el)*np.cos(vec_az)		   <span class="hljs-comment">#光源对x轴的影响，np.cos(vec_el)为单位光线在地平面的投影长度</span><br>dy = np.cos(vec_el)*np.sin(vec_az)		   <span class="hljs-comment">#光源对y轴的影响</span><br>dz = np.sin(vec_el)						  <span class="hljs-comment">#光源对z轴的影响</span><br><br>b = <span class="hljs-number">255</span>*(dx*uni_x +dy*uni_y +dz*uni_z)	   <span class="hljs-comment">#光源归一化，梯度与光源相互作用，将梯度转化为灰度？？？？</span><br>b = b.clip(<span class="hljs-number">0</span>,<span class="hljs-number">255</span>)						 <span class="hljs-comment">#为避免数据越界，将生成的灰度值裁剪至0-255区间</span><br><br>im = Image.fromarray(b.astype(<span class="hljs-string">&#x27;uint8&#x27;</span>))		<span class="hljs-comment">#重构图像</span><br>im.save(<span class="hljs-string">&#x27;G:\\1hd.jpg&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
                 
               </div>
