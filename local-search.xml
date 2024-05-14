@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Matplotlib库入门</title>
+    <link href="/2024/05/14/20240514_Matplotlib/"/>
+    <url>/2024/05/14/20240514_Matplotlib/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>人工智能</category>
+      
+      <category>数据分析</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数据分析</tag>
+      
+      <tag>分析工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python虚拟环境</title>
     <link href="/2024/05/08/20240508_virtualEnv/"/>
     <url>/2024/05/08/20240508_virtualEnv/</url>
@@ -107,9 +136,9 @@
     
     <tags>
       
-      <tag>爬虫</tag>
-      
       <tag>数据分析</tag>
+      
+      <tag>爬虫</tag>
       
     </tags>
     
