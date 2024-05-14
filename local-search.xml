@@ -91,16 +91,16 @@
   
   
   <entry>
-    <title>随记</title>
+    <title>计划</title>
     <link href="/2024/04/29/20240429_daliylogs/"/>
     <url>/2024/04/29/20240429_daliylogs/</url>
     
-    <content type="html"><![CDATA[<p>—-小甲鱼爬虫</p><p>—-python菜鸟速成</p><p>—-Python面向对象编程五步曲-从零到就业</p><p>—-机器学习基础-吴恩达</p><p>—-统计学习方法-李航</p><ul><li>七月</li></ul><p>—-慕课北理工np，pandas…</p><ul><li>240513 NumPu数据存储与函数</li><li>240514 图像的手绘效果</li><li>240516 Matplotlib入门</li><li>240518 Matploylib基础绘图函数示例</li><li>240520 引力波的绘制</li><li>240522 Pandas库入门</li><li>240524 Pandas数据特征分析</li></ul><p>—-图像处理与机器学习</p><ul><li>六月过完机器学习</li></ul><p>—-唐宇迪opencv</p><p>—-斯坦福李飞飞计算机视觉</p><p>—-学习标注自己的数据集</p><p>—-mmdetection</p><p>—-光纤类课程</p><p>—-数据库</p><p>—-信号处理</p>]]></content>
+    <content type="html"><![CDATA[<p>—-小甲鱼爬虫</p><p>—-python菜鸟速成</p><p>—-Python面向对象编程五步曲-从零到就业</p><p>—-机器学习基础-吴恩达</p><p>—-统计学习方法-李航</p><ul><li>七月</li></ul><p>—-慕课北理工np，pandas…</p><ul><li><strong>240513 NumPu数据存储与函数</strong> <strong>240513</strong></li><li><strong>240514 图像的手绘效果</strong> <strong>240514</strong></li><li>240516 Matplotlib入门 </li><li>240518 Matploylib基础绘图函数示例</li><li>240520 引力波的绘制</li><li>240522 Pandas库入门</li><li>240524 Pandas数据特征分析</li></ul><p>—-图像处理与机器学习</p><ul><li>六月过完机器学习</li></ul><p>—-唐宇迪opencv</p><p>—-斯坦福李飞飞计算机视觉</p><p>—-学习标注自己的数据集</p><p>—-mmdetection</p><p>—-光纤类课程</p><p>—-数据库</p><p>—-信号处理</p>]]></content>
     
     
     <categories>
       
-      <category>感悟</category>
+      <category>不破不立</category>
       
     </categories>
     
@@ -365,7 +365,7 @@
   
   
   <entry>
-    <title>关于fluid</title>
+    <title>fluid主题</title>
     <link href="/2024/04/09/20240410_hexo/"/>
     <url>/2024/04/09/20240410_hexo/</url>
     
