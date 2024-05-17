@@ -1,0 +1,909 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="XuanYa">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基本介绍提供高性能易用数据类型和分析工具 http:&#x2F;&#x2F;pandas.pydata.org Pandas基于NumPy实现，常与NumPy和Matplotlib一同使用 1234567891011121314151617181920212223242526In :import pandas as pd    d &#x3D; pd.Serier(range(20))    dOut:0	01	12	23	3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pandas库入门">
+<meta property="og:url" content="http://example.com/2024/05/17/20240517_Pandas/index.html">
+<meta property="og:site_name" content="冯宝宝">
+<meta property="og:description" content="基本介绍提供高性能易用数据类型和分析工具 http:&#x2F;&#x2F;pandas.pydata.org Pandas基于NumPy实现，常与NumPy和Matplotlib一同使用 1234567891011121314151617181920212223242526In :import pandas as pd    d &#x3D; pd.Serier(range(20))    dOut:0	01	12	23	3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/05/17/20240517_Pandas/image-20240517183052878.png">
+<meta property="article:published_time" content="2024-05-17T02:15:51.382Z">
+<meta property="article:modified_time" content="2024-05-17T17:57:07.105Z">
+<meta property="article:author" content="XuanYa">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="分析工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/05/17/20240517_Pandas/image-20240517183052878.png">
+  
+  
+  
+  <title>Pandas库入门 - 冯宝宝</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>轩的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Pandas库入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-17 10:15" pubdate>
+          2024年5月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Pandas库入门</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>提供高性能易用数据类型和分析工具</p>
+<p><a target="_blank" rel="noopener" href="http://pandas.pydata.org">http://pandas.pydata.org</a></p>
+<p>Pandas基于NumPy实现，常与NumPy和Matplotlib一同使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>    d = pd.Serier(<span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>))<br>    d<br><br>Out:<br><span class="hljs-number">0</span>	<span class="hljs-number">0</span><br><span class="hljs-number">1</span>	<span class="hljs-number">1</span><br><span class="hljs-number">2</span>	<span class="hljs-number">2</span><br><span class="hljs-number">3</span>	<span class="hljs-number">3</span><br><span class="hljs-number">4</span>	<span class="hljs-number">4</span><br>...<br><span class="hljs-number">19</span>	<span class="hljs-number">19</span><br>dtype: int32<br><br>In :d.cumsum()	<span class="hljs-comment">#计算前N项累加和</span><br><br>Out:<br><span class="hljs-number">0</span>	<span class="hljs-number">0</span><br><span class="hljs-number">1</span>	<span class="hljs-number">1</span><br><span class="hljs-number">2</span>	<span class="hljs-number">3</span><br><span class="hljs-number">3</span>	<span class="hljs-number">6</span><br><span class="hljs-number">4</span>	<span class="hljs-number">10</span><br>...<br><span class="hljs-number">18</span>	<span class="hljs-number">171</span><br><span class="hljs-number">19</span>	<span class="hljs-number">190</span><br>dtype: int32<br></code></pre></td></tr></table></figure>
+<h2 id="Series，DataFrame"><a href="#Series，DataFrame" class="headerlink" title="Series，DataFrame"></a>Series，DataFrame</h2><p>像对待单一数据一样对待</p>
+<p>基于这两种数据类型有各类操作：<strong>基本操作、运算操作、特征类操作、关联类操作</strong></p>
+<h2 id="对比NumPy与Pandas"><a href="#对比NumPy与Pandas" class="headerlink" title="对比NumPy与Pandas"></a>对比NumPy与Pandas</h2><h3 id="基础数据类型与扩展数据类型"><a href="#基础数据类型与扩展数据类型" class="headerlink" title="基础数据类型与扩展数据类型"></a>基础数据类型与扩展数据类型</h3><p>NumPy的基础数据类型ndarray可以表达n维数组，Pandas提供两种基于ndarray的扩展数据类型</p>
+<h3 id="数据结构表达与数据应用表达"><a href="#数据结构表达与数据应用表达" class="headerlink" title="数据结构表达与数据应用表达"></a>数据结构表达与数据应用表达</h3><p>NumPy关注数据的结构表达，数据的结构表达即数据构成的维度，即你给我一些数据，我关注要用什么维度将数据存储起来并表示出来，数据通过n维方式存储至一个变量中</p>
+<p>Pandas关注数据的应用表达，使用数据的时候，怎么更有效地提取数据，以及对这些数据进行运算</p>
+<p>我们把数据维度简历好，可以将数据结构表达清楚，但是在使用数据的时候，过于紧密的维度关系并不利于数据的实际应用，因此Pandas并没过分关注数据的结构表达，而是关注数据的应用表达，应用表达体现在数据与索引的关系</p>
+<h3 id="维度-数据间关系-、数据与索引间关系"><a href="#维度-数据间关系-、数据与索引间关系" class="headerlink" title="维度(数据间关系)、数据与索引间关系"></a>维度(数据间关系)、数据与索引间关系</h3><p>Series与DataFrame都非常明确有效的索引，通过索引可以对数据进行相关分析与提取，通过数据与索引的关系可以使得数据的应用非常方便</p>
+<h1 id="Series类型"><a href="#Series类型" class="headerlink" title="Series类型"></a>Series类型</h1><ul>
+<li>Series是一维带“标签”数组</li>
+<li>Pandas的一维数据类型</li>
+<li>Series基本操作类似ndarray和字典，根据索引对齐，不根据维度</li>
+<li>由一组数据及与之相关的数据索引组成</li>
+</ul>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">index_0</span>	--&gt;</span> data_a<br><span class="hljs-function"><span class="hljs-title">index_1</span> --&gt;</span> data_b<br><span class="hljs-function"><span class="hljs-title">index_2</span> --&gt;</span> data_c<br><span class="hljs-function"><span class="hljs-title">index_3</span> --&gt;</span> data_d<br>索引		  数据<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>	a = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>])<br>	a<br>	<br>Out:<br><span class="hljs-number">0</span>	<span class="hljs-number">9</span>	<span class="hljs-comment"># 自动索引</span><br><span class="hljs-number">1</span>	<span class="hljs-number">8</span><br><span class="hljs-number">2</span>	<span class="hljs-number">7</span><br><span class="hljs-number">3</span>	<span class="hljs-number">6</span><br>dtype: int64 <span class="hljs-comment"># &lt;--NumPy中数据类型</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>	b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],index=[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])	<span class="hljs-comment"># 作为第二个参数，可以省略index=</span><br>	b<br>	<br>Out:<br>a	<span class="hljs-number">9</span>	<span class="hljs-comment"># 自定义索引</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>dtype: int64<br></code></pre></td></tr></table></figure>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>可以由如下类型创建</p>
+<p><strong>Python列表    标量值    Python字典    ndarray    其他函数</strong></p>
+<h3 id="标量类型创建"><a href="#标量类型创建" class="headerlink" title="标量类型创建"></a>标量类型创建</h3><p>index表达Series类型的尺寸</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>	s = pd.Series(<span class="hljs-number">25</span>,index=[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>])	<span class="hljs-comment"># 此处不能省略index=</span><br>	s<br>	<br>Out:<br>a	<span class="hljs-number">25</span><br>b	<span class="hljs-number">25</span><br>c	<span class="hljs-number">25</span><br>dtype: int64<br></code></pre></td></tr></table></figure>
+<h3 id="字典类型创建"><a href="#字典类型创建" class="headerlink" title="字典类型创建"></a>字典类型创建</h3><p>键值对中“键”是索引，index从字典中进行选择操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>	d = pd.Series(&#123;<span class="hljs-string">&#x27;a&#x27;</span>:<span class="hljs-number">9</span>,<span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">8</span>,<span class="hljs-string">&#x27;c&#x27;</span>:<span class="hljs-number">7</span>&#125;)<br>	d<br>	<br>Out:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>dtype: int64<br>    <br>In :e = pd.Series(&#123;<span class="hljs-string">&#x27;a&#x27;</span>:<span class="hljs-number">9</span>,<span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">8</span>,<span class="hljs-string">&#x27;c&#x27;</span>:<span class="hljs-number">7</span>&#125;,index=[<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>    e<br>    <br>Out:<br>c	<span class="hljs-number">7.0</span><br>a	<span class="hljs-number">9.0</span><br>b	<span class="hljs-number">8.0</span><br>d	NaN<br>dtype: float64<br></code></pre></td></tr></table></figure>
+<h3 id="ndarray创建"><a href="#ndarray创建" class="headerlink" title="ndarray创建"></a>ndarray创建</h3><p>Python列表的话index与列表元素个数一致</p>
+<p>ndarray中索引和数据都可以通过ndarray类型创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>	<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>	n = pd.Series(np.arange(<span class="hljs-number">5</span>))<br>	n<br>	<br>Out:<br><span class="hljs-number">0</span>	<span class="hljs-number">0</span><br><span class="hljs-number">1</span>	<span class="hljs-number">1</span><br><span class="hljs-number">2</span>	<span class="hljs-number">2</span><br><span class="hljs-number">3</span>	<span class="hljs-number">3</span><br><span class="hljs-number">4</span>	<span class="hljs-number">4</span><br>dtype: int32<br>    <br>    <br>In :m = pd.Series(np.arange(<span class="hljs-number">5</span>),index=np.arange(<span class="hljs-number">9</span>,<span class="hljs-number">4</span>,-<span class="hljs-number">1</span>))<br>    m<br>    <br>Out:<br><span class="hljs-number">9</span>	<span class="hljs-number">0</span><br><span class="hljs-number">8</span>	<span class="hljs-number">1</span><br><span class="hljs-number">7</span>	<span class="hljs-number">2</span><br><span class="hljs-number">6</span>	<span class="hljs-number">3</span><br><span class="hljs-number">5</span>	<span class="hljs-number">4</span><br>dtype: int32<br></code></pre></td></tr></table></figure>
+<h3 id="其他函数创建"><a href="#其他函数创建" class="headerlink" title="其他函数创建"></a>其他函数创建</h3><p>range()函数等</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>Series类型包括index和values两部分，操作类似ndarray类型与Python字典类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]:<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>In [<span class="hljs-number">2</span>]:b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>In [<span class="hljs-number">3</span>]:b<br>Out[<span class="hljs-number">3</span>]:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>dtype: int64<br><br>In [<span class="hljs-number">4</span>]:b.index	<span class="hljs-comment"># 获得索引</span><br>Out[<span class="hljs-number">4</span>]:<br>Index([<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b,&#x27;</span>c<span class="hljs-string">&#x27;,&#x27;</span>d<span class="hljs-string">&#x27;],dtype=&#x27;</span><span class="hljs-built_in">object</span><span class="hljs-string">&#x27;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">In [5]:b.values	# 获得数据</span><br><span class="hljs-string">Out[5]:array([9,8,7,6],dtype=int64)</span><br><span class="hljs-string">       </span><br><span class="hljs-string">In [6]:b[&#x27;</span><span class="hljs-string">b&#x27;]	# 自定义索引</span><br><span class="hljs-string">Out[6]:8</span><br><span class="hljs-string"></span><br><span class="hljs-string">In [7]:b[1]		# 自动索引并存</span><br><span class="hljs-string">Out[7]:8</span><br><span class="hljs-string"></span><br><span class="hljs-string">In [8]:b[[&#x27;</span>c<span class="hljs-string">&#x27;,&#x27;</span>d<span class="hljs-string">&#x27;,0]]</span><br><span class="hljs-string">Out[8]:</span><br><span class="hljs-string">c	7.0</span><br><span class="hljs-string">d	6.0</span><br><span class="hljs-string">0	NaN			# 两套索引并存，但不能混用</span><br><span class="hljs-string">dtype: float64</span><br><span class="hljs-string"></span><br><span class="hljs-string">In [9]:b[[&#x27;</span>c<span class="hljs-string">&#x27;,&#x27;</span>d<span class="hljs-string">&#x27;,&#x27;</span>a<span class="hljs-string">&#x27;]]</span><br><span class="hljs-string">Out[9]:</span><br><span class="hljs-string">c	7</span><br><span class="hljs-string">d	6</span><br><span class="hljs-string">a	9</span><br><span class="hljs-string">dtype: int64</span><br></code></pre></td></tr></table></figure>
+<h3 id="ndarray类似方法"><a href="#ndarray类似方法" class="headerlink" title="ndarray类似方法"></a>ndarray类似方法</h3><ul>
+<li>索引方法相同，采用[]</li>
+<li>NumPy中运算和操作可用于Series类型</li>
+<li>可以通过自定义索引的列表进行切片</li>
+<li>可以通过自动索引进行切片，如果存在自定义索引，则一同被切片</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]:<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>In [<span class="hljs-number">2</span>]:b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>In [<span class="hljs-number">3</span>]:b<br>Out[<span class="hljs-number">3</span>]:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>dtype: int64<br><br>In [<span class="hljs-number">4</span>]:b[<span class="hljs-number">3</span>]		<span class="hljs-comment"># 一个值</span><br>Out[<span class="hljs-number">4</span>]:<span class="hljs-number">6</span><br><br>In [<span class="hljs-number">5</span>]:b[:<span class="hljs-number">3</span>]	<span class="hljs-comment"># series类型</span><br>Out[<span class="hljs-number">5</span>]:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>dtype: int64<br><br>In [<span class="hljs-number">6</span>]:b[b&gt;b.median()]<br>Out[<span class="hljs-number">6</span>]:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>dtype: int64<br><br>In [<span class="hljs-number">7</span>]:np.exp(b)<br>Out[<span class="hljs-number">7</span>]:<br>a	<span class="hljs-number">8103.0839288</span><br>b	<span class="hljs-number">2980.957987</span><br>c	<span class="hljs-number">1096.633158</span><br>d	 <span class="hljs-number">403.428793</span><br>dtype: float64<br></code></pre></td></tr></table></figure>
+<h3 id="Python字典类似方法"><a href="#Python字典类似方法" class="headerlink" title="Python字典类似方法"></a>Python字典类似方法</h3><ul>
+<li>通过自定义索引访问</li>
+<li>保留字in操作</li>
+<li>使用.get()方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]:<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>In [<span class="hljs-number">2</span>]:b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br><br>In [<span class="hljs-number">3</span>]:b[<span class="hljs-string">&#x27;b&#x27;</span>]<br>Out[<span class="hljs-number">3</span>]:<span class="hljs-number">8</span><br><br>In [<span class="hljs-number">4</span>]:<span class="hljs-string">&#x27;c&#x27;</span> <span class="hljs-keyword">in</span> b<br>Out[<span class="hljs-number">4</span>]:<span class="hljs-literal">True</span><br><br>In [<span class="hljs-number">5</span>]:<span class="hljs-number">0</span> <span class="hljs-keyword">in</span> b	<span class="hljs-comment"># 不会判断自动索引</span><br>Out[<span class="hljs-number">5</span>]:<span class="hljs-literal">False</span><br><br>In [<span class="hljs-number">6</span>]:b.get(<span class="hljs-string">&#x27;f&#x27;</span>,<span class="hljs-number">100</span>)<br>Out[<span class="hljs-number">6</span>]:<span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+<h2 id="对齐操作"><a href="#对齐操作" class="headerlink" title="对齐操作"></a>对齐操作</h2><p>Series类型在运算中会自动对齐不同索引的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]:<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>In [<span class="hljs-number">2</span>]:a = pd.Series([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>])<br><br>In [<span class="hljs-number">3</span>]:b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br><br>In [<span class="hljs-number">4</span>]:a+b<br>Out[<span class="hljs-number">4</span>]:<br>a	NaN<br>b	NaN<br>c	<span class="hljs-number">8.0</span><br>d	<span class="hljs-number">8.0</span><br>e	NaN<br>dtype: float64<br></code></pre></td></tr></table></figure>
+<h2 id="Name属性"><a href="#Name属性" class="headerlink" title="Name属性"></a>Name属性</h2><p>Series对象和索引都可以有一个名字，存储在属性.name中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>b.name<br>b.name = <span class="hljs-string">&#x27;Series对象&#x27;</span><br>b.index.name = <span class="hljs-string">&#x27;索引列&#x27;</span><br>b<br><br>Out:<br>索引列<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>Name: Series对象,dtype: int64<br></code></pre></td></tr></table></figure>
+<h2 id="类型修改"><a href="#类型修改" class="headerlink" title="类型修改"></a>类型修改</h2><p>Series对象可以随时修改并即刻生效</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>b = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>b[<span class="hljs-string">&#x27;a&#x27;</span>] = <span class="hljs-number">15</span><br>b.name = <span class="hljs-string">&quot;Series&quot;</span><br>b<br><br>Out:<br>a	<span class="hljs-number">15</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>Name: Series,dtype: int64<br><br>In :<br>b.name = <span class="hljs-string">&quot;New Series&quot;</span><br>b[<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>] = <span class="hljs-number">20</span><br>b<br><br>Out:<br>a	<span class="hljs-number">15</span><br>b	<span class="hljs-number">20</span><br>c	<span class="hljs-number">20</span><br>d	<span class="hljs-number">6</span><br>Name: New Series,dtype: int64<br></code></pre></td></tr></table></figure>
+<h1 id="DataFrame类型"><a href="#DataFrame类型" class="headerlink" title="DataFrame类型"></a>DataFrame类型</h1><ul>
+<li>Data是二维带”标签”数组</li>
+<li>Pandas的二维数据类型，由共用相同索引的一组列组成</li>
+<li>DataFrame是一个表格型的数据类型，每列值类型可以不同</li>
+<li>DataFrame既有行索引、也有列索引，基本操作类似Series</li>
+<li>DataFrame常用于表达二维数据，但可以表达多维数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">index_0 --&gt; data_a	data_1			data_w	(column)(axis=<span class="hljs-number">1</span>)<br>index_1 --&gt; data_b	data_2			data_x<br>index_2 --&gt; data_c	data_3	......   data_y<br>index_3 --&gt; data_d	data_4			data_z<br>索引(index)					多列数据<br>(axis=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="创建-1"><a href="#创建-1" class="headerlink" title="创建"></a>创建</h2><p>可以由如下类型创建</p>
+<ul>
+<li>二维ndarray对象</li>
+<li>由一维ndarray、列表、字典、元组或Series构成的字典</li>
+<li>Series类型</li>
+<li>其他的DataFrame类型</li>
+</ul>
+<h3 id="二维ndarry对象创建"><a href="#二维ndarry对象创建" class="headerlink" title="二维ndarry对象创建"></a>二维ndarry对象创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>d = pd.DataFrame(np.arange(<span class="hljs-number">10</span>).reshape(<span class="hljs-number">2</span>,<span class="hljs-number">5</span>))<br>d<br><br>Out:<br>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span>	<span class="hljs-number">4</span>	<span class="hljs-comment"># 自动列索引</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span>	<span class="hljs-number">4</span><br><span class="hljs-number">1</span>	<span class="hljs-number">5</span>	<span class="hljs-number">6</span>	<span class="hljs-number">7</span>	<span class="hljs-number">8</span>	<span class="hljs-number">9</span><br><span class="hljs-comment"># 自动行索引</span><br></code></pre></td></tr></table></figure>
+<h3 id="一维ndarray对象字典创建"><a href="#一维ndarray对象字典创建" class="headerlink" title="一维ndarray对象字典创建"></a>一维ndarray对象字典创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>dt = &#123;<span class="hljs-string">&#x27;one&#x27;</span>:pd.Series([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],index=[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>]),<br>	  <span class="hljs-string">&#x27;two&#x27;</span>:pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],index=[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])&#125;<br>d = pd.DataFrame(dt)<br>d<br><br>Out:<br>	one	two	<span class="hljs-comment"># 自动列索引</span><br>a	<span class="hljs-number">1.0</span>	  <span class="hljs-number">9</span><br>b	<span class="hljs-number">2.0</span>	  <span class="hljs-number">8</span><br>c	<span class="hljs-number">3.0</span>	  <span class="hljs-number">7</span><br>d	NaN	  <span class="hljs-number">6</span><br><span class="hljs-comment"># 自动行索引</span><br><br>In :<br>pd.DataFrame(dt,index=[<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>],columns=[<span class="hljs-string">&#x27;two&#x27;</span>,<span class="hljs-string">&#x27;three&#x27;</span>])<br><br>Out:<br>	two	three<br>b	<span class="hljs-number">8</span>	 NaN<br>c	<span class="hljs-number">7</span>	 NaN<br>d	<span class="hljs-number">6</span>	 NaN<br></code></pre></td></tr></table></figure>
+<h3 id="列表类型的字典创建"><a href="#列表类型的字典创建" class="headerlink" title="列表类型的字典创建"></a>列表类型的字典创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>dl = &#123;<span class="hljs-string">&#x27;one&#x27;</span>:[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<span class="hljs-string">&#x27;two&#x27;</span>:[<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>]&#125;<br>d = pd.DataFrame(dl,index=[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>d<br><br>Out:<br>	one	two<br>a	<span class="hljs-number">1</span>	<span class="hljs-number">9</span><br>b	<span class="hljs-number">2</span>	<span class="hljs-number">8</span><br>c	<span class="hljs-number">3</span>	<span class="hljs-number">7</span><br>d	<span class="hljs-number">4</span>	<span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p><style>.ourusfmpmzzs{zoom:67%;}</style><img src="/2024/05/17/20240517_Pandas/image-20240517183052878.png" srcset="/img/loading.gif" lazyload class="ourusfmpmzzs" alt="image-20240517183052878"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>dl = &#123;<span class="hljs-string">&#x27;城市&#x27;</span>:[<span class="hljs-string">&#x27;北京&#x27;</span>,<span class="hljs-string">&#x27;上海&#x27;</span>,<span class="hljs-string">&#x27;广州&#x27;</span>,<span class="hljs-string">&#x27;深圳&#x27;</span>,<span class="hljs-string">&#x27;沈阳&#x27;</span>]，<br>	  <span class="hljs-string">&#x27;环比&#x27;</span>:[<span class="hljs-number">101.5</span>, <span class="hljs-number">101.2</span>, <span class="hljs-number">101.3</span>, <span class="hljs-number">102.0</span>, <span class="hljs-number">100.1</span>],<br>	  <span class="hljs-string">&#x27;同比&#x27;</span>:[<span class="hljs-number">120.7</span>, <span class="hljs-number">127.3</span>, <span class="hljs-number">119.4</span>, <span class="hljs-number">140.9</span>, <span class="hljs-number">101.4</span>],<br>	  <span class="hljs-string">&#x27;定基&#x27;</span>:[<span class="hljs-number">121.4</span>, <span class="hljs-number">127.8</span>, <span class="hljs-number">120.0</span>, <span class="hljs-number">145.5</span>, <span class="hljs-number">101.6</span>]&#125;<br>d = pd.DataFrame(dl,index=[<span class="hljs-string">&#x27;c1&#x27;</span>,<span class="hljs-string">&#x27;c2&#x27;</span>,<span class="hljs-string">&#x27;c3&#x27;</span>,<span class="hljs-string">&#x27;c4&#x27;</span>,<span class="hljs-string">&#x27;c5&#x27;</span>])<br>d<br><br>Out:<br>	同比	城市	定基	环比<br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c5  <span class="hljs-number">101.4</span> 沈阳  <span class="hljs-number">101.6</span> <span class="hljs-number">100.1</span><br><br>In :d.index<br>Out:Index([<span class="hljs-string">&#x27;c1&#x27;</span>,<span class="hljs-string">&#x27;c2&#x27;</span>,<span class="hljs-string">&#x27;c3&#x27;</span>,<span class="hljs-string">&#x27;c4&#x27;</span>,<span class="hljs-string">&#x27;c5&#x27;</span>],dtype=<span class="hljs-string">&#x27;object&#x27;</span>)<br>    <br>In :d.colums<br>Out:Index([<span class="hljs-string">&#x27;同比&#x27;</span>,<span class="hljs-string">&#x27;城市&#x27;</span>,<span class="hljs-string">&#x27;定基&#x27;</span>,<span class="hljs-string">&#x27;环比&#x27;</span>],dtype=<span class="hljs-string">&#x27;object&#x27;</span>)<br><br>In :d.values<br>Out:<br>array([[<span class="hljs-number">120.7</span>,北京,<span class="hljs-number">121.4</span>,<span class="hljs-number">101.5</span>],<br>       [<span class="hljs-number">127.3</span>,上海,<span class="hljs-number">127.8</span>,<span class="hljs-number">101.2</span>],<br>       [<span class="hljs-number">119.4</span>,广州,<span class="hljs-number">120.0</span>,<span class="hljs-number">101.3</span>],<br>       [<span class="hljs-number">140.9</span>,深圳,<span class="hljs-number">145.5</span>,<span class="hljs-number">102.0</span>],<br>       [<span class="hljs-number">101.4</span>,沈阳,<span class="hljs-number">101.6</span>,<span class="hljs-number">100.1</span>]],dtype=<span class="hljs-built_in">object</span>)<br><br><span class="hljs-comment">###字典之间各元素是无序的，因此生成d中列顺序不一定和字典中相同</span><br><br>In :d[<span class="hljs-string">&#x27;同比&#x27;</span>]<br>Out:<br>c1	<span class="hljs-number">120.7</span><br>c2  <span class="hljs-number">127.3</span><br>c3  <span class="hljs-number">119.4</span><br>c4  <span class="hljs-number">140.9</span><br>c5  <span class="hljs-number">101.4</span><br>Name:同比,dtype: float64<br>        <br>In :d.ix[<span class="hljs-string">&#x27;c2&#x27;</span>]<br>Out:<br>同比	<span class="hljs-number">127.8</span><br>城市	上海<br>定基	<span class="hljs-number">127.8</span><br>环比	<span class="hljs-number">101.2</span><br>Name:c2,dtype:<span class="hljs-built_in">object</span><br><br>In :d[<span class="hljs-string">&#x27;同比&#x27;</span>][<span class="hljs-string">&#x27;c2&#x27;</span>]<br>Out:<span class="hljs-number">127.3</span><br></code></pre></td></tr></table></figure>
+<h1 id="数据类型操作"><a href="#数据类型操作" class="headerlink" title="数据类型操作"></a>数据类型操作</h1><h2 id="如何改变Series和DataFrame对象"><a href="#如何改变Series和DataFrame对象" class="headerlink" title="如何改变Series和DataFrame对象"></a>如何改变Series和DataFrame对象</h2><p>改变指的是增加或重排Series或DataFrame的索引，或者删掉其中的部分值</p>
+<h3 id="索引类型及其常用方法"><a href="#索引类型及其常用方法" class="headerlink" title="索引类型及其常用方法"></a>索引类型及其常用方法</h3><p>Series和DataFrame的索引是Index类型</p>
+<p>Index对象是不可修改类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">In :d.index<br>Out:Index([<span class="hljs-string">&#x27;c5&#x27;</span>,<span class="hljs-string">&#x27;c4&#x27;</span>,<span class="hljs-string">&#x27;c3&#x27;</span>,<span class="hljs-string">&#x27;c2&#x27;</span>,<span class="hljs-string">&#x27;c1&#x27;</span>],dtype=<span class="hljs-string">&#x27;object&#x27;</span>)<br><br>In :d.columns<br>Out:Index([<span class="hljs-string">&#x27;城市&#x27;</span>,<span class="hljs-string">&#x27;同比&#x27;</span>,<span class="hljs-string">&#x27;环比&#x27;</span>,<span class="hljs-string">&#x27;定基&#x27;</span>],dtype=<span class="hljs-string">&#x27;object&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.append(idx)</td>
+<td>连接另一个Index对象，产生新的Index对象</td>
+</tr>
+<tr>
+<td>.diff(idx)</td>
+<td>计算差集，产生新的Index对象</td>
+</tr>
+<tr>
+<td>.intersection(idx)</td>
+<td>计算交集</td>
+</tr>
+<tr>
+<td>.union(idx)</td>
+<td>计算并集</td>
+</tr>
+<tr>
+<td>.delete(loc)</td>
+<td>删除loc位置处的元素</td>
+</tr>
+<tr>
+<td>.insert(loc,e)</td>
+<td>在loc位置增加一个元素e</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python">In :d<br>Out:<br>	同比	城市	定基	环比<br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c5  <span class="hljs-number">101.4</span> 沈阳  <span class="hljs-number">101.6</span> <span class="hljs-number">100.1</span><br><br>In :<br>nc = d.columns.delete(<span class="hljs-number">2</span>)<br>ni = d.index.insert(<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;c6&#x27;</span>)<br>nd = d.reindex(index=ni,columns=nc,method=<span class="hljs-string">&#x27;ffill&#x27;</span>)<br>nd<br><br>Out:<br>	同比	城市	环比<br>c1	<span class="hljs-number">120.7</span> 北京 <span class="hljs-number">101.5</span><br>c2  <span class="hljs-number">127.3</span> 上海 <span class="hljs-number">101.2</span><br>c3  <span class="hljs-number">119.4</span> 广州 <span class="hljs-number">101.3</span><br>c4  <span class="hljs-number">140.9</span> 深圳 <span class="hljs-number">102.0</span><br>c5  <span class="hljs-number">101.4</span> 沈阳 <span class="hljs-number">100.1</span><br>c6  <span class="hljs-number">101.4</span> 沈阳 <span class="hljs-number">100.1</span>  <br></code></pre></td></tr></table></figure>
+<h3 id="增加或重排：重新索引"><a href="#增加或重排：重新索引" class="headerlink" title="增加或重排：重新索引"></a>增加或重排：重新索引</h3><p>.reindex()能够改变或重排Series和DataFrame索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>dl = &#123;<span class="hljs-string">&#x27;城市&#x27;</span>:[<span class="hljs-string">&#x27;北京&#x27;</span>,<span class="hljs-string">&#x27;上海&#x27;</span>,<span class="hljs-string">&#x27;广州&#x27;</span>,<span class="hljs-string">&#x27;深圳&#x27;</span>,<span class="hljs-string">&#x27;沈阳&#x27;</span>]，<br>	  <span class="hljs-string">&#x27;环比&#x27;</span>:[<span class="hljs-number">101.5</span>, <span class="hljs-number">101.2</span>, <span class="hljs-number">101.3</span>, <span class="hljs-number">102.0</span>, <span class="hljs-number">100.1</span>],<br>	  <span class="hljs-string">&#x27;同比&#x27;</span>:[<span class="hljs-number">120.7</span>, <span class="hljs-number">127.3</span>, <span class="hljs-number">119.4</span>, <span class="hljs-number">140.9</span>, <span class="hljs-number">101.4</span>],<br>	  <span class="hljs-string">&#x27;定基&#x27;</span>:[<span class="hljs-number">121.4</span>, <span class="hljs-number">127.8</span>, <span class="hljs-number">120.0</span>, <span class="hljs-number">145.5</span>, <span class="hljs-number">101.6</span>]&#125;<br>d = pd.DataFrame(dl,index=[<span class="hljs-string">&#x27;c1&#x27;</span>,<span class="hljs-string">&#x27;c2&#x27;</span>,<span class="hljs-string">&#x27;c3&#x27;</span>,<span class="hljs-string">&#x27;c4&#x27;</span>,<span class="hljs-string">&#x27;c5&#x27;</span>])<br>d<br><br>Out:<br>	同比	城市	定基	环比<br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c5  <span class="hljs-number">101.4</span> 沈阳  <span class="hljs-number">101.6</span> <span class="hljs-number">100.1</span><br><br>In :<br>d = d.reindex(index=[<span class="hljs-string">&#x27;c5&#x27;</span>,<span class="hljs-string">&#x27;c4&#x27;</span>,<span class="hljs-string">&#x27;c3&#x27;</span>,<span class="hljs-string">&#x27;c2&#x27;</span>,<span class="hljs-string">&#x27;c1&#x27;</span>])<br>d<br><br>Out:<br>	同比	城市	定基	环比<br>c5  <span class="hljs-number">101.4</span> 沈阳  <span class="hljs-number">101.6</span> <span class="hljs-number">100.1</span><br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br><br>In :<br>d = d.reindex(colums=[<span class="hljs-string">&#x27;城市&#x27;</span>,<span class="hljs-string">&#x27;同比&#x27;</span>,<span class="hljs-string">&#x27;环比&#x27;</span>,<span class="hljs-string">&#x27;定基&#x27;</span>])<br>d<br><br>Out:<br>	城市	同比	环比	定基<br>c5	沈阳  <span class="hljs-number">101.4</span> <span class="hljs-number">100.1</span> <span class="hljs-number">101.6</span><br>...<br>c1	北京  <span class="hljs-number">120.7</span> <span class="hljs-number">101.5</span> <span class="hljs-number">121.4</span><br></code></pre></td></tr></table></figure>
+<p>.reindex(index=None,columns=None,…)的参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index,columns</td>
+<td>新的行列自定义索引</td>
+</tr>
+<tr>
+<td>fill_value</td>
+<td>重新索引中，用于填充缺失位置的值</td>
+</tr>
+<tr>
+<td>method</td>
+<td>填充方法，ffill当前值向前填充，bfill向后填充</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>最大填充量</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>默认True，生成新的对象，False时，新旧相等不复制</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br>newc = d.columns.insert(<span class="hljs-number">4</span>,<span class="hljs-string">&#x27;新增&#x27;</span>)<br>newd = d.reindex(colums=newc,fill_value=<span class="hljs-number">200</span>)<br>newd<br><br>Out:<br>	城市	同比	环比	定基	新增<br>c5	沈阳  <span class="hljs-number">101.4</span> <span class="hljs-number">100.1</span> <span class="hljs-number">101.6</span> <span class="hljs-number">200</span><br>...<br>c1	北京  <span class="hljs-number">120.7</span> <span class="hljs-number">101.5</span> <span class="hljs-number">121.4</span> <span class="hljs-number">200</span><br></code></pre></td></tr></table></figure>
+<h3 id="删除：drop"><a href="#删除：drop" class="headerlink" title="删除：drop"></a>删除：drop</h3><p>.drop()能够删除Series和DataFrame指定行或列索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]:<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>In [<span class="hljs-number">2</span>]:a = pd.Series([<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>],[<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>])<br>In [<span class="hljs-number">3</span>]:a<br>Out[<span class="hljs-number">3</span>]:<br>a	<span class="hljs-number">9</span><br>b	<span class="hljs-number">8</span><br>c	<span class="hljs-number">7</span><br>d	<span class="hljs-number">6</span><br>dtype: int64<br><br>In :a.drop([<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>])<br>Out:<br>a	<span class="hljs-number">9</span><br>d	<span class="hljs-number">6</span><br>dtype:int64<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python">In :d<br>Out:<br>	同比	城市	定基	环比<br>c5  <span class="hljs-number">101.4</span> 沈阳  <span class="hljs-number">101.6</span> <span class="hljs-number">100.1</span><br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br><br>In :d.drop(<span class="hljs-string">&#x27;c5&#x27;</span>)	<span class="hljs-comment"># 默认0轴</span><br>Out:<br>	同比	城市	定基	环比<br>c4  <span class="hljs-number">140.9</span> 深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c3  <span class="hljs-number">119.4</span> 广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c2  <span class="hljs-number">127.3</span> 上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c1	<span class="hljs-number">120.7</span> 北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br><br>In :d.drop(<span class="hljs-string">&#x27;同比&#x27;</span>,axis=<span class="hljs-number">1</span>)<br>Out:<br>	城市	定基	环比<br>c4  深圳  <span class="hljs-number">145.5</span> <span class="hljs-number">102.0</span><br>c3  广州  <span class="hljs-number">120.0</span> <span class="hljs-number">101.3</span><br>c2  上海  <span class="hljs-number">127.8</span> <span class="hljs-number">101.2</span><br>c1	北京  <span class="hljs-number">121.4</span> <span class="hljs-number">101.5</span><br></code></pre></td></tr></table></figure>
+<h1 id="数据类型运算"><a href="#数据类型运算" class="headerlink" title="数据类型运算"></a>数据类型运算</h1><h2 id="算数运算法则"><a href="#算数运算法则" class="headerlink" title="算数运算法则"></a>算数运算法则</h2><ul>
+<li>算数运算根据行列索引，补齐后运算，运算默认产生浮点数</li>
+<li>补齐时缺项填充NaN(空值)</li>
+<li>二维和一维、一维和零维间为广播运算</li>
+<li>采用+-*/符号进行的二元运算产生新的对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python">In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>a = pd.DataFrame(np.arange(<span class="hljs-number">12</span>).reshape(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br>a<br><br>Out:<br>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span><br><span class="hljs-number">1</span>	<span class="hljs-number">4</span>	<span class="hljs-number">5</span>	<span class="hljs-number">6</span>	<span class="hljs-number">7</span><br><span class="hljs-number">2</span>	<span class="hljs-number">8</span>	<span class="hljs-number">9</span>	<span class="hljs-number">10</span>	<span class="hljs-number">11</span><br><br>In :<br>b = pd.DataFrame(np.arange(<span class="hljs-number">20</span>).reshape(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>))<br>b<br><br>Out:<br>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span>	<span class="hljs-number">4</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0</span>	<span class="hljs-number">1</span>	<span class="hljs-number">2</span>	<span class="hljs-number">3</span>	<span class="hljs-number">4</span><br><span class="hljs-number">1</span>	<span class="hljs-number">5</span>	<span class="hljs-number">6</span>	<span class="hljs-number">7</span>	<span class="hljs-number">8</span>	<span class="hljs-number">9</span><br><span class="hljs-number">2</span>	<span class="hljs-number">10</span>	<span class="hljs-number">11</span>	<span class="hljs-number">12</span>	<span class="hljs-number">13</span>	<span class="hljs-number">14</span><br><span class="hljs-number">3</span>	<span class="hljs-number">15</span>	<span class="hljs-number">16</span>	<span class="hljs-number">17</span>	<span class="hljs-number">18</span>	<span class="hljs-number">19</span><br><br>In :a+b<br>Out:<br>	<span class="hljs-number">0</span>	 <span class="hljs-number">1</span>	  <span class="hljs-number">2</span>	   <span class="hljs-number">3</span>	<span class="hljs-number">4</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0.0</span>	 <span class="hljs-number">2.0</span>  <span class="hljs-number">4.0</span>  <span class="hljs-number">6.0</span>  NaN<br><span class="hljs-number">1</span>	<span class="hljs-number">9.0</span> <span class="hljs-number">11.0</span>  <span class="hljs-number">13.0</span> <span class="hljs-number">15.0</span>	NaN<br><span class="hljs-number">2</span>	<span class="hljs-number">18.0</span> <span class="hljs-number">20.0</span> <span class="hljs-number">22.0</span> <span class="hljs-number">24.0</span>	NaN<br><span class="hljs-number">3</span>	NaN	 NaN  NaN  NaN	NaN<br><br>In :a*b<br>Out:	<span class="hljs-comment"># 自动补齐，缺项补NaN</span><br>	<span class="hljs-number">0</span>	 <span class="hljs-number">1</span>	  <span class="hljs-number">2</span>	    <span class="hljs-number">3</span>	 <span class="hljs-number">4</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0.0</span>	 <span class="hljs-number">1.0</span>  <span class="hljs-number">4.0</span>   <span class="hljs-number">9.0</span>   NaN<br><span class="hljs-number">1</span>	<span class="hljs-number">20.0</span> <span class="hljs-number">30.0</span> <span class="hljs-number">42.0</span>  <span class="hljs-number">56.0</span>  NaN<br><span class="hljs-number">2</span>   <span class="hljs-number">80.0</span> <span class="hljs-number">99.0</span> <span class="hljs-number">120.0</span> <span class="hljs-number">143.0</span>  NaN<br><span class="hljs-number">3</span>	NaN	 NaN  NaN   NaN	  NaN<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 不同维度间运算为广播运算，一维Series默认在轴1参与运算</span><br>In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>b = pd.DataFrame(np.arange(<span class="hljs-number">20</span>).reshape(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>))<br><span class="hljs-built_in">print</span>(b)<br>c = pd.Series(np.arange(<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(c)<br><span class="hljs-built_in">print</span>(c-<span class="hljs-number">10</span>)<br><span class="hljs-built_in">print</span>(b-c)<br><br>Out:<br>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br><span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br><span class="hljs-number">1</span>   <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>   <span class="hljs-number">8</span>   <span class="hljs-number">9</span><br><span class="hljs-number">2</span>  <span class="hljs-number">10</span>  <span class="hljs-number">11</span>  <span class="hljs-number">12</span>  <span class="hljs-number">13</span>  <span class="hljs-number">14</span><br><span class="hljs-number">3</span>  <span class="hljs-number">15</span>  <span class="hljs-number">16</span>  <span class="hljs-number">17</span>  <span class="hljs-number">18</span>  <span class="hljs-number">19</span><br><br><span class="hljs-number">0</span>    <span class="hljs-number">0</span><br><span class="hljs-number">1</span>    <span class="hljs-number">1</span><br><span class="hljs-number">2</span>    <span class="hljs-number">2</span><br><span class="hljs-number">3</span>    <span class="hljs-number">3</span><br>dtype: int32<br><br><span class="hljs-number">0</span>   -<span class="hljs-number">10</span><br><span class="hljs-number">1</span>    -<span class="hljs-number">9</span><br><span class="hljs-number">2</span>    -<span class="hljs-number">8</span><br><span class="hljs-number">3</span>    -<span class="hljs-number">7</span><br>dtype: int32<br><br>      <span class="hljs-number">0</span>     <span class="hljs-number">1</span>     <span class="hljs-number">2</span>     <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br><span class="hljs-number">0</span>   <span class="hljs-number">0.0</span>   <span class="hljs-number">0.0</span>   <span class="hljs-number">0.0</span>   <span class="hljs-number">0.0</span> NaN<br><span class="hljs-number">1</span>   <span class="hljs-number">5.0</span>   <span class="hljs-number">5.0</span>   <span class="hljs-number">5.0</span>   <span class="hljs-number">5.0</span> NaN<br><span class="hljs-number">2</span>  <span class="hljs-number">10.0</span>  <span class="hljs-number">10.0</span>  <span class="hljs-number">10.0</span>  <span class="hljs-number">10.0</span> NaN<br><span class="hljs-number">3</span>  <span class="hljs-number">15.0</span>  <span class="hljs-number">15.0</span>  <span class="hljs-number">15.0</span>  <span class="hljs-number">15.0</span> NaN<br></code></pre></td></tr></table></figure>
+<p><strong>方法形式运算</strong></p>
+<p>好处：增加可选参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.add(d,**argws)</td>
+<td>类型间加法运算，可选参数</td>
+</tr>
+<tr>
+<td>.sub(d,**argws)</td>
+<td>类型间减法运算，可选参数</td>
+</tr>
+<tr>
+<td>.mul(d,**argws)</td>
+<td>类型间乘法运算，可选参数</td>
+</tr>
+<tr>
+<td>.div(d,**argws)</td>
+<td>类型间除法运算，可选参数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">In :b.add(a,fill_value = <span class="hljs-number">100</span>)<br>Out:<br>	<span class="hljs-number">0</span>	 <span class="hljs-number">1</span>	  <span class="hljs-number">2</span>	   <span class="hljs-number">3</span>	<span class="hljs-number">4</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0.0</span>	 <span class="hljs-number">2.0</span>  <span class="hljs-number">4.0</span>  <span class="hljs-number">6.0</span>  <span class="hljs-number">104.0</span><br><span class="hljs-number">1</span>	<span class="hljs-number">9.0</span> <span class="hljs-number">11.0</span>  <span class="hljs-number">13.0</span> <span class="hljs-number">15.0</span>	<span class="hljs-number">109.0</span><br><span class="hljs-number">2</span>	<span class="hljs-number">18.0</span> <span class="hljs-number">20.0</span> <span class="hljs-number">22.0</span> <span class="hljs-number">24.0</span>	<span class="hljs-number">114.0</span><br><span class="hljs-number">3</span>	<span class="hljs-number">115.0</span> <span class="hljs-number">116.0</span> <span class="hljs-number">117.0</span> <span class="hljs-number">118.0</span> <span class="hljs-number">119.0</span><br><br>In :a.mul(b,fill_value = <span class="hljs-number">0</span>)<br>Out:<br>	<span class="hljs-number">0</span>	 <span class="hljs-number">1</span>	  <span class="hljs-number">2</span>	    <span class="hljs-number">3</span>	 <span class="hljs-number">4</span><br><span class="hljs-number">0</span>	<span class="hljs-number">0.0</span>	 <span class="hljs-number">1.0</span>  <span class="hljs-number">4.0</span>   <span class="hljs-number">9.0</span>   <span class="hljs-number">0</span><br><span class="hljs-number">1</span>	<span class="hljs-number">20.0</span> <span class="hljs-number">30.0</span> <span class="hljs-number">42.0</span>  <span class="hljs-number">56.0</span>  <span class="hljs-number">0</span><br><span class="hljs-number">2</span>   <span class="hljs-number">80.0</span> <span class="hljs-number">99.0</span> <span class="hljs-number">120.0</span> <span class="hljs-number">143.0</span>  <span class="hljs-number">0</span><br><span class="hljs-number">3</span>	<span class="hljs-number">0</span>	 <span class="hljs-number">0</span> 	  <span class="hljs-number">0</span>     <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用运算方法可以令一维Series参与轴0运算</span><br>In :b.sub(c,axis=<span class="hljs-number">0</span>)<br>Out:<br>    <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br><span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br><span class="hljs-number">1</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>   <span class="hljs-number">8</span><br><span class="hljs-number">2</span>   <span class="hljs-number">8</span>   <span class="hljs-number">9</span>  <span class="hljs-number">10</span>  <span class="hljs-number">11</span>  <span class="hljs-number">12</span><br><span class="hljs-number">3</span>  <span class="hljs-number">12</span>  <span class="hljs-number">13</span>  <span class="hljs-number">14</span>  <span class="hljs-number">15</span>  <span class="hljs-number">16</span><br></code></pre></td></tr></table></figure>
+<h2 id="比较运算法则"><a href="#比较运算法则" class="headerlink" title="比较运算法则"></a>比较运算法则</h2><ul>
+<li>比较运算只能比较相同索引的元素，不进行补齐</li>
+<li>二维和一维、一维和零维间为广播运算</li>
+<li>采用&gt; &lt; &gt;= &lt;= == !=等符号进行的二元运算产生布尔对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 同纬度运算，尺寸一致</span><br>In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>a = pd.DataFrame(np.arange(<span class="hljs-number">12</span>).reshape(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(a)<br>d = pd.DataFrame(np.arange(<span class="hljs-number">12</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>).reshape(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(d)<br><span class="hljs-built_in">print</span>(a&gt;d)<br><span class="hljs-built_in">print</span>(a==d)<br><br>Out:<br>   <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span><br><span class="hljs-number">1</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span><br><span class="hljs-number">2</span>  <span class="hljs-number">8</span>  <span class="hljs-number">9</span>  <span class="hljs-number">10</span>  <span class="hljs-number">11</span><br>    <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-number">12</span>  <span class="hljs-number">11</span>  <span class="hljs-number">10</span>  <span class="hljs-number">9</span><br><span class="hljs-number">1</span>   <span class="hljs-number">8</span>   <span class="hljs-number">7</span>   <span class="hljs-number">6</span>  <span class="hljs-number">5</span><br><span class="hljs-number">2</span>   <span class="hljs-number">4</span>   <span class="hljs-number">3</span>   <span class="hljs-number">2</span>  <span class="hljs-number">1</span><br>       <span class="hljs-number">0</span>      <span class="hljs-number">1</span>      <span class="hljs-number">2</span>      <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span><br><span class="hljs-number">1</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>   <span class="hljs-literal">True</span><br><span class="hljs-number">2</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span><br>       <span class="hljs-number">0</span>      <span class="hljs-number">1</span>      <span class="hljs-number">2</span>      <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span><br><span class="hljs-number">1</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>   <span class="hljs-literal">True</span>  <span class="hljs-literal">False</span><br><span class="hljs-number">2</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 不同维度，广播运算，默认在1轴</span><br>In :<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>a = pd.DataFrame(np.arange(<span class="hljs-number">12</span>).reshape(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(a)<br>c = pd.Series(np.arange(<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(c)<br><span class="hljs-built_in">print</span>(a&gt;c)<br><span class="hljs-built_in">print</span>(c&gt;<span class="hljs-number">0</span>)<br><br>Out:<br>   <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span><br><span class="hljs-number">1</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span><br><span class="hljs-number">2</span>  <span class="hljs-number">8</span>  <span class="hljs-number">9</span>  <span class="hljs-number">10</span>  <span class="hljs-number">11</span><br><br><span class="hljs-number">0</span>    <span class="hljs-number">0</span><br><span class="hljs-number">1</span>    <span class="hljs-number">1</span><br><span class="hljs-number">2</span>    <span class="hljs-number">2</span><br><span class="hljs-number">3</span>    <span class="hljs-number">3</span><br>dtype: int32<br>    <br>       <span class="hljs-number">0</span>      <span class="hljs-number">1</span>      <span class="hljs-number">2</span>      <span class="hljs-number">3</span><br><span class="hljs-number">0</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span>  <span class="hljs-literal">False</span><br><span class="hljs-number">1</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span><br><span class="hljs-number">2</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span>   <span class="hljs-literal">True</span><br><br><span class="hljs-number">0</span>    <span class="hljs-literal">False</span><br><span class="hljs-number">1</span>     <span class="hljs-literal">True</span><br><span class="hljs-number">2</span>     <span class="hljs-literal">True</span><br><span class="hljs-number">3</span>     <span class="hljs-literal">True</span><br>dtype: <span class="hljs-built_in">bool</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="category-chain-item">数据分析</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="print-no-link">#数据分析</a>
+      
+        <a href="/tags/%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/" class="print-no-link">#分析工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Pandas库入门</div>
+      <div>http://example.com/2024/05/17/20240517_Pandas/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>XuanYa</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/14/20240514_Matplotlib/" title="Matplotlib库入门">
+                        <span class="hidden-mobile">Matplotlib库入门</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
