@@ -16,23 +16,30 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="数据分析">
-<meta property="og:url" content="http://example.com/2024/04/12/20240412_dataAnalysis/index.html">
+    <meta name="description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习引言">
+<meta property="og:url" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/index.html">
 <meta property="og:site_name" content="冯宝宝">
+<meta property="og:description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/04/12/20240412_dataAnalysis/image-20240412163256908.png">
-<meta property="article:published_time" content="2024-04-12T08:19:08.601Z">
-<meta property="article:modified_time" content="2024-04-12T08:33:01.456Z">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png">
+<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png">
+<meta property="article:published_time" content="2024-05-19T14:53:13.783Z">
+<meta property="article:modified_time" content="2024-05-19T16:42:17.163Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="人工智能">
-<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2024/04/12/20240412_dataAnalysis/image-20240412163256908.png">
+<meta name="twitter:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
   
   
   
-  <title>数据分析 - 冯宝宝</title>
+  <title>机器学习引言 - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据分析"></span>
+            <span id="subtitle" data-typed-text="机器学习引言"></span>
           
         </div>
 
@@ -211,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-12 16:19" pubdate>
-          2024年4月12日 下午
+        <time datetime="2024-05-19 22:53" pubdate>
+          2024年5月19日 晚上
         </time>
       </span>
     
@@ -223,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.4k 字
         
       </span>
     
@@ -234,7 +241,7 @@
         
         
         
-          1 分钟
+          12 分钟
         
       </span>
     
@@ -271,12 +278,102 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">数据分析</h1>
+            <h1 id="seo-header">机器学习引言</h1>
             
             
               <div class="markdown-body">
                 
-                <img src="/2024/04/12/20240412_dataAnalysis/image-20240412163256908.png" srcset="/img/loading.gif" lazyload class="" title="image-20240412163256908">
+                <h1 id="机器学习观点"><a href="#机器学习观点" class="headerlink" title="机器学习观点"></a>机器学习观点</h1><ul>
+<li><p>拿到数据之后，<strong>构建机器学习算法第一步</strong>：观察数据，总结规律</p>
+<ul>
+<li><p><strong>不正确观点</strong>：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）</p>
+</li>
+<li><p>对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限</p>
+</li>
+</ul>
+</li>
+<li><strong>设计算法</strong>：思考一个任务的经验E和性能指标P是什么</li>
+<li>一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可以转换的</li>
+<li>机器学习的重点不是提取特征，而是假设在<strong>已经提取好特征</strong>的前提下，如何构造算法获得更好的性能</li>
+<li>提取特征很重要，不同媒质不同任务，提取特征的方式千变万化</li>
+<li>维度与标准决定了我们要用机器学习，维度：人对超过二维的数据难以想象，标准：对某些区域的划分是不一样的</li>
+<li>机器学习是典型的最优化问题，数学在现代化机器学习中占有重要的作用</li>
+</ul>
+<h1 id="机器学习定义"><a href="#机器学习定义" class="headerlink" title="机器学习定义"></a>机器学习定义</h1><h2 id="ARCHUR-SAMUEL"><a href="#ARCHUR-SAMUEL" class="headerlink" title="ARCHUR SAMUEL"></a>ARCHUR SAMUEL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">ARCHUR SAMUEL：<br>​	Machine Learning <span class="hljs-keyword">is</span> Fields <span class="hljs-keyword">of</span> study <span class="hljs-keyword">that</span> gives computers <span class="hljs-keyword">the</span> ability <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">without</span> being explicitly programmed.<br>​	机器学习是这样的领域，它土语计算机学习的能力，（这种学习能力）不是通过显著式编程获得的。<br></code></pre></td></tr></table></figure>
+<h3 id="显著式编程"><a href="#显著式编程" class="headerlink" title="显著式编程"></a>显著式编程</h3><ul>
+<li>通过人为预先定义出规律，告诉计算机实现一一对照区别。</li>
+<li>劣势：<strong>人为</strong>帮计算机<strong>规划</strong>所处的环境，将环境、规律调查得一清二楚</li>
+</ul>
+<h3 id="非显著式编程"><a href="#非显著式编程" class="headerlink" title="非显著式编程"></a>非显著式编程</h3><ul>
+<li>事先并不约束计算机总结出什么规律，只给大量数据，编写程序让计算机自己挑出能分辨事物的规律，总结不同事物的区别</li>
+<li>规定在特定环境下，做一些行为带来的收益，将收益称为<strong>收益函数</strong></li>
+<li>规定了收益函数后，让计算机去自己<strong>找最大化收益函数</strong>的行为</li>
+<li>优势：<strong>通过数据、经验自动学习</strong></li>
+</ul>
+<h2 id="TOM-MITSHELL"><a href="#TOM-MITSHELL" class="headerlink" title="TOM MITSHELL"></a>TOM MITSHELL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript">TOM MITSHELL:<br>​	A computer program <span class="hljs-keyword">is</span> said <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">from</span> experience E <span class="hljs-keyword">with</span> respect <span class="hljs-keyword">to</span> <span class="hljs-keyword">some</span> task T <span class="hljs-keyword">and</span> <span class="hljs-keyword">some</span> performance measure P, <span class="hljs-keyword">if</span> <span class="hljs-keyword">its</span> performance <span class="hljs-keyword">on</span> T, <span class="hljs-keyword">as</span> measured <span class="hljs-keyword">by</span> P, improves <span class="hljs-keyword">with</span> experience E.<br>​	一个计算机程序被称为可以学习，是指它能够针对某个任务T和某个性能指标P，从经验E中学习。这种学习的特点是，它在T上的被P所衡量的性能，会随着经验E的增加而提高。<br>​	任务 T：编写计算机程序识别菊花和玫瑰<br>	经验 E：一大堆菊花和玫瑰的图片<br>	性能指标 P：不同的机器学习算法会有不同，如把识别的正确率简称为识别率，将其作为性能指标<br></code></pre></td></tr></table></figure>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>Experience越来越多，Performance Measure也会越来越高</li>
+<li>更数学化，典型的最优化问题</li>
+</ul>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><ul>
+<li>数学在现代化机器学习中占有重要的作用</li>
+</ul>
+<h1 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h1><p>现在的强化学习利用到了监督学习，如ALPHAGO，先通过监督学习获得初试围棋程序，再将初试围棋程序进行强化学习</p>
+<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><ul>
+<li>经验E是完全由人搜集起来输入进计算机</li>
+<li>为训练数据打标签，此时经验E为：<strong>训练样本</strong>和<strong>标签</strong>的集合<ul>
+<li>垃圾邮件识别，教计算机自动识别某个邮件识别是垃圾邮件</li>
+<li>人脸识别，教计算机通过人脸的图像识别这个人是谁</li>
+</ul>
+</li>
+</ul>
+<h3 id="传统监督学习"><a href="#传统监督学习" class="headerlink" title="传统监督学习"></a>传统监督学习</h3><p>每一个训练数据都有对应的标签</p>
+<ul>
+<li>支持向量机</li>
+<li>人工神经网络</li>
+<li>深度神经网络</li>
+</ul>
+<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>所有训练数据都没有对应的标签</p>
+<ul>
+<li>聚类</li>
+<li>EM算法</li>
+<li>主成分分析</li>
+</ul>
+<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>训练数据中一部分有标签，一部分没有标签（如何用少量标注数据与大量未标注数据，获得更好的机器学习算法）</p>
+<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><ul>
+<li>经验E是由计算机与环境互动获得的</li>
+<li>产生<strong>行为</strong>，定义这些行为的收益函数(Reward function)，改变自己行为模式去<strong>最大化收益函数</strong></li>
+<li>计算机通过与环境的互动，逐渐强化自己的行为模式<ul>
+<li>教计算机下棋</li>
+<li>无人驾驶，教计算机自动驾驶汽车，从一个指定地点到另一个指定地点</li>
+</ul>
+</li>
+</ul>
+<h1 id="机器学习算法过程"><a href="#机器学习算法过程" class="headerlink" title="机器学习算法过程"></a>机器学习算法过程</h1><p>识别尿沉中的红白细胞</p>
+<p><style>.qfepykpdwpbb{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png" srcset="/img/loading.gif" lazyload class="qfepykpdwpbb" alt="image-20240520000512315"></p>
+<p>可能被观察到的区别</p>
+<ul>
+<li>平均来说，白细胞面积比红细胞大</li>
+<li>白细胞没有红细胞圆</li>
+<li>白细胞内部纹理比红细胞粗糙</li>
+</ul>
+<h2 id="第一步：提取特征"><a href="#第一步：提取特征" class="headerlink" title="第一步：提取特征"></a>第一步：提取特征</h2><p>通过训练样本获得的，对机器学习任务有帮助的多维度的特征数据</p>
+<p>很重要，提取了好的特征，（即使算法不是很好）也能获得不错的性能</p>
+<p>提取了差的特征，不可能获得好的性能</p>
+<p><strong>细胞的面积</strong>    <strong>圆形度</strong>    <strong>表面粗糙程度</strong></p>
+<h3 id="提取面积特征方法"><a href="#提取面积特征方法" class="headerlink" title="提取面积特征方法"></a>提取面积特征方法</h3><p><style>.brgjeisgdfui{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png" srcset="/img/loading.gif" lazyload class="brgjeisgdfui" alt="image-20240520001815389"></p>
+<h2 id="第二步：特征选择"><a href="#第二步：特征选择" class="headerlink" title="第二步：特征选择"></a>第二步：特征选择</h2><p>只选择面积与周长作为区分，来构建机器学习系统，后面归一化一下</p>
+<p><style>.hnqrhlpoqdye{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png" srcset="/img/loading.gif" lazyload class="hnqrhlpoqdye" alt="image-20240520002610676"></p>
+<p><style>.ilbouhnfhjdv{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png" srcset="/img/loading.gif" lazyload class="ilbouhnfhjdv" alt="image-20240520002746171"></p>
+<h2 id="第三步：设计算法"><a href="#第三步：设计算法" class="headerlink" title="第三步：设计算法"></a>第三步：设计算法</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><ul>
+<li>线性内核</li>
+<li>多项式内核</li>
+<li>高斯径向基函数核</li>
+</ul>
+<p><style>.zruonercbztx{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png" srcset="/img/loading.gif" lazyload class="zruonercbztx" alt="image-20240520003916270"></p>
+<h2 id="第四步：训练结果"><a href="#第四步：训练结果" class="headerlink" title="第四步：训练结果"></a>第四步：训练结果</h2><p>获得训练库准确率</p>
+<p><style>.dqkgblrxdmvt{zoom:67%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png" srcset="/img/loading.gif" lazyload class="dqkgblrxdmvt" alt="image-20240520003934456"></p>
+
                 
               </div>
             
@@ -299,7 +396,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="category-chain-item">数据分析</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
   
   
 
@@ -316,9 +413,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="print-no-link">#人工智能</a>
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="print-no-link">#数据分析</a>
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
       
     </div>
   
@@ -330,8 +427,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据分析</div>
-      <div>http://example.com/2024/04/12/20240412_dataAnalysis/</div>
+      <div>机器学习引言</div>
+      <div>http://example.com/2024/05/19/20240519_MachineLearning_Introduction/</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +440,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月12日</div>
+          <div>2024年5月19日</div>
         </div>
       
       
@@ -375,18 +472,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/12/20240412_housePrices/" title="房价回归预测">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">房价回归预测</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/12/20240412_LogisticRegression/" title="逻辑回归">
-                        <span class="hidden-mobile">逻辑回归</span>
+                      <a href="/2024/05/17/20240517_Pandas/" title="Pandas库入门">
+                        <span class="hidden-mobile">Pandas库入门</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
