@@ -350,7 +350,7 @@
 </li>
 </ul>
 <h1 id="机器学习算法过程"><a href="#机器学习算法过程" class="headerlink" title="机器学习算法过程"></a>机器学习算法过程</h1><p>识别尿沉中的红白细胞</p>
-<p><style>.ulhokvbupjlr{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png" srcset="/img/loading.gif" lazyload class="ulhokvbupjlr" alt="image-20240520000512315"></p>
+<p><style>.dmbzhhfpwcwy{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png" srcset="/img/loading.gif" lazyload class="dmbzhhfpwcwy" alt="image-20240520000512315"></p>
 <p>可能被观察到的区别</p>
 <ul>
 <li>平均来说，白细胞面积比红细胞大</li>
@@ -361,18 +361,18 @@
 <p>很重要，提取了好的特征，（即使算法不是很好）也能获得不错的性能</p>
 <p>提取了差的特征，不可能获得好的性能</p>
 <p><strong>细胞的面积</strong>    <strong>圆形度</strong>    <strong>表面粗糙程度</strong></p>
-<h3 id="提取面积特征方法"><a href="#提取面积特征方法" class="headerlink" title="提取面积特征方法"></a>提取面积特征方法</h3><p><style>.igvwvldxdcxw{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png" srcset="/img/loading.gif" lazyload class="igvwvldxdcxw" alt="image-20240520001815389"></p>
+<h3 id="提取面积特征方法"><a href="#提取面积特征方法" class="headerlink" title="提取面积特征方法"></a>提取面积特征方法</h3><p><style>.iufrnpyjemyi{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png" srcset="/img/loading.gif" lazyload class="iufrnpyjemyi" alt="image-20240520001815389"></p>
 <h2 id="第二步：特征选择"><a href="#第二步：特征选择" class="headerlink" title="第二步：特征选择"></a>第二步：特征选择</h2><p>只选择面积与周长作为区分，来构建机器学习系统，后面归一化一下</p>
-<p><style>.dconnxuibejt{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png" srcset="/img/loading.gif" lazyload class="dconnxuibejt" alt="image-20240520002610676"></p>
-<p><style>.hlbaksrtiozk{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png" srcset="/img/loading.gif" lazyload class="hlbaksrtiozk" alt="image-20240520002746171"></p>
+<p><style>.huibdbukemrj{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png" srcset="/img/loading.gif" lazyload class="huibdbukemrj" alt="image-20240520002610676"></p>
+<p><style>.eyvpsxflhrex{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png" srcset="/img/loading.gif" lazyload class="eyvpsxflhrex" alt="image-20240520002746171"></p>
 <h2 id="第三步：设计算法"><a href="#第三步：设计算法" class="headerlink" title="第三步：设计算法"></a>第三步：设计算法</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><ul>
 <li>线性内核</li>
 <li>多项式内核</li>
 <li>高斯径向基函数核</li>
 </ul>
-<p><style>.rkxxmvedldao{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png" srcset="/img/loading.gif" lazyload class="rkxxmvedldao" alt="image-20240520003916270"></p>
+<p><style>.ujipbogucoxd{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png" srcset="/img/loading.gif" lazyload class="ujipbogucoxd" alt="image-20240520003916270"></p>
 <h2 id="第四步：训练结果"><a href="#第四步：训练结果" class="headerlink" title="第四步：训练结果"></a>第四步：训练结果</h2><p>获得训练库准确率</p>
-<p><style>.qyemcnlmcmed{zoom:67%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png" srcset="/img/loading.gif" lazyload class="qyemcnlmcmed" alt="image-20240520003934456"></p>
+<p><style>.tskbmldcgjqs{zoom:67%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png" srcset="/img/loading.gif" lazyload class="tskbmldcgjqs" alt="image-20240520003934456"></p>
 <h1 id="机器学习算法比较"><a href="#机器学习算法比较" class="headerlink" title="机器学习算法比较"></a>机器学习算法比较</h1><h2 id="没有免费午餐定理"><a href="#没有免费午餐定理" class="headerlink" title="没有免费午餐定理"></a>没有免费午餐定理</h2><p>​    任何一个预测函数，如果在一些训练样本上表现好，那么必然在另一些训练样本上表现不好，如果不对数据在特征空间的先验分布有一定假设，那么表现好于表现不好的情况一样多。</p>
 <p>​    在设计机器学习算法的时候有一个假设：在特征空间上距离接近的样本，他们属于同一个类别的概率会更高。</p>
 <p>​    道理是从以前的事实中来的。通过类比推广到对未来的预测。</p>
