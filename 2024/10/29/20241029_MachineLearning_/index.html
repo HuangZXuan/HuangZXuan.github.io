@@ -16,24 +16,23 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义">
+    <meta name="description" content="从数学的角度来看，这段代码展示了神经网络训练的基本流程，包括前向传播、损失计算、反向传播和参数更新。我们可以通过梯度下降的方法来最小化损失函数。 数学解析1. 定义和初始化 net 是一个神经网络模型，设模型参数为 (\theta)，包括权重和偏置。  loss 是损失函数，定义为 ( L(\hat{y}, y) )，它衡量模型输出   \hat{y} &#x3D; \text{net}(X; \theta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://example.com/2024/05/31/20240531_ConvexOptimization/index.html">
+<meta property="og:title" content="数学角度看深度学习">
+<meta property="og:url" content="http://example.com/2024/10/29/20241029_MachineLearning_/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="定义">
+<meta property="og:description" content="从数学的角度来看，这段代码展示了神经网络训练的基本流程，包括前向传播、损失计算、反向传播和参数更新。我们可以通过梯度下降的方法来最小化损失函数。 数学解析1. 定义和初始化 net 是一个神经网络模型，设模型参数为 (\theta)，包括权重和偏置。  loss 是损失函数，定义为 ( L(\hat{y}, y) )，它衡量模型输出   \hat{y} &#x3D; \text{net}(X; \theta">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-31T03:03:39.717Z">
-<meta property="article:modified_time" content="2024-05-31T13:37:45.292Z">
+<meta property="article:published_time" content="2024-10-29T08:08:44.923Z">
+<meta property="article:modified_time" content="2024-11-06T13:38:58.474Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="SVM">
-<meta property="article:tag" content="凸优化">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>凸优化 - 冯宝宝</title>
+  <title>数学角度看深度学习 - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凸优化"></span>
+            <span id="subtitle" data-typed-text="数学角度看深度学习"></span>
           
         </div>
 
@@ -212,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-31 11:03" pubdate>
-          2024年5月31日 上午
+        <time datetime="2024-10-29 16:08" pubdate>
+          2024年10月29日 下午
         </time>
       </span>
     
@@ -224,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          615 字
         
       </span>
     
@@ -235,7 +234,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -272,12 +271,62 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">凸优化</h1>
+            <h1 id="seo-header">数学角度看深度学习</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1>
+                <p>从数学的角度来看，这段代码展示了神经网络训练的基本流程，包括前向传播、损失计算、反向传播和参数更新。我们可以通过梯度下降的方法来最小化损失函数。</p>
+<h3 id="数学解析"><a href="#数学解析" class="headerlink" title="数学解析"></a>数学解析</h3><h4 id="1-定义和初始化"><a href="#1-定义和初始化" class="headerlink" title="1. 定义和初始化"></a>1. 定义和初始化</h4><ul>
+<li><p><code>net</code> 是一个神经网络模型，设模型参数为 (\theta)，包括权重和偏置。</p>
+</li>
+<li><p><code>loss</code> 是损失函数，定义为 ( L(\hat{y}, y) )，它衡量模型输出 </p>
+<script type="math/tex; mode=display">
+\hat{y} = \text{net}(X; \theta)</script><p>和真实标签 ( y ) 的误差。</p>
+</li>
+<li><p><code>num_epochs = 3</code> 表示我们将训练模型 3 个轮次。</p>
+</li>
+</ul>
+<h4 id="2-训练循环"><a href="#2-训练循环" class="headerlink" title="2. 训练循环"></a>2. 训练循环</h4><p>在训练过程中，每一个 <code>epoch</code> 都会经历以下步骤：</p>
+<h4 id="3-小批量训练"><a href="#3-小批量训练" class="headerlink" title="3. 小批量训练"></a>3. 小批量训练</h4><p>代码中 <code>for X, y in data_iter</code> 遍历每个小批量的输入数据 (X) 和标签 (y)：</p>
+<ol>
+<li><p><strong>前向传播</strong>：对于每个小批量 ( X ) 和标签 ( y )：</p>
+<ul>
+<li><p>模型通过前向传播计算预测输出： </p>
+<script type="math/tex; mode=display">
+\hat{y} = \text{net}(X; \theta)</script></li>
+<li><p>这里的 <code>net(X)</code> 代表了从输入到输出的所有计算，这通常包括线性变换、非线性激活函数等。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>损失计算</strong>：计算当前小批量数据的损失 ( l )：</p>
+<script type="math/tex; mode=display">
+l = L(\hat{y}, y)</script><p>其中，</p>
+<script type="math/tex; mode=display">
+\hat{y} = \text{net}(X)</script><p>常见的损失函数有均方误差（MSE）和交叉熵（Cross Entropy）等，具体取决于任务的类型（回归或分类）。</p>
+</li>
+<li><p><strong>梯度清零</strong>：<code>trainer.zero_grad()</code> </p>
+</li>
+</ol>
+<ul>
+<li>为了避免梯度的累积，清除上一批次计算出的梯度。</li>
+</ul>
+<ol>
+<li><strong>反向传播</strong>：计算损失 ( l ) 对模型参数 (\theta) 的梯度：<script type="math/tex; mode=display">
+\nabla_\theta l = \frac{\partial L(\hat{y}, y)}{\partial \theta}</script></li>
+</ol>
+<ul>
+<li>通过 <code>l.backward()</code> 调用链式法则，将损失的梯度从输出层逐层传递到每一层的参数（即计算各层参数的偏导数）。</li>
+</ul>
+<ol>
+<li><strong>参数更新</strong>：利用梯度下降算法更新参数：<script type="math/tex; mode=display">
+\theta := \theta - \alpha \nabla_\theta l</script>其中 (\alpha) 是学习率，控制每次更新的步长大小。</li>
+</ol>
+<h4 id="4-整体损失评估"><a href="#4-整体损失评估" class="headerlink" title="4. 整体损失评估"></a>4. 整体损失评估</h4><p>在每个 <code>epoch</code> 结束时，代码再次计算模型在整个数据集上的损失：</p>
+<script type="math/tex; mode=display">
+L_{\text{total}} = L(\text{net}(\text{features}), \text{labels})</script><p>这样可以监测每个 <code>epoch</code> 后的损失，判断训练的进展。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从数学角度看，这段代码实现了一个典型的 <strong>梯度下降优化过程</strong>，通过前向传播计算损失，然后通过反向传播计算梯度，再利用梯度下降更新参数。最终，损失逐渐减小，模型在数据上的性能逐步提升。</p>
+
                 
               </div>
             
@@ -300,7 +349,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="category-chain-item">数学基础</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -317,11 +366,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/SVM/" class="print-no-link">#SVM</a>
-      
-        <a href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" class="print-no-link">#凸优化</a>
+        <a href="/tags/%E6%95%B0%E5%AD%A6/" class="print-no-link">#数学</a>
       
     </div>
   
@@ -333,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凸优化</div>
-      <div>http://example.com/2024/05/31/20240531_ConvexOptimization/</div>
+      <div>数学角度看深度学习</div>
+      <div>http://example.com/2024/10/29/20241029_MachineLearning_/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月31日</div>
+          <div>2024年10月29日</div>
         </div>
       
       
@@ -378,7 +425,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/19/timeplan/" title="">
+                      <a href="/2024/10/29/%E6%95%B0%E5%AD%A6%E8%A7%A3%E6%9E%90/" title="">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
@@ -388,8 +435,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
-                        <span class="hidden-mobile">支持向量机</span>
+                      <a href="/2024/07/19/timeplan/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

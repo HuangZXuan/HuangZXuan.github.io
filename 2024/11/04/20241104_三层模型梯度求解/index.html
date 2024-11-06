@@ -16,24 +16,23 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义">
+    <meta name="description" content="好的！我们来构建一个简单的三层神经网络模型，并详细分析每一层的梯度计算过程。 假设这个模型由以下三层构成：  输入层：大小为 2 隐藏层：大小为 3，激活函数为 ReLU 输出层：大小为 1  每一层的权重和偏置参数如下：  第一层：权重 ( W_1 ) 和偏置 ( b_1 ) 第二层：权重 ( W_2 ) 和偏置 ( b_2 ) 输出层：权重 ( W_3 ) 和偏置 ( b_3 )  1. 先建">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://example.com/2024/05/31/20240531_ConvexOptimization/index.html">
+<meta property="og:title" content="三层网络模型梯度求解">
+<meta property="og:url" content="http://example.com/2024/11/04/20241104_%E4%B8%89%E5%B1%82%E6%A8%A1%E5%9E%8B%E6%A2%AF%E5%BA%A6%E6%B1%82%E8%A7%A3/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="定义">
+<meta property="og:description" content="好的！我们来构建一个简单的三层神经网络模型，并详细分析每一层的梯度计算过程。 假设这个模型由以下三层构成：  输入层：大小为 2 隐藏层：大小为 3，激活函数为 ReLU 输出层：大小为 1  每一层的权重和偏置参数如下：  第一层：权重 ( W_1 ) 和偏置 ( b_1 ) 第二层：权重 ( W_2 ) 和偏置 ( b_2 ) 输出层：权重 ( W_3 ) 和偏置 ( b_3 )  1. 先建">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-31T03:03:39.717Z">
-<meta property="article:modified_time" content="2024-05-31T13:37:45.292Z">
+<meta property="article:published_time" content="2024-11-04T08:15:16.479Z">
+<meta property="article:modified_time" content="2024-11-06T13:42:07.007Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="SVM">
-<meta property="article:tag" content="凸优化">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>凸优化 - 冯宝宝</title>
+  <title>三层网络模型梯度求解 - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凸优化"></span>
+            <span id="subtitle" data-typed-text="三层网络模型梯度求解"></span>
           
         </div>
 
@@ -212,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-31 11:03" pubdate>
-          2024年5月31日 上午
+        <time datetime="2024-11-04 16:15" pubdate>
+          2024年11月4日 下午
         </time>
       </span>
     
@@ -224,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          845 字
         
       </span>
     
@@ -235,7 +234,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -272,12 +271,72 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">凸优化</h1>
+            <h1 id="seo-header">三层网络模型梯度求解</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1>
+                <p>好的！我们来构建一个简单的三层神经网络模型，并详细分析每一层的梯度计算过程。</p>
+<p>假设这个模型由以下三层构成：</p>
+<ol>
+<li>输入层：大小为 2</li>
+<li>隐藏层：大小为 3，激活函数为 ReLU</li>
+<li>输出层：大小为 1</li>
+</ol>
+<p>每一层的权重和偏置参数如下：</p>
+<ul>
+<li>第一层：权重 ( W_1 ) 和偏置 ( b_1 )</li>
+<li>第二层：权重 ( W_2 ) 和偏置 ( b_2 )</li>
+<li>输出层：权重 ( W_3 ) 和偏置 ( b_3 )</li>
+</ul>
+<h3 id="1-先建立模型并计算前向传播"><a href="#1-先建立模型并计算前向传播" class="headerlink" title="1. 先建立模型并计算前向传播"></a>1. 先建立模型并计算前向传播</h3><p>我们将输入数据设为 <code>x</code>，标签设为 <code>y_true</code>。模型的前向传播计算过程如下：</p>
+<script type="math/tex; mode=display">
+z_1 = x \cdot W_1 + b_1</script><script type="math/tex; mode=display">
+a_1 = \text{ReLU}(z_1)</script><script type="math/tex; mode=display">
+z_2 = a_1 \cdot W_2 + b_2</script><script type="math/tex; mode=display">
+a_2 = \text{ReLU}(z_2)</script><script type="math/tex; mode=display">
+y_{\text{pred}} = a_2 \cdot W_3 + b_3</script><p>损失函数使用均方误差（MSE）：</p>
+<script type="math/tex; mode=display">
+\text{loss} = \frac{1}{N} \sum (y_{\text{pred}} - y_{\text{true}})^2</script><h3 id="2-用-PyTorch-实现这个三层模型"><a href="#2-用-PyTorch-实现这个三层模型" class="headerlink" title="2. 用 PyTorch 实现这个三层模型"></a>2. 用 PyTorch 实现这个三层模型</h3><p>以下是代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><br><span class="hljs-comment"># 初始化输入和标签</span><br>x = torch.tensor([[<span class="hljs-number">0.5</span>, -<span class="hljs-number">1.5</span>]], requires_grad=<span class="hljs-literal">False</span>)  <span class="hljs-comment"># 输入为 2 维</span><br>y_true = torch.tensor([[<span class="hljs-number">1.0</span>]], requires_grad=<span class="hljs-literal">False</span>)   <span class="hljs-comment"># 标签为 1 维</span><br><br><span class="hljs-comment"># 初始化模型参数</span><br>W1 = torch.randn((<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 第一层的权重 (2x3)</span><br>b1 = torch.randn((<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 第一层的偏置 (1x3)</span><br><br>W2 = torch.randn((<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 第二层的权重 (3x3)</span><br>b2 = torch.randn((<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 第二层的偏置 (1x3)</span><br><br>W3 = torch.randn((<span class="hljs-number">3</span>, <span class="hljs-number">1</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 输出层的权重 (3x1)</span><br>b3 = torch.randn((<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), requires_grad=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># 输出层的偏置 (1x1)</span><br><br><span class="hljs-comment"># 前向传播</span><br>z1 = x @ W1 + b1<br>a1 = F.relu(z1)<br>z2 = a1 @ W2 + b2<br>a2 = F.relu(z2)<br>y_pred = a2 @ W3 + b3<br><br><span class="hljs-comment"># 计算损失</span><br>loss = torch.mean((y_pred - y_true) ** <span class="hljs-number">2</span>)<br><br><span class="hljs-comment"># 反向传播</span><br>loss.backward()<br><br><span class="hljs-comment"># 输出每一层的梯度</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;W1 的梯度：&quot;</span>, W1.grad)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;b1 的梯度：&quot;</span>, b1.grad)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;W2 的梯度：&quot;</span>, W2.grad)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;b2 的梯度：&quot;</span>, b2.grad)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;W3 的梯度：&quot;</span>, W3.grad)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;b3 的梯度：&quot;</span>, b3.grad)<br></code></pre></td></tr></table></figure>
+<h3 id="3-梯度计算分析"><a href="#3-梯度计算分析" class="headerlink" title="3. 梯度计算分析"></a>3. 梯度计算分析</h3><p>现在，我们分析每一层参数梯度的计算过程：</p>
+<h4 id="第一层（输入到隐藏层）"><a href="#第一层（输入到隐藏层）" class="headerlink" title="第一层（输入到隐藏层）"></a>第一层（输入到隐藏层）</h4><ol>
+<li>对于第一层的权重  <script type="math/tex; mode=display">
+W_1</script><script type="math/tex; mode=display">
+，其梯度为</script><script type="math/tex; mode=display">
+\frac{\partial \text{loss}}{\partial W_1}</script></li>
+</ol>
+<script type="math/tex; mode=display">
+   。
+   - 通过链式法则，我们可以将梯度分解为：</script><script type="math/tex; mode=display">
+\frac{\partial \text{loss}}{\partial W_1} = \frac{\partial \text{loss}}{\partial y_{\text{pred}}} \cdot \frac{\partial y_{\text{pred}}}{\partial a_2} \cdot \frac{\partial a_2}{\partial z_2} \cdot \frac{\partial z_2}{\partial a_1} \cdot \frac{\partial a_1}{\partial z_1} \cdot \frac{\partial z_1}{\partial W_1}</script><ul>
+<li>PyTorch 自动计算并累积这些链式法则中的每个项的梯度，最终得到 <code>W1.grad</code>。</li>
+</ul>
+<ol>
+<li>对于第一层的偏置 ( b_1 )，其梯度为 (\frac{\partial \text{loss}}{\partial b_1})，计算过程与 ( W_1 ) 类似，但没有权重的部分。</li>
+</ol>
+<h4 id="第二层（隐藏层到隐藏层）"><a href="#第二层（隐藏层到隐藏层）" class="headerlink" title="第二层（隐藏层到隐藏层）"></a>第二层（隐藏层到隐藏层）</h4><ol>
+<li><p>对于第二层的权重 ( W_2 )，其梯度为 (\frac{\partial \text{loss}}{\partial W_2})。</p>
+<ul>
+<li>同样通过链式法则分解：(\frac{\partial \text{loss}}{\partial W_2} = \frac{\partial \text{loss}}{\partial y_{\text{pred}}} \cdot \frac{\partial y_{\text{pred}}}{\partial a_2} \cdot \frac{\partial a_2}{\partial z_2} \cdot \frac{\partial z_2}{\partial W_2})。</li>
+<li>PyTorch 自动追踪这些操作并计算 <code>W2.grad</code>。</li>
+</ul>
+</li>
+<li><p>对于第二层的偏置 ( b_2 )，其梯度为 (\frac{\partial \text{loss}}{\partial b_2})。</p>
+</li>
+</ol>
+<h4 id="输出层（隐藏层到输出层）"><a href="#输出层（隐藏层到输出层）" class="headerlink" title="输出层（隐藏层到输出层）"></a>输出层（隐藏层到输出层）</h4><ol>
+<li><p>对于输出层的权重 ( W_3 )，其梯度为 (\frac{\partial \text{loss}}{\partial W_3})。</p>
+<ul>
+<li>这一步相对简单，因为它直接涉及到最终的输出：(\frac{\partial \text{loss}}{\partial W_3} = \frac{\partial \text{loss}}{\partial y_{\text{pred}}} \cdot \frac{\partial y_{\text{pred}}}{\partial W_3})。</li>
+<li>PyTorch 在反向传播中计算出 <code>W3.grad</code>。</li>
+</ul>
+</li>
+<li><p>对于输出层的偏置 ( b_3 )，其梯度为 (\frac{\partial \text{loss}}{\partial b_3})。</p>
+</li>
+</ol>
+<p>通过这三层的链式求导法则，PyTorch 能够自动计算每层权重和偏置的梯度并存储在 <code>.grad</code> 中，用于之后的参数更新。</p>
+
                 
               </div>
             
@@ -300,7 +359,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="category-chain-item">数学基础</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -317,11 +376,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/SVM/" class="print-no-link">#SVM</a>
-      
-        <a href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" class="print-no-link">#凸优化</a>
+        <a href="/tags/%E6%95%B0%E5%AD%A6/" class="print-no-link">#数学</a>
       
     </div>
   
@@ -333,8 +390,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凸优化</div>
-      <div>http://example.com/2024/05/31/20240531_ConvexOptimization/</div>
+      <div>三层网络模型梯度求解</div>
+      <div>http://example.com/2024/11/04/20241104_三层模型梯度求解/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +403,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月31日</div>
+          <div>2024年11月4日</div>
         </div>
       
       
@@ -378,9 +435,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/19/timeplan/" title="">
+                      <a href="/2024/11/05/20241105_%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%82%E4%BE%8B%E5%AD%90/" title="自定义层实现">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">自定义层实现</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -388,8 +445,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
-                        <span class="hidden-mobile">支持向量机</span>
+                      <a href="/2024/10/30/20241030_%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E4%BD%9C%E7%94%A8/" title="正则化的作用">
+                        <span class="hidden-mobile">正则化的作用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,24 +16,23 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义">
+    <meta name="description" content="LeNet 是由 Yann LeCun 等人于 1989 年提出的卷积神经网络 (CNN) 架构，主要目的是解决手写数字识别问题，尤其是在 MNIST 数据集上的数字分类。LeNet 的提出是在当时深度学习和卷积神经网络技术尚未成熟的背景下，提出了一种有效的网络结构来处理图像分类任务。 LeNet 解决的问题： 手写数字识别：LeNet 最初的设计目标是进行手写数字的识别，尤其是用于银行支票的数字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://example.com/2024/05/31/20240531_ConvexOptimization/index.html">
+<meta property="og:title" content="LeNet">
+<meta property="og:url" content="http://example.com/2024/11/06/20241106_LeNet/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="定义">
+<meta property="og:description" content="LeNet 是由 Yann LeCun 等人于 1989 年提出的卷积神经网络 (CNN) 架构，主要目的是解决手写数字识别问题，尤其是在 MNIST 数据集上的数字分类。LeNet 的提出是在当时深度学习和卷积神经网络技术尚未成熟的背景下，提出了一种有效的网络结构来处理图像分类任务。 LeNet 解决的问题： 手写数字识别：LeNet 最初的设计目标是进行手写数字的识别，尤其是用于银行支票的数字">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-31T03:03:39.717Z">
-<meta property="article:modified_time" content="2024-05-31T13:37:45.292Z">
+<meta property="article:published_time" content="2024-11-06T12:12:16.302Z">
+<meta property="article:modified_time" content="2024-11-06T13:45:13.844Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="SVM">
-<meta property="article:tag" content="凸优化">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>凸优化 - 冯宝宝</title>
+  <title>LeNet - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凸优化"></span>
+            <span id="subtitle" data-typed-text="LeNet"></span>
           
         </div>
 
@@ -212,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-31 11:03" pubdate>
-          2024年5月31日 上午
+        <time datetime="2024-11-06 20:12" pubdate>
+          2024年11月6日 晚上
         </time>
       </span>
     
@@ -224,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          2.4k 字
         
       </span>
     
@@ -235,7 +234,7 @@
         
         
         
-          1 分钟
+          20 分钟
         
       </span>
     
@@ -272,12 +271,86 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">凸优化</h1>
+            <h1 id="seo-header">LeNet</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1>
+                <p>LeNet 是由 Yann LeCun 等人于 1989 年提出的卷积神经网络 (CNN) 架构，主要目的是解决手写数字识别问题，尤其是在 <strong>MNIST</strong> 数据集上的数字分类。LeNet 的提出是在当时深度学习和卷积神经网络技术尚未成熟的背景下，提出了一种有效的网络结构来处理图像分类任务。</p>
+<h1 id="LeNet-解决的问题："><a href="#LeNet-解决的问题：" class="headerlink" title="LeNet 解决的问题："></a>LeNet 解决的问题：</h1><ol>
+<li><strong>手写数字识别</strong>：LeNet 最初的设计目标是进行手写数字的识别，尤其是用于银行支票的数字识别。</li>
+<li><strong>提高图像分类的效率</strong>：它通过卷积层来提取图像中的空间特征，避免了传统的手工特征提取方法，显著提高了图像分类的性能。</li>
+</ol>
+<h1 id="LeNet的缺点："><a href="#LeNet的缺点：" class="headerlink" title="LeNet的缺点："></a>LeNet的缺点：</h1><p>LeNet在深度学习发展初期具有重要的突破性，但随着技术的进步和应用的复杂化，其缺点逐渐显现，主要包括以下几点：</p>
+<h4 id="1-对复杂任务的局限性"><a href="#1-对复杂任务的局限性" class="headerlink" title="1. 对复杂任务的局限性"></a>1. <strong>对复杂任务的局限性</strong></h4><ul>
+<li><strong>有限的层数和参数</strong>：LeNet的层数较少，参数量较小，适用于简单任务（如手写数字识别），但对于复杂的任务（如自然图像分类、物体检测）则表现不佳。</li>
+<li><strong>提取特征有限</strong>：由于特征提取的层数较少，LeNet对复杂图像中的高层次特征（如多物体、复杂背景）提取能力不足，导致在处理复杂视觉任务时表现欠佳。</li>
+</ul>
+<h4 id="2-缺少深度和宽度，模型容量不足"><a href="#2-缺少深度和宽度，模型容量不足" class="headerlink" title="2. 缺少深度和宽度，模型容量不足"></a>2. <strong>缺少深度和宽度，模型容量不足</strong></h4><ul>
+<li>LeNet的网络深度和宽度（通道数）都有限，导致模型容量较小，不足以捕捉大规模数据集中的丰富模式。</li>
+<li>随着数据量的增加和任务的复杂化，模型需要更深层次和更宽通道的设计来容纳更多的参数，以学习更丰富的特征表示。</li>
+</ul>
+<h4 id="3-池化操作简单"><a href="#3-池化操作简单" class="headerlink" title="3. 池化操作简单"></a>3. <strong>池化操作简单</strong></h4><ul>
+<li><strong>使用平均池化</strong>：LeNet采用平均池化（Average Pooling），容易导致信息的平均化和丢失。后来的模型多用最大池化（Max Pooling），更擅长保留图像的显著特征和边缘信息，使模型更具识别能力。</li>
+<li><strong>缺少全局信息聚合</strong>：LeNet的池化操作只聚合了局部信息，而没有全局特征的聚合。对更复杂的视觉任务来说，全局信息的缺乏会限制模型的表现。</li>
+</ul>
+<h4 id="4-过于依赖手工设计的特征"><a href="#4-过于依赖手工设计的特征" class="headerlink" title="4. 过于依赖手工设计的特征"></a>4. <strong>过于依赖手工设计的特征</strong></h4><ul>
+<li>LeNet的设计过程需要手工调节卷积核大小、通道数等，缺少自动化的调整手段。这些设计并非对所有任务都有效，而现代深度学习框架中更趋向于自动化搜索最佳结构（如AutoML）。</li>
+</ul>
+<h4 id="5-没有标准化和正则化措施"><a href="#5-没有标准化和正则化措施" class="headerlink" title="5. 没有标准化和正则化措施"></a>5. <strong>没有标准化和正则化措施</strong></h4><ul>
+<li><strong>没有批量归一化（Batch Normalization）</strong>：LeNet没有采用批量归一化，这会导致训练过程中的梯度消失或爆炸问题，训练速度较慢，效果欠佳。</li>
+<li><strong>缺少正则化</strong>：LeNet缺少后来的Dropout、L2正则等防止过拟合的手段，容易在大数据集上过拟合。</li>
+</ul>
+<h4 id="6-无法很好地利用现代硬件的并行计算能力"><a href="#6-无法很好地利用现代硬件的并行计算能力" class="headerlink" title="6. 无法很好地利用现代硬件的并行计算能力"></a>6. <strong>无法很好地利用现代硬件的并行计算能力</strong></h4><ul>
+<li>LeNet在设计时的硬件环境较为有限，没有考虑到现代硬件（如GPU、TPU）的并行计算能力，因此其结构在大型并行计算时的表现不如后来设计的网络高效。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>LeNet的缺点主要体现在模型容量不足、缺乏正则化手段、特征提取能力有限、以及对复杂任务的适应性较差等方面。尽管LeNet在手写数字识别上表现出色，但其结构不适用于处理大规模和复杂的视觉任务。现代卷积神经网络（如AlexNet、VGG、ResNet）在LeNet的基础上，通过增加深度、使用更强的正则化手段和更高效的特征提取方法，克服了这些缺点，推动了深度学习在视觉领域的广泛应用。</p>
+<h1 id="LeNet-的优点："><a href="#LeNet-的优点：" class="headerlink" title="LeNet 的优点："></a>LeNet 的优点：</h1><ol>
+<li><strong>局部连接</strong>：LeNet 引入了卷积操作，将图像中的局部特征映射到更高层次的抽象特征，极大地减少了计算量和参数数量。</li>
+<li><strong>权重共享</strong>：卷积层中的权重共享大大减少了模型的参数，使得网络更加高效，降低了过拟合的风险。</li>
+<li><strong>池化操作</strong>：LeNet 中使用了池化层（如平均池化），进一步减少了特征的尺寸，降低了计算复杂度。</li>
+<li><strong>端到端学习</strong>：LeNet 使得神经网络能够从原始图像像素直接学习特征，而不依赖于手工特征提取，开创了深度学习端到端训练的先河。</li>
+<li><strong>深度结构</strong>：LeNet 通过多个卷积层和池化层的堆叠，能够逐渐提取图像的高层次抽象特征，有效地提高了图像识别的准确度。</li>
+</ol>
+<p>LeNet的卷积核大小和结构设计是基于一些基本的设计原则和当时的计算资源限制来确定的。Yann LeCun在发明LeNet时主要参考了以下几点：</p>
+<h1 id="参数设置原因："><a href="#参数设置原因：" class="headerlink" title="参数设置原因："></a>参数设置原因：</h1><ul>
+<li><strong>小卷积核</strong>：LeNet使用了 (5 \times 5) 的卷积核，这个大小足够捕捉局部图像特征，如边缘和简单的纹理，同时减少了参数数量。</li>
+<li><p><strong>分层提取特征</strong>：通过使用多层卷积，每一层可以提取更复杂的特征，逐渐从低级特征（如边缘）到高级特征（如形状）。</p>
+</li>
+<li><p>LeNet主要用于处理尺寸较小的图像（如手写数字的 (28 \times 28) 灰度图像）。</p>
+</li>
+<li>使用 (5 \times 5) 卷积核而非更大的卷积核可以显著减少计算量，因为较大的卷积核需要更多的参数和更多计算，超出了当时的计算资源。</li>
+<li><p>使用较大的步长或无填充（例如第二层卷积没有填充），让特征图的尺寸逐层减少，有助于压缩信息，同时进一步降低计算量。</p>
+</li>
+<li><p>LeNet选择的参数（如每层的通道数）是为了在保持网络学习能力的前提下尽可能减少计算需求。</p>
+</li>
+<li>第一层卷积输出6个通道，第二层增加到16个通道，这种增加是为了在较深层次中允许模型捕获更多信息。</li>
+<li><p>这个层数和通道数的设计已经足以让模型学习到手写数字的基本模式，而不会因为过多的参数而导致过拟合。</p>
+</li>
+<li><p>LeCun的团队通过反复试验，确定了卷积核大小、池化类型、层数等参数，这在深度学习早期是非常常见的方法。</p>
+</li>
+<li>例如，LeNet使用平均池化（而非后来更常见的最大池化），这在当时是一种合理的选择，因为手写字符的模式简单且稳定。</li>
+</ul>
+<h1 id="结构设计原因："><a href="#结构设计原因：" class="headerlink" title="结构设计原因："></a>结构设计原因：</h1><p>LeNet的结构设计（先使用两个卷积层，然后接三个全连接层）是经过深思熟虑的：</p>
+<h4 id="1-逐步提取特征的层次结构"><a href="#1-逐步提取特征的层次结构" class="headerlink" title="1. 逐步提取特征的层次结构"></a>1. <strong>逐步提取特征的层次结构</strong></h4><ul>
+<li><strong>卷积层的作用</strong>：前两个卷积层的主要作用是提取图像的局部特征，如边缘、纹理和形状。每一层卷积操作能够识别出图像的低层次特征，随着层数的增加，可以逐步形成更高层次的抽象。</li>
+<li><strong>分层特征提取</strong>：第一个卷积层用小的卷积核提取低层特征，如简单的边缘和角；第二个卷积层在第一层提取的特征基础上，通过更多的通道数和卷积核继续捕捉更复杂的模式和结构。</li>
+</ul>
+<h4 id="2-逐步减少空间维度，增加特征维度"><a href="#2-逐步减少空间维度，增加特征维度" class="headerlink" title="2. 逐步减少空间维度，增加特征维度"></a>2. <strong>逐步减少空间维度，增加特征维度</strong></h4><ul>
+<li>在卷积和池化操作的过程中，LeNet通过设计将图像的空间尺寸逐渐缩小，从最初的 (28 \times 28) 到更小的特征图（如 (5 \times 5)）。</li>
+<li>这种空间上的压缩让网络在较少的神经元连接上保留了图像的主要特征，减少了参数数量和计算量，有助于提高效率。</li>
+<li>通过这种设计，卷积层的输出特征图在大小上足够小，后续全连接层可以直接接入而不会因为维度过高而导致参数过多。</li>
+</ul>
+<h4 id="3-全连接层的作用：分类与决策"><a href="#3-全连接层的作用：分类与决策" class="headerlink" title="3. 全连接层的作用：分类与决策"></a>3. <strong>全连接层的作用：分类与决策</strong></h4><ul>
+<li><strong>转变为分类任务</strong>：卷积层提取了有意义的特征后，全连接层负责将这些特征用于分类。</li>
+<li>全连接层的三个层次逐渐缩小尺寸，从120到84再到10，通过这种层级结构，网络可以从高维特征表示转化为类别分数。</li>
+<li><strong>逐步抽象特征</strong>：全连接层可以进一步组合卷积层提取的特征，学习不同特征组合的权重关系，形成更抽象的表示，提升模型对复杂模式的识别能力。</li>
+</ul>
+<h4 id="4-设计的平衡：计算量与识别能力"><a href="#4-设计的平衡：计算量与识别能力" class="headerlink" title="4. 设计的平衡：计算量与识别能力"></a>4. <strong>设计的平衡：计算量与识别能力</strong></h4><ul>
+<li><strong>减少参数量</strong>：在卷积层减少图像空间尺寸后，再接全连接层，既保留了重要的图像特征，又避免了巨大的参数量。</li>
+<li><strong>提升识别能力</strong>：全连接层在特征图的低维表示上进行分类，保留了卷积层提取的信息，并将其有效转化为分类结果。</li>
+</ul>
+
                 
               </div>
             
@@ -300,7 +373,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="category-chain-item">数学基础</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -317,11 +390,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/SVM/" class="print-no-link">#SVM</a>
-      
-        <a href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" class="print-no-link">#凸优化</a>
+        <a href="/tags/%E6%95%B0%E5%AD%A6/" class="print-no-link">#数学</a>
       
     </div>
   
@@ -333,8 +404,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凸优化</div>
-      <div>http://example.com/2024/05/31/20240531_ConvexOptimization/</div>
+      <div>LeNet</div>
+      <div>http://example.com/2024/11/06/20241106_LeNet/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +417,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月31日</div>
+          <div>2024年11月6日</div>
         </div>
       
       
@@ -378,18 +449,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/19/timeplan/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
-                        <span class="hidden-mobile">支持向量机</span>
+                      <a href="/2024/11/05/20241105_%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E%E7%9A%84%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89/" title="卷积与感受野的物理意义">
+                        <span class="hidden-mobile">卷积与感受野的物理意义</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

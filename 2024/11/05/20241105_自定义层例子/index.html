@@ -16,24 +16,22 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义">
+    <meta name="description" content="要设计一个接受输入并计算张量降维的层，返回值为   y_k &#x3D; \sum_{i,j} W_{ijk} x_i x_j ，我们需要实现一个自定义的 PyTorch 模块。这个层将接收一个输入张量 ( X )（通常是一维向量），并通过权重张量 ( W ) 计算输出。 实现步骤 定义自定义层：该层将包含权重张量 ( W )。 计算输出：在 forward 方法中，计算每个 ( y_k ) 的值。 支持批">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://example.com/2024/05/31/20240531_ConvexOptimization/index.html">
+<meta property="og:title" content="自定义层实现">
+<meta property="og:url" content="http://example.com/2024/11/05/20241105_%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%82%E4%BE%8B%E5%AD%90/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="定义">
+<meta property="og:description" content="要设计一个接受输入并计算张量降维的层，返回值为   y_k &#x3D; \sum_{i,j} W_{ijk} x_i x_j ，我们需要实现一个自定义的 PyTorch 模块。这个层将接收一个输入张量 ( X )（通常是一维向量），并通过权重张量 ( W ) 计算输出。 实现步骤 定义自定义层：该层将包含权重张量 ( W )。 计算输出：在 forward 方法中，计算每个 ( y_k ) 的值。 支持批">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-31T03:03:39.717Z">
-<meta property="article:modified_time" content="2024-05-31T13:37:45.292Z">
+<meta property="article:published_time" content="2024-11-05T05:44:22.733Z">
+<meta property="article:modified_time" content="2024-11-06T13:44:50.720Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="SVM">
-<meta property="article:tag" content="凸优化">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>凸优化 - 冯宝宝</title>
+  <title>自定义层实现 - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凸优化"></span>
+            <span id="subtitle" data-typed-text="自定义层实现"></span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-31 11:03" pubdate>
-          2024年5月31日 上午
+        <time datetime="2024-11-05 13:44" pubdate>
+          2024年11月5日 下午
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          1.1k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -272,12 +270,123 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">凸优化</h1>
+            <h1 id="seo-header">自定义层实现</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1>
+                <p>要设计一个接受输入并计算张量降维的层，返回值为 </p>
+<script type="math/tex; mode=display">
+y_k = \sum_{i,j} W_{ijk} x_i x_j</script><p> ，我们需要实现一个自定义的 PyTorch 模块。这个层将接收一个输入张量 ( X )（通常是一维向量），并通过权重张量 ( W ) 计算输出。</p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ol>
+<li><strong>定义自定义层</strong>：该层将包含权重张量 ( W )。</li>
+<li><strong>计算输出</strong>：在 <code>forward</code> 方法中，计算每个 ( y_k ) 的值。</li>
+<li><strong>支持批处理</strong>：确保层可以处理多个输入样本。</li>
+</ol>
+<p>以下是具体的实现代码：</p>
+<h3 id="自定义层实现"><a href="#自定义层实现" class="headerlink" title="自定义层实现"></a>自定义层实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TensorReductionLayer</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, input_dim, output_dim</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-comment"># 初始化权重 W，大小为 (output_dim, input_dim, input_dim)</span><br>        self.W = nn.Parameter(torch.randn(output_dim, input_dim, input_dim) * <span class="hljs-number">0.01</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br>        <span class="hljs-comment"># X 的形状为 (batch_size, input_dim)</span><br>        <span class="hljs-comment"># W 的形状为 (output_dim, input_dim, input_dim)</span><br>        <br>        <span class="hljs-comment"># 计算 x_i * x_j 的外积</span><br>        outer_product = torch.matmul(X.unsqueeze(<span class="hljs-number">2</span>), X.unsqueeze(<span class="hljs-number">1</span>))  <span class="hljs-comment"># 形状为 (batch_size, input_dim, input_dim)</span><br>        <br>        <span class="hljs-comment"># 对每个输出维度计算加权求和</span><br>        <span class="hljs-comment"># y_k 的形状为 (batch_size, output_dim)</span><br>        y_k = torch.einsum(<span class="hljs-string">&#x27;bxy,zyx-&gt;bz&#x27;</span>, outer_product, self.W)  <span class="hljs-comment"># batch_size, output_dim</span><br>        <br>        <span class="hljs-keyword">return</span> y_k<br><br><span class="hljs-comment"># 示例使用</span><br>input_dim = <span class="hljs-number">5</span>   <span class="hljs-comment"># 输入特征的维度</span><br>output_dim = <span class="hljs-number">3</span>  <span class="hljs-comment"># 输出特征的维度</span><br>layer = TensorReductionLayer(input_dim, output_dim)<br><br><span class="hljs-comment"># 创建一个随机输入张量，大小为 (2, 5)</span><br>input_tensor = torch.rand(<span class="hljs-number">2</span>, input_dim)<br><br><span class="hljs-comment"># 通过层进行前向传播</span><br>output_tensor = layer(input_tensor)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;输出张量:\n&quot;</span>, output_tensor)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;输出张量的形状:&quot;</span>, output_tensor.shape)  <span class="hljs-comment"># 应该是 (2, output_dim)</span><br></code></pre></td></tr></table></figure>
+<h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><ol>
+<li><p><strong>权重 ( W )</strong>：</p>
+<ul>
+<li>在 <code>__init__</code> 方法中，使用 <code>nn.Parameter</code> 来定义权重张量 ( W )，其形状为 ( (output_dim, input_dim, input_dim) )。这使得每个输出维度都可以根据输入特征的外积进行加权。</li>
+</ul>
+</li>
+<li><p><strong>前向传播</strong>：</p>
+<ul>
+<li>在 <code>forward</code> 方法中，通过 <code>X.unsqueeze(2)</code> 和 <code>X.unsqueeze(1)</code> 计算输入的外积，得到形状为 ( (batch_size, input_dim, input_dim) ) 的张量。</li>
+<li>使用 <code>torch.einsum</code> 进行加权求和，计算每个 ( y_k )，其形状为 ( (batch_size, output_dim) )。</li>
+</ul>
+</li>
+</ol>
+<h3 id="预期结果"><a href="#预期结果" class="headerlink" title="预期结果"></a>预期结果</h3><p>运行示例代码后，你应该能够看到输出张量和其形状的信息：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">输出张量:<br> <span class="hljs-built_in">tensor</span>(<span class="hljs-selector-attr">[...]</span>, grad_fn=&lt;SumBackward0&gt;)<br>输出张量的形状: torch<span class="hljs-selector-class">.Size</span>(<span class="hljs-selector-attr">[2, output_dim]</span>)<br></code></pre></td></tr></table></figure>
+<p>这里的输出张量包含了每个输入样本的降维结果，形状为 ( (2, 3) )（假设 <code>output_dim</code> 设置为3）。</p>
+<p>要理解 <code>outer_product = torch.matmul(X.unsqueeze(2), X.unsqueeze(1))</code>，我们可以通过一个数学示例来说明如何使用这个操作计算外积。外积是将两个向量结合起来生成一个矩阵。</p>
+<h3 id="设定示例"><a href="#设定示例" class="headerlink" title="设定示例"></a>设定示例</h3><p>假设我们有一个输入张量 ( X )，其形状为 ( (2, 3) )，表示有 2 个样本，每个样本有 3 个特征。我们可以设定如下：</p>
+<script type="math/tex; mode=display">
+X = \begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{bmatrix}</script><h3 id="使用-unsqueeze-操作"><a href="#使用-unsqueeze-操作" class="headerlink" title="使用 unsqueeze 操作"></a>使用 <code>unsqueeze</code> 操作</h3><p>首先，使用 <code>X.unsqueeze(2)</code> 和 <code>X.unsqueeze(1)</code>：</p>
+<ul>
+<li><strong><code>X.unsqueeze(2)</code></strong>：在第三维添加一个新维度。结果将变为形状为 ( (2, 3, 1) ) 的张量。</li>
+</ul>
+<script type="math/tex; mode=display">
+X.unsqueeze(2) = \begin{bmatrix}
+\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix}
+\end{bmatrix}
+\text{ 和 }
+\begin{bmatrix}
+\begin{bmatrix}
+4 \\
+5 \\
+6
+\end{bmatrix}
+\end{bmatrix}</script><ul>
+<li><strong><code>X.unsqueeze(1)</code></strong>：在第二维添加一个新维度。结果将变为形状为 ( (2, 1, 3) ) 的张量。</li>
+</ul>
+<script type="math/tex; mode=display">
+X.unsqueeze(1) = \begin{bmatrix}
+\begin{bmatrix}
+1 & 2 & 3
+\end{bmatrix}
+\end{bmatrix}
+\text{ 和 }
+\begin{bmatrix}
+\begin{bmatrix}
+4 & 5 & 6
+\end{bmatrix}
+\end{bmatrix}</script><h3 id="计算外积"><a href="#计算外积" class="headerlink" title="计算外积"></a>计算外积</h3><p>使用 <code>torch.matmul</code> 进行矩阵乘法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><br>X = torch.tensor([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br>outer_product = torch.matmul(X.unsqueeze(<span class="hljs-number">2</span>), X.unsqueeze(<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>外积的结果</strong>：此操作会将 ( X.unsqueeze(2) ) 和 ( X.unsqueeze(1) ) 进行矩阵乘法，从而生成一个形状为 ( (2, 3, 3) ) 的张量。</li>
+</ul>
+<script type="math/tex; mode=display">
+\text{outer_product} = \begin{bmatrix}
+\begin{bmatrix}
+1 \times 1 & 1 \times 2 & 1 \times 3 \\
+2 \times 1 & 2 \times 2 & 2 \times 3 \\
+3 \times 1 & 3 \times 2 & 3 \times 3
+\end{bmatrix} & \begin{bmatrix}
+4 \times 1 & 4 \times 2 & 4 \times 3 \\
+5 \times 1 & 5 \times 2 & 5 \times 3 \\
+6 \times 1 & 6 \times 2 & 6 \times 3
+\end{bmatrix}
+\end{bmatrix}</script><p>计算结果为：</p>
+<script type="math/tex; mode=display">
+\text{outer_product} = \begin{bmatrix}
+\begin{bmatrix}
+1 & 2 & 3 \\
+2 & 4 & 6 \\
+3 & 6 & 9
+\end{bmatrix} & \begin{bmatrix}
+4 & 8 & 12 \\
+5 & 10 & 15 \\
+6 & 12 & 18
+\end{bmatrix}
+\end{bmatrix}</script><h3 id="结果解释"><a href="#结果解释" class="headerlink" title="结果解释"></a>结果解释</h3><ul>
+<li>外积的每个切片（第一个维度的每个样本）将生成一个 ( 3 \times 3 ) 的矩阵，其中的每个元素 ( (i,j) ) 是 ( x_i ) 和 ( x_j ) 的乘积。</li>
+<li>例如，对于第一个样本：</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+1 & 2 & 3 \\
+2 & 4 & 6 \\
+3 & 6 & 9
+\end{bmatrix}</script><p>表示的就是第一个样本特征的外积。</p>
+<p>对于第二个样本：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+4 & 8 & 12 \\
+5 & 10 & 15 \\
+6 & 12 & 18
+\end{bmatrix}</script><p>表示的就是第二个样本特征的外积。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过 <code>unsqueeze</code> 操作，我们将原始向量转化为适合进行外积计算的格式。<code>torch.matmul</code> 将两个张量相乘，从而得到外积结果，生成的张量的形状是 ( (2, 3, 3) )，其中包含了每个样本的外积矩阵。如果你有任何进一步的问题或需要更多例子，请随时告诉我！</p>
+
                 
               </div>
             
@@ -300,7 +409,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="category-chain-item">数学基础</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -317,11 +426,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
-      
-        <a href="/tags/SVM/" class="print-no-link">#SVM</a>
-      
-        <a href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" class="print-no-link">#凸优化</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
     </div>
   
@@ -333,8 +438,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凸优化</div>
-      <div>http://example.com/2024/05/31/20240531_ConvexOptimization/</div>
+      <div>自定义层实现</div>
+      <div>http://example.com/2024/11/05/20241105_自定义层例子/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +451,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月31日</div>
+          <div>2024年11月5日</div>
         </div>
       
       
@@ -378,9 +483,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/19/timeplan/" title="">
+                      <a href="/2024/11/05/20241105_%E7%94%9F%E6%88%90%E5%8D%B1%E9%99%A9%E6%A6%82%E7%8E%87%E5%9B%BE/" title="根据烈度图生成危险概率分布图">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">根据烈度图生成危险概率分布图</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -388,8 +493,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
-                        <span class="hidden-mobile">支持向量机</span>
+                      <a href="/2024/11/04/20241104_%E4%B8%89%E5%B1%82%E6%A8%A1%E5%9E%8B%E6%A2%AF%E5%BA%A6%E6%B1%82%E8%A7%A3/" title="三层网络模型梯度求解">
+                        <span class="hidden-mobile">三层网络模型梯度求解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
