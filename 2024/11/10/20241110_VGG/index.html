@@ -16,30 +16,23 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
+    <meta name="description" content="LeNet  2卷积+池化层 2全连接层  AlexNet  更大更深 ReLu，Dropout，数据增强  VGG  更大更深的AlexNet（重复的VGG块）  缺点尽管VGG（Visual Geometry Group）网络有许多优点，但它也存在一些显著的缺点，主要体现在计算资源消耗、模型规模和训练效率等方面。以下是VGG的主要缺点： 1. 计算资源消耗大 参数量巨大：VGG 网络的卷积层使">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习引言">
-<meta property="og:url" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/index.html">
+<meta property="og:title" content="VGG">
+<meta property="og:url" content="http://example.com/2024/11/10/20241110_VGG/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
+<meta property="og:description" content="LeNet  2卷积+池化层 2全连接层  AlexNet  更大更深 ReLu，Dropout，数据增强  VGG  更大更深的AlexNet（重复的VGG块）  缺点尽管VGG（Visual Geometry Group）网络有许多优点，但它也存在一些显著的缺点，主要体现在计算资源消耗、模型规模和训练效率等方面。以下是VGG的主要缺点： 1. 计算资源消耗大 参数量巨大：VGG 网络的卷积层使">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png">
-<meta property="article:published_time" content="2024-05-19T14:53:13.783Z">
-<meta property="article:modified_time" content="2024-05-21T15:07:01.825Z">
+<meta property="article:published_time" content="2024-11-10T03:19:33.916Z">
+<meta property="article:modified_time" content="2024-11-11T03:23:21.680Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="模型">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
   
   
   
-  <title>机器学习引言 - 冯宝宝</title>
+  <title>VGG - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="机器学习引言"></span>
+            <span id="subtitle" data-typed-text="VGG"></span>
           
         </div>
 
@@ -218,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-19 22:53" pubdate>
-          2024年5月19日 晚上
+        <time datetime="2024-11-10 11:19" pubdate>
+          2024年11月10日 上午
         </time>
       </span>
     
@@ -230,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.5k 字
         
       </span>
     
@@ -241,7 +234,7 @@
         
         
         
-          15 分钟
+          21 分钟
         
       </span>
     
@@ -278,127 +271,112 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">机器学习引言</h1>
+            <h1 id="seo-header">VGG</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="机器学习观点"><a href="#机器学习观点" class="headerlink" title="机器学习观点"></a>机器学习观点</h1><ul>
-<li><p>拿到数据之后，<strong>构建机器学习算法第一步</strong>：观察数据，总结规律</p>
+                <p>LeNet</p>
 <ul>
-<li><p><strong>不正确观点</strong>：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）</p>
-</li>
-<li><p>对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限</p>
-</li>
+<li>2卷积+池化层</li>
+<li>2全连接层</li>
 </ul>
-</li>
-<li><strong>设计算法</strong>：思考一个任务的经验E和性能指标P是什么</li>
-<li>一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可以转换的</li>
-<li>机器学习的重点不是提取特征，而是假设在<strong>已经提取好特征</strong>的前提下，如何构造算法获得更好的性能</li>
-<li>提取特征很重要，不同媒质不同任务，提取特征的方式千变万化</li>
-<li>维度与标准决定了我们要用机器学习，维度：人对超过二维的数据难以想象，标准：对某些区域的划分是不一样的</li>
-<li>机器学习是典型的最优化问题，数学在现代化机器学习中占有重要的作用</li>
+<p>AlexNet</p>
+<ul>
+<li>更大更深</li>
+<li>ReLu，Dropout，数据增强</li>
 </ul>
-<h1 id="机器学习定义"><a href="#机器学习定义" class="headerlink" title="机器学习定义"></a>机器学习定义</h1><h2 id="ARCHUR-SAMUEL"><a href="#ARCHUR-SAMUEL" class="headerlink" title="ARCHUR SAMUEL"></a>ARCHUR SAMUEL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">ARCHUR SAMUEL：<br>​	Machine Learning <span class="hljs-keyword">is</span> Fields <span class="hljs-keyword">of</span> study <span class="hljs-keyword">that</span> gives computers <span class="hljs-keyword">the</span> ability <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">without</span> being explicitly programmed.<br>​	机器学习是这样的领域，它土语计算机学习的能力，（这种学习能力）不是通过显著式编程获得的。<br></code></pre></td></tr></table></figure>
-<h3 id="显著式编程"><a href="#显著式编程" class="headerlink" title="显著式编程"></a>显著式编程</h3><ul>
-<li>通过人为预先定义出规律，告诉计算机实现一一对照区别。</li>
-<li>劣势：<strong>人为</strong>帮计算机<strong>规划</strong>所处的环境，将环境、规律调查得一清二楚</li>
+<p>VGG</p>
+<ul>
+<li>更大更深的AlexNet（重复的VGG块）</li>
 </ul>
-<h3 id="非显著式编程"><a href="#非显著式编程" class="headerlink" title="非显著式编程"></a>非显著式编程</h3><ul>
-<li>事先并不约束计算机总结出什么规律，只给大量数据，编写程序让计算机自己挑出能分辨事物的规律，总结不同事物的区别</li>
-<li>规定在特定环境下，做一些行为带来的收益，将收益称为<strong>收益函数</strong></li>
-<li>规定了收益函数后，让计算机去自己<strong>找最大化收益函数</strong>的行为</li>
-<li>优势：<strong>通过数据、经验自动学习</strong></li>
-</ul>
-<h2 id="TOM-MITSHELL"><a href="#TOM-MITSHELL" class="headerlink" title="TOM MITSHELL"></a>TOM MITSHELL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript">TOM MITSHELL:<br>​	A computer program <span class="hljs-keyword">is</span> said <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">from</span> experience E <span class="hljs-keyword">with</span> respect <span class="hljs-keyword">to</span> <span class="hljs-keyword">some</span> task T <span class="hljs-keyword">and</span> <span class="hljs-keyword">some</span> performance measure P, <span class="hljs-keyword">if</span> <span class="hljs-keyword">its</span> performance <span class="hljs-keyword">on</span> T, <span class="hljs-keyword">as</span> measured <span class="hljs-keyword">by</span> P, improves <span class="hljs-keyword">with</span> experience E.<br>​	一个计算机程序被称为可以学习，是指它能够针对某个任务T和某个性能指标P，从经验E中学习。这种学习的特点是，它在T上的被P所衡量的性能，会随着经验E的增加而提高。<br>​	任务 T：编写计算机程序识别菊花和玫瑰<br>	经验 E：一大堆菊花和玫瑰的图片<br>	性能指标 P：不同的机器学习算法会有不同，如把识别的正确率简称为识别率，将其作为性能指标<br></code></pre></td></tr></table></figure>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>Experience越来越多，Performance Measure也会越来越高</li>
-<li>更数学化，典型的最优化问题</li>
-</ul>
-<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><ul>
-<li>数学在现代化机器学习中占有重要的作用</li>
-</ul>
-<h1 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h1><p>现在的强化学习利用到了监督学习，如ALPHAGO，先通过监督学习获得初试围棋程序，再将初试围棋程序进行强化学习</p>
-<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><ul>
-<li>经验E是完全由人搜集起来输入进计算机</li>
-<li>为训练数据打标签，此时经验E为：<strong>训练样本</strong>和<strong>标签</strong>的集合<ul>
-<li>垃圾邮件识别，教计算机自动识别某个邮件识别是垃圾邮件</li>
-<li>人脸识别，教计算机通过人脸的图像识别这个人是谁</li>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>尽管VGG（Visual Geometry Group）网络有许多优点，但它也存在一些显著的缺点，主要体现在计算资源消耗、模型规模和训练效率等方面。以下是VGG的主要缺点：</p>
+<h3 id="1-计算资源消耗大"><a href="#1-计算资源消耗大" class="headerlink" title="1. 计算资源消耗大"></a>1. <strong>计算资源消耗大</strong></h3><ul>
+<li><strong>参数量巨大</strong>：VGG 网络的卷积层使用多个 3x3 的卷积核，并且通过堆叠多层卷积来加深网络。这导致了模型的 <strong>参数量非常庞大</strong>。尤其是在 VGG16 和 VGG19 这样的版本中，全连接层的参数数量更是非常庞大。<ul>
+<li>例如，VGG16 中有 138百万个参数，这意味着需要大量的内存和计算资源来训练和存储模型。</li>
 </ul>
 </li>
+<li>由于参数量庞大，训练 VGG 网络需要 <strong>大量的 GPU 内存</strong> 和 <strong>长时间的训练时间</strong>，对计算资源的要求非常高。</li>
 </ul>
-<h3 id="传统监督学习"><a href="#传统监督学习" class="headerlink" title="传统监督学习"></a>传统监督学习</h3><p>每一个训练数据都有对应的标签</p>
-<ul>
-<li>支持向量机</li>
-<li>人工神经网络</li>
-<li>深度神经网络</li>
+<h3 id="2-推理速度慢"><a href="#2-推理速度慢" class="headerlink" title="2. 推理速度慢"></a>2. <strong>推理速度慢</strong></h3><ul>
+<li>由于网络层数较多且参数众多，VGG 网络的 <strong>推理速度较慢</strong>。在实时应用（例如视频分析、自动驾驶等）中，这种网络的速度可能无法满足低延迟的要求，特别是在边缘设备或资源受限的设备上。</li>
+<li>由于大量的计算量，VGG 在推理时可能需要较多的时间，尤其是在输入图像较大时。</li>
 </ul>
-<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>所有训练数据都没有对应的标签</p>
-<ul>
-<li>聚类</li>
-<li>EM算法</li>
-<li>主成分分析</li>
+<h3 id="3-内存消耗高"><a href="#3-内存消耗高" class="headerlink" title="3. 内存消耗高"></a>3. <strong>内存消耗高</strong></h3><ul>
+<li>训练深度网络时，VGG 的 <strong>内存消耗较高</strong>。尤其是存储梯度、激活值和中间层输出时，网络的深度和参数量会导致显著的内存占用。</li>
+<li>对于资源有限的环境，尤其是嵌入式设备和移动设备，这可能导致无法运行或者需要大量的内存优化技巧。</li>
 </ul>
-<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>训练数据中一部分有标签，一部分没有标签（如何用少量标注数据与大量未标注数据，获得更好的机器学习算法）</p>
-<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><ul>
-<li>经验E是由计算机与环境互动获得的</li>
-<li>产生<strong>行为</strong>，定义这些行为的收益函数(Reward function)，改变自己行为模式去<strong>最大化收益函数</strong></li>
-<li>计算机通过与环境的互动，逐渐强化自己的行为模式<ul>
-<li>教计算机下棋</li>
-<li>无人驾驶，教计算机自动驾驶汽车，从一个指定地点到另一个指定地点</li>
+<h3 id="4-缺乏创新性"><a href="#4-缺乏创新性" class="headerlink" title="4. 缺乏创新性"></a>4. <strong>缺乏创新性</strong></h3><ul>
+<li>VGG 网络采用的是一种 <strong>相对简单的架构</strong>，虽然它在深度上取得了成功，但其本质上并没有提出一些创新性的结构或新型的训练技巧。相比之下，像 ResNet、Inception 等后续的网络提出了更加创新和高效的设计。</li>
+<li><strong>ResNet</strong> 引入了残差连接，极大地缓解了深层网络训练中的梯度消失问题，而 <strong>Inception</strong> 通过引入不同大小的卷积核和层次化设计，提高了模型的计算效率。VGG 在这些方面相对缺乏创新。</li>
 </ul>
+<h3 id="5-容易过拟合"><a href="#5-容易过拟合" class="headerlink" title="5. 容易过拟合"></a>5. <strong>容易过拟合</strong></h3><ul>
+<li>由于参数量巨大且没有加入像 Batch Normalization（批量归一化）等正则化技术，VGG 网络更容易出现 <strong>过拟合</strong>，特别是在数据集较小的情况下。虽然 VGG 通过加入 Dropout 和数据增强来缓解过拟合问题，但仍然需要更多的训练数据和更精细的调参。</li>
+<li>过拟合通常会导致网络在训练集上表现良好，但在测试集上表现较差，影响其泛化能力。</li>
+</ul>
+<h3 id="6-不适合小型设备"><a href="#6-不适合小型设备" class="headerlink" title="6. 不适合小型设备"></a>6. <strong>不适合小型设备</strong></h3><ul>
+<li>由于模型的深度和参数量较大，VGG 网络不适合在 <strong>计算能力较弱</strong> 或 <strong>内存较小的设备</strong> 上运行。例如，智能手机、嵌入式设备和物联网设备通常无法高效运行如此庞大的模型。</li>
+<li>对于这些设备，通常需要更小、更高效的网络，如 MobileNet、SqueezeNet 等。</li>
+</ul>
+<h3 id="7-对计算力依赖强"><a href="#7-对计算力依赖强" class="headerlink" title="7. 对计算力依赖强"></a>7. <strong>对计算力依赖强</strong></h3><ul>
+<li>VGG 的训练和推理过程对 <strong>计算能力的依赖非常强</strong>，特别是在没有 GPU 的情况下，训练 VGG 网络可能非常耗时。即便使用 GPU，训练时间也可能非常长，特别是在使用大规模数据集（如 ImageNet）时。</li>
+</ul>
+<h3 id="8-没有充分利用并行性"><a href="#8-没有充分利用并行性" class="headerlink" title="8. 没有充分利用并行性"></a>8. <strong>没有充分利用并行性</strong></h3><ul>
+<li>相比后来的网络架构（如 Inception 或者 EfficientNet），VGG 的设计没有充分利用卷积操作的 <strong>并行性</strong>。例如，Inception 网络通过使用不同大小的卷积核并行计算特征，减少了计算开销；而 VGG 采用了较多的相同大小的卷积核和多层结构，这种设计虽然效果好，但并没有优化计算效率。</li>
+</ul>
+<h1 id="相较于AlexNet的几个主要进步"><a href="#相较于AlexNet的几个主要进步" class="headerlink" title="相较于AlexNet的几个主要进步"></a>相较于AlexNet的几个主要进步</h1><h3 id="1-更深的网络结构"><a href="#1-更深的网络结构" class="headerlink" title="1. 更深的网络结构"></a>1. <strong>更深的网络结构</strong></h3><ul>
+<li><strong>AlexNet</strong>：AlexNet包含8层，其中5层是卷积层，3层是全连接层。AlexNet是深度学习网络中早期的成功应用，但其深度在当时较浅。</li>
+<li><strong>VGG</strong>：VGG网络进一步加深了网络结构，设计了16层（VGG-16）和19层（VGG-19）的深度网络。这种深度使网络可以学习到更复杂、更高层次的特征表示，从而提升了分类精度。</li>
+</ul>
+<h3 id="2-统一的小卷积核（3x3）"><a href="#2-统一的小卷积核（3x3）" class="headerlink" title="2. 统一的小卷积核（3x3）"></a>2. <strong>统一的小卷积核（3x3）</strong></h3><ul>
+<li><strong>AlexNet</strong>：AlexNet的卷积层使用多种卷积核大小（11x11、5x5和3x3），以捕捉不同的特征尺度。但大的卷积核（如11x11）会引入大量参数，增加了计算量。</li>
+<li><strong>VGG</strong>：VGG则统一使用3x3的卷积核，通过多个3x3卷积堆叠来代替更大的卷积核。这样设计的优点是可以在保持参数数量较少的情况下，增加网络的深度和非线性能力，提取到更细致的特征。</li>
+</ul>
+<h3 id="3-更稳定的特征表示"><a href="#3-更稳定的特征表示" class="headerlink" title="3. 更稳定的特征表示"></a>3. <strong>更稳定的特征表示</strong></h3><ul>
+<li>VGG采用多个小卷积核堆叠，相较于单层大卷积核能够引入更多的非线性激活函数。这种方式在理论上增加了模型的非线性表达能力，也增强了特征的稳定性。</li>
+<li>同时，VGG网络中的池化操作也很规则，卷积层后通常跟随2x2的最大池化层，从而逐步减少特征图的大小并压缩信息。</li>
+</ul>
+<h3 id="4-更简洁的网络设计"><a href="#4-更简洁的网络设计" class="headerlink" title="4. 更简洁的网络设计"></a>4. <strong>更简洁的网络设计</strong></h3><ul>
+<li><strong>AlexNet</strong>：AlexNet的设计相对复杂，包含不同尺寸的卷积核、局部响应归一化（LRN）层等。</li>
+<li><strong>VGG</strong>：VGG去掉了复杂的结构，舍弃了LRN层，依靠深度和小卷积核来提升性能。这种简洁的设计更具通用性，也方便网络的迁移和复用，成为了后续许多深度学习架构的基础。</li>
+</ul>
+<h3 id="5-性能的提升"><a href="#5-性能的提升" class="headerlink" title="5. 性能的提升"></a>5. <strong>性能的提升</strong></h3><ul>
+<li><strong>AlexNet</strong>：在2012年ImageNet比赛中取得了显著的成功，但其错误率约为16.4%。</li>
+<li><strong>VGG</strong>：在2014年的ImageNet比赛中，VGG-16将Top-5错误率降到了7.3%，相比AlexNet在准确性上有了显著提升。</li>
+</ul>
+<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>VGG（Visual Geometry Group）网络的优点主要体现在其简单而有效的架构设计上，尤其在图像分类任务中表现出色。以下是VGG网络的主要优点：</p>
+<h3 id="1-简单且统一的网络架构"><a href="#1-简单且统一的网络架构" class="headerlink" title="1. 简单且统一的网络架构"></a>1. <strong>简单且统一的网络架构</strong></h3><ul>
+<li>VGG 网络的一个突出特点是其 <strong>统一且简单的架构设计</strong>。所有的卷积层都使用了相同的卷积核大小（3x3）和步幅（1），池化层使用 2x2 的最大池化，步幅为 2。这使得网络的结构非常规律，易于理解和实现。</li>
+<li>相比其他网络（如 AlexNet），VGG 网络避免了复杂的结构设计，采用了简单且一致的方式堆叠卷积层。</li>
+</ul>
+<h3 id="2-更深的网络结构"><a href="#2-更深的网络结构" class="headerlink" title="2. 更深的网络结构"></a>2. <strong>更深的网络结构</strong></h3><ul>
+<li>VGG 网络通过 <strong>增加层数</strong>（通常为16层或19层）来提高网络的表达能力。更深的网络可以捕捉到更丰富的特征，使得模型在图像识别等任务中具有更高的性能。</li>
+<li>更深的网络相比较浅的网络有更强的抽象能力，能够识别更复杂的图像模式。</li>
+</ul>
+<h3 id="3-更小的卷积核"><a href="#3-更小的卷积核" class="headerlink" title="3. 更小的卷积核"></a>3. <strong>更小的卷积核</strong></h3><ul>
+<li>VGG 网络使用了 <strong>3x3</strong> 的卷积核代替较大的卷积核（例如 5x5 或 7x7）。小卷积核具有两个优势：<ol>
+<li><strong>减少参数数量</strong>：使用多个小卷积核的组合可以达到与一个大卷积核相同的感受野，同时减少计算量和参数数量。</li>
+<li><strong>增加非线性</strong>：通过堆叠多个小卷积核，网络可以引入更多的非线性，使得模型能够捕捉到更多的复杂模式。</li>
+</ol>
 </li>
 </ul>
-<h1 id="机器学习算法过程"><a href="#机器学习算法过程" class="headerlink" title="机器学习算法过程"></a>机器学习算法过程</h1><p>识别尿沉中的红白细胞</p>
-<p><style>.wsumfulplgnt{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png" srcset="/img/loading.gif" lazyload class="wsumfulplgnt" alt="image-20240520000512315"></p>
-<p>可能被观察到的区别</p>
-<ul>
-<li>平均来说，白细胞面积比红细胞大</li>
-<li>白细胞没有红细胞圆</li>
-<li>白细胞内部纹理比红细胞粗糙</li>
+<h3 id="4-较好的性能"><a href="#4-较好的性能" class="headerlink" title="4. 较好的性能"></a>4. <strong>较好的性能</strong></h3><ul>
+<li>VGG 网络在许多视觉任务上表现出了 <strong>优秀的性能</strong>，特别是在图像分类任务中，VGG16 和 VGG19 这两个常见版本在 ImageNet 上都取得了优异的结果。</li>
+<li>通过增加网络的深度，VGG 能够更好地处理复杂的视觉问题，取得比浅层网络更高的准确率。</li>
 </ul>
-<h2 id="第一步：提取特征"><a href="#第一步：提取特征" class="headerlink" title="第一步：提取特征"></a>第一步：提取特征</h2><p>通过训练样本获得的，对机器学习任务有帮助的多维度的特征数据</p>
-<p>很重要，提取了好的特征，（即使算法不是很好）也能获得不错的性能</p>
-<p>提取了差的特征，不可能获得好的性能</p>
-<p><strong>细胞的面积</strong>    <strong>圆形度</strong>    <strong>表面粗糙程度</strong></p>
-<h3 id="提取面积特征方法"><a href="#提取面积特征方法" class="headerlink" title="提取面积特征方法"></a>提取面积特征方法</h3><p><style>.vcdqplhaglzh{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png" srcset="/img/loading.gif" lazyload class="vcdqplhaglzh" alt="image-20240520001815389"></p>
-<h2 id="第二步：特征选择"><a href="#第二步：特征选择" class="headerlink" title="第二步：特征选择"></a>第二步：特征选择</h2><p>只选择面积与周长作为区分，来构建机器学习系统，后面归一化一下</p>
-<p><style>.yqlgiakjdjmp{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png" srcset="/img/loading.gif" lazyload class="yqlgiakjdjmp" alt="image-20240520002610676"></p>
-<p><style>.vvyhwtsoogmx{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png" srcset="/img/loading.gif" lazyload class="vvyhwtsoogmx" alt="image-20240520002746171"></p>
-<h2 id="第三步：设计算法"><a href="#第三步：设计算法" class="headerlink" title="第三步：设计算法"></a>第三步：设计算法</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><ul>
-<li>线性内核</li>
-<li>多项式内核</li>
-<li>高斯径向基函数核</li>
+<h3 id="5-易于迁移学习"><a href="#5-易于迁移学习" class="headerlink" title="5. 易于迁移学习"></a>5. <strong>易于迁移学习</strong></h3><ul>
+<li>VGG 网络由于其结构的简洁性和广泛的应用，已经成为 <strong>迁移学习</strong> 中的经典模型之一。许多预训练的 VGG 模型被广泛使用，并且能够在新的任务中取得很好的效果，尤其是在数据较少的情况下。</li>
+<li>在迁移学习中，VGG 模型的卷积层特征可以作为其他任务的强大特征提取器。</li>
 </ul>
-<p><style>.srhxrzmgugzu{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png" srcset="/img/loading.gif" lazyload class="srhxrzmgugzu" alt="image-20240520003916270"></p>
-<h2 id="第四步：训练结果"><a href="#第四步：训练结果" class="headerlink" title="第四步：训练结果"></a>第四步：训练结果</h2><p>获得训练库准确率</p>
-<p><style>.irquspklbmqo{zoom:67%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png" srcset="/img/loading.gif" lazyload class="irquspklbmqo" alt="image-20240520003934456"></p>
-<h1 id="机器学习算法比较"><a href="#机器学习算法比较" class="headerlink" title="机器学习算法比较"></a>机器学习算法比较</h1><h2 id="没有免费午餐定理"><a href="#没有免费午餐定理" class="headerlink" title="没有免费午餐定理"></a>没有免费午餐定理</h2><p>​    任何一个预测函数，如果在一些训练样本上表现好，那么必然在另一些训练样本上表现不好，如果不对数据在特征空间的先验分布有一定假设，那么表现好于表现不好的情况一样多。</p>
-<p>​    在设计机器学习算法的时候有一个假设：在特征空间上距离接近的样本，他们属于同一个类别的概率会更高。</p>
-<p>​    道理是从以前的事实中来的。通过类比推广到对未来的预测。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    不对特征空间的先验分布有假设，所有算法的表现都一样。</p>
-<p>​    机器学习的本质：从有限的已知数据，在复杂的高维特征空间中预测未知样本的属性和类别。<strong>然而</strong>，我们不知道未知样本在哪里、性质如何，因此，再好的算法也存在犯错误的风险。</p>
-<h1 id="机器学习作业"><a href="#机器学习作业" class="headerlink" title="机器学习作业"></a>机器学习作业</h1><p>编程大作业</p>
-<ul>
-<li>人脸识别</li>
+<h3 id="6-更强的特征提取能力"><a href="#6-更强的特征提取能力" class="headerlink" title="6. 更强的特征提取能力"></a>6. <strong>更强的特征提取能力</strong></h3><ul>
+<li>VGG 网络由于其深层结构，能够从输入图像中提取出更加丰富和层次化的特征。随着网络的加深，网络能够从低级别的边缘和纹理特征逐渐构建到高级的物体部件和语义特征。</li>
 </ul>
-<ul>
-<li>人脸性别年龄估计</li>
+<h3 id="7-可扩展性"><a href="#7-可扩展性" class="headerlink" title="7. 可扩展性"></a>7. <strong>可扩展性</strong></h3><ul>
+<li>VGG 网络的设计原则非常简单，使得网络结构容易进行 <strong>扩展</strong>。例如，可以通过增加卷积层的数量或通道数，或者修改全连接层的结构来适应特定任务的需求。</li>
+<li>由于设计的简单性，它能够较容易地与其他类型的网络（如全卷积网络）进行结合，或用于生成更加复杂的架构。</li>
 </ul>
-<ul>
-<li>五子棋对战程序</li>
-</ul>
-<ul>
-<li>水果识别</li>
-</ul>
-<ul>
-<li>人脸特征点检测</li>
-</ul>
-<ul>
-<li>语种识别</li>
-</ul>
-<ul>
-<li>视频行为识别</li>
+<h3 id="8-广泛的应用"><a href="#8-广泛的应用" class="headerlink" title="8. 广泛的应用"></a>8. <strong>广泛的应用</strong></h3><ul>
+<li>VGG 网络被广泛应用于各类视觉任务，不仅限于图像分类，还被用于目标检测、图像分割、风格迁移、视频处理等多种领域。</li>
 </ul>
 
                 
@@ -423,7 +401,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -440,9 +418,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/AI/" class="print-no-link">#AI</a>
+        <a href="/tags/%E6%A8%A1%E5%9E%8B/" class="print-no-link">#模型</a>
       
     </div>
   
@@ -454,8 +432,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>机器学习引言</div>
-      <div>http://example.com/2024/05/19/20240519_MachineLearning_Introduction/</div>
+      <div>VGG</div>
+      <div>http://example.com/2024/11/10/20241110_VGG/</div>
     </div>
     <div class="license-meta">
       
@@ -467,7 +445,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月19日</div>
+          <div>2024年11月10日</div>
         </div>
       
       
@@ -499,9 +477,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
+                      <a href="/2024/11/10/20241110_NiN/" title="NiN">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">支持向量机</span>
+                        <span class="hidden-mobile">NiN</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -509,8 +487,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/17/20240517_Pandas/" title="Pandas库入门">
-                        <span class="hidden-mobile">Pandas库入门</span>
+                      <a href="/2024/11/07/20241107_AlexNet/" title="AlexNet">
+                        <span class="hidden-mobile">AlexNet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,30 +16,23 @@
   <meta name="author" content="XuanYa">
   <meta name="keywords" content="">
   
-    <meta name="description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
+    <meta name="description" content="AlexNet的提出解决了当时在计算机视觉领域中的大规模图像识别问题，尤其是深层卷积神经网络在大数据集上的训练效率和效果问题。以下是AlexNet解决的问题和其创新点： 问题解决方向 处理大规模数据集的能力：在AlexNet之前，模型在小数据集上训练时通常表现良好，但在大型数据集上（如ImageNet）效果不佳。AlexNet通过设计更深层次和更宽的网络结构，使其能够学习到丰富的特征，成功应对大规">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习引言">
-<meta property="og:url" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/index.html">
+<meta property="og:title" content="AlexNet">
+<meta property="og:url" content="http://example.com/2024/11/07/20241107_AlexNet/index.html">
 <meta property="og:site_name" content="冯宝宝">
-<meta property="og:description" content="机器学习观点 拿到数据之后，构建机器学习算法第一步：观察数据，总结规律  不正确观点：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）  对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限    设计算法：思考一个任务的经验E和性能指标P是什么 一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可">
+<meta property="og:description" content="AlexNet的提出解决了当时在计算机视觉领域中的大规模图像识别问题，尤其是深层卷积神经网络在大数据集上的训练效率和效果问题。以下是AlexNet解决的问题和其创新点： 问题解决方向 处理大规模数据集的能力：在AlexNet之前，模型在小数据集上训练时通常表现良好，但在大型数据集上（如ImageNet）效果不佳。AlexNet通过设计更深层次和更宽的网络结构，使其能够学习到丰富的特征，成功应对大规">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png">
-<meta property="og:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png">
-<meta property="article:published_time" content="2024-05-19T14:53:13.783Z">
-<meta property="article:modified_time" content="2024-05-21T15:07:01.825Z">
+<meta property="article:published_time" content="2024-11-07T10:27:51.973Z">
+<meta property="article:modified_time" content="2024-11-10T03:10:21.856Z">
 <meta property="article:author" content="XuanYa">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="模型">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png">
   
   
   
-  <title>机器学习引言 - 冯宝宝</title>
+  <title>AlexNet - 冯宝宝</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="机器学习引言"></span>
+            <span id="subtitle" data-typed-text="AlexNet"></span>
           
         </div>
 
@@ -218,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-19 22:53" pubdate>
-          2024年5月19日 晚上
+        <time datetime="2024-11-07 18:27" pubdate>
+          2024年11月7日 晚上
         </time>
       </span>
     
@@ -230,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          1.5k 字
         
       </span>
     
@@ -241,7 +234,7 @@
         
         
         
-          15 分钟
+          13 分钟
         
       </span>
     
@@ -278,128 +271,60 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">机器学习引言</h1>
+            <h1 id="seo-header">AlexNet</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="机器学习观点"><a href="#机器学习观点" class="headerlink" title="机器学习观点"></a>机器学习观点</h1><ul>
-<li><p>拿到数据之后，<strong>构建机器学习算法第一步</strong>：观察数据，总结规律</p>
-<ul>
-<li><p><strong>不正确观点</strong>：收集足够多数据，从网上随便下载一个开源算法模型，直接将数据扔进模型中训练，就可能获得很好的结果（大多数不正确）</p>
+                <p>AlexNet的提出解决了当时在计算机视觉领域中的大规模图像识别问题，尤其是深层卷积神经网络在大数据集上的训练效率和效果问题。以下是AlexNet解决的问题和其创新点：</p>
+<h1 id="问题解决方向"><a href="#问题解决方向" class="headerlink" title="问题解决方向"></a>问题解决方向</h1><ol>
+<li><strong>处理大规模数据集的能力</strong>：在AlexNet之前，模型在小数据集上训练时通常表现良好，但在大型数据集上（如ImageNet）效果不佳。AlexNet通过设计更深层次和更宽的网络结构，使其能够学习到丰富的特征，成功应对大规模图像数据。</li>
+<li><strong>计算资源限制</strong>：深层网络通常需要大量计算资源，AlexNet利用GPU并行加速训练，有效减少了计算时间，使得在大规模数据上训练深层神经网络成为可能。</li>
+</ol>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>AlexNet在当时的深度学习领域发挥了开创性作用，但其参数量大、计算成本高、过拟合风险、缺乏跨通道融合和灵活性等缺点，限制了其在现代应用中的效率和扩展性。随着技术的进步，许多后续网络（如VGG、GoogLeNet和ResNet）在AlexNet的基础上进一步优化，解决了这些不足。</p>
+<h3 id="1-参数量大，计算资源需求高"><a href="#1-参数量大，计算资源需求高" class="headerlink" title="1. 参数量大，计算资源需求高"></a>1. <strong>参数量大，计算资源需求高</strong></h3><ul>
+<li><strong>缺点</strong>：AlexNet包含约6000万个参数，这对计算资源的需求非常高，在当时只能依赖多GPU并行训练，这样的计算要求不适用于资源受限的设备。</li>
+<li><strong>影响</strong>：模型训练和推理速度较慢，导致存储和计算成本高，在实际应用中难以部署在内存有限的设备（如移动端）上。</li>
+</ul>
+<h3 id="2-容易出现过拟合"><a href="#2-容易出现过拟合" class="headerlink" title="2. 容易出现过拟合"></a>2. <strong>容易出现过拟合</strong></h3><ul>
+<li><strong>缺点</strong>：尽管AlexNet引入了Dropout正则化来减少过拟合，但在特定情况下，特别是当训练数据不足时，过拟合问题依然明显。</li>
+<li><strong>影响</strong>：模型泛化能力可能不足，在实际应用中可能无法很好地处理训练数据外的新样本。</li>
+</ul>
+<h3 id="3-卷积层和全连接层设计不够灵活"><a href="#3-卷积层和全连接层设计不够灵活" class="headerlink" title="3. 卷积层和全连接层设计不够灵活"></a>3. <strong>卷积层和全连接层设计不够灵活</strong></h3><ul>
+<li><strong>缺点</strong>：AlexNet使用了大尺寸的卷积核（如第一个卷积层为 (11 \times 11)），在后续的网络设计中被证明不够灵活且计算开销大。此外，AlexNet的全连接层参数量过大，也限制了网络的灵活性。</li>
+<li><strong>影响</strong>：使得模型在提取多尺度特征时能力较弱，且计算开销不必要地增大；此外，在处理较小图像时不够有效率。</li>
+</ul>
+<h3 id="4-缺少跨通道的信息融合"><a href="#4-缺少跨通道的信息融合" class="headerlink" title="4. 缺少跨通道的信息融合"></a>4. <strong>缺少跨通道的信息融合</strong></h3><ul>
+<li><strong>缺点</strong>：AlexNet主要依赖传统的卷积层来提取特征，没有有效融合不同通道之间的信息。相比之下，后来的模型（如GoogLeNet、ResNet）设计了更加复杂的模块来跨通道融合特征。</li>
+<li><strong>影响</strong>：可能会限制模型在处理具有不同特征类型或复杂结构的图像时的表现。</li>
+</ul>
+<h3 id="5-不具备残差连接，训练深层网络有困难"><a href="#5-不具备残差连接，训练深层网络有困难" class="headerlink" title="5. 不具备残差连接，训练深层网络有困难"></a>5. <strong>不具备残差连接，训练深层网络有困难</strong></h3><ul>
+<li><strong>缺点</strong>：AlexNet没有采用残差连接或其他跳跃连接来辅助梯度传递，而后来的网络（如ResNet）通过这种连接显著改善了深层网络的训练效果。</li>
+<li><strong>影响</strong>：AlexNet在进一步加深时容易面临梯度消失问题，不容易训练更深层的网络，难以在更复杂的任务上进行扩展。</li>
+</ul>
+<h3 id="6-卷积层和池化层排列方式的局限性"><a href="#6-卷积层和池化层排列方式的局限性" class="headerlink" title="6. 卷积层和池化层排列方式的局限性"></a>6. <strong>卷积层和池化层排列方式的局限性</strong></h3><ul>
+<li><strong>缺点</strong>：AlexNet中固定的卷积层和池化层的组合方式相对简单，无法在多尺度特征提取上有良好的表现。</li>
+<li><strong>影响</strong>：无法提取到一些高层、细致的图像特征，对复杂场景的适应能力较弱。</li>
+</ul>
+<h1 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h1><ol>
+<li><p><strong>ReLU激活函数</strong>：AlexNet引入了ReLU（Rectified Linear Unit）激活函数代替传统的Sigmoid或Tanh函数。这种激活函数计算简单，可以有效减少梯度消失问题，加快网络的收敛速度。</p>
 </li>
-<li><p>对数据有足够的感性认识，才能设计出好的算法以及认识算法的性能极限</p>
+<li><p><strong>Dropout正则化</strong>：为减轻过拟合问题，AlexNet引入了Dropout正则化层。Dropout在训练时随机丢弃部分神经元，使网络不依赖特定的神经元，提升了模型的泛化能力。</p>
 </li>
-</ul>
+<li><p><strong>重叠池化层</strong>：AlexNet在池化层中引入重叠池化（Overlapping Pooling），即池化窗口之间存在重叠。这种设计可以保留更多细节信息，同时避免下采样带来的信息损失，提高模型性能。</p>
 </li>
-<li><strong>设计算法</strong>：思考一个任务的经验E和性能指标P是什么</li>
-<li>一个解决分类的问题稍微加以改造就可以解决回归问题，反之亦然，因为连续与离散是可以转换的</li>
-<li>机器学习的重点不是提取特征，而是假设在<strong>已经提取好特征</strong>的前提下，如何构造算法获得更好的性能</li>
-<li>提取特征很重要，不同媒质不同任务，提取特征的方式千变万化</li>
-<li>维度与标准决定了我们要用机器学习，维度：人对超过二维的数据难以想象，标准：对某些区域的划分是不一样的</li>
-<li>机器学习是典型的最优化问题，数学在现代化机器学习中占有重要的作用</li>
-</ul>
-<h1 id="机器学习定义"><a href="#机器学习定义" class="headerlink" title="机器学习定义"></a>机器学习定义</h1><h2 id="ARCHUR-SAMUEL"><a href="#ARCHUR-SAMUEL" class="headerlink" title="ARCHUR SAMUEL"></a>ARCHUR SAMUEL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">ARCHUR SAMUEL：<br>​	Machine Learning <span class="hljs-keyword">is</span> Fields <span class="hljs-keyword">of</span> study <span class="hljs-keyword">that</span> gives computers <span class="hljs-keyword">the</span> ability <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">without</span> being explicitly programmed.<br>​	机器学习是这样的领域，它土语计算机学习的能力，（这种学习能力）不是通过显著式编程获得的。<br></code></pre></td></tr></table></figure>
-<h3 id="显著式编程"><a href="#显著式编程" class="headerlink" title="显著式编程"></a>显著式编程</h3><ul>
-<li>通过人为预先定义出规律，告诉计算机实现一一对照区别。</li>
-<li>劣势：<strong>人为</strong>帮计算机<strong>规划</strong>所处的环境，将环境、规律调查得一清二楚</li>
-</ul>
-<h3 id="非显著式编程"><a href="#非显著式编程" class="headerlink" title="非显著式编程"></a>非显著式编程</h3><ul>
-<li>事先并不约束计算机总结出什么规律，只给大量数据，编写程序让计算机自己挑出能分辨事物的规律，总结不同事物的区别</li>
-<li>规定在特定环境下，做一些行为带来的收益，将收益称为<strong>收益函数</strong></li>
-<li>规定了收益函数后，让计算机去自己<strong>找最大化收益函数</strong>的行为</li>
-<li>优势：<strong>通过数据、经验自动学习</strong></li>
-</ul>
-<h2 id="TOM-MITSHELL"><a href="#TOM-MITSHELL" class="headerlink" title="TOM MITSHELL"></a>TOM MITSHELL</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript">TOM MITSHELL:<br>​	A computer program <span class="hljs-keyword">is</span> said <span class="hljs-keyword">to</span> learn <span class="hljs-keyword">from</span> experience E <span class="hljs-keyword">with</span> respect <span class="hljs-keyword">to</span> <span class="hljs-keyword">some</span> task T <span class="hljs-keyword">and</span> <span class="hljs-keyword">some</span> performance measure P, <span class="hljs-keyword">if</span> <span class="hljs-keyword">its</span> performance <span class="hljs-keyword">on</span> T, <span class="hljs-keyword">as</span> measured <span class="hljs-keyword">by</span> P, improves <span class="hljs-keyword">with</span> experience E.<br>​	一个计算机程序被称为可以学习，是指它能够针对某个任务T和某个性能指标P，从经验E中学习。这种学习的特点是，它在T上的被P所衡量的性能，会随着经验E的增加而提高。<br>​	任务 T：编写计算机程序识别菊花和玫瑰<br>	经验 E：一大堆菊花和玫瑰的图片<br>	性能指标 P：不同的机器学习算法会有不同，如把识别的正确率简称为识别率，将其作为性能指标<br></code></pre></td></tr></table></figure>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>Experience越来越多，Performance Measure也会越来越高</li>
-<li>更数学化，典型的最优化问题</li>
-</ul>
-<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><ul>
-<li>数学在现代化机器学习中占有重要的作用</li>
-</ul>
-<h1 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h1><p>现在的强化学习利用到了监督学习，如ALPHAGO，先通过监督学习获得初试围棋程序，再将初试围棋程序进行强化学习</p>
-<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><ul>
-<li>经验E是完全由人搜集起来输入进计算机</li>
-<li>为训练数据打标签，此时经验E为：<strong>训练样本</strong>和<strong>标签</strong>的集合<ul>
-<li>垃圾邮件识别，教计算机自动识别某个邮件识别是垃圾邮件</li>
-<li>人脸识别，教计算机通过人脸的图像识别这个人是谁</li>
-</ul>
+<li><p><strong>数据增强</strong>：为了增强数据集的多样性并避免过拟合，AlexNet在训练时采用数据增强方法，如随机裁剪、翻转和RGB通道变化。这一策略帮助网络更好地适应不同的图像变化，提高了泛化能力。</p>
 </li>
-</ul>
-<h3 id="传统监督学习"><a href="#传统监督学习" class="headerlink" title="传统监督学习"></a>传统监督学习</h3><p>每一个训练数据都有对应的标签</p>
-<ul>
-<li>支持向量机</li>
-<li>人工神经网络</li>
-<li>深度神经网络</li>
-</ul>
-<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>所有训练数据都没有对应的标签</p>
-<ul>
-<li>聚类</li>
-<li>EM算法</li>
-<li>主成分分析</li>
-</ul>
-<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>训练数据中一部分有标签，一部分没有标签（如何用少量标注数据与大量未标注数据，获得更好的机器学习算法）</p>
-<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><ul>
-<li>经验E是由计算机与环境互动获得的</li>
-<li>产生<strong>行为</strong>，定义这些行为的收益函数(Reward function)，改变自己行为模式去<strong>最大化收益函数</strong></li>
-<li>计算机通过与环境的互动，逐渐强化自己的行为模式<ul>
-<li>教计算机下棋</li>
-<li>无人驾驶，教计算机自动驾驶汽车，从一个指定地点到另一个指定地点</li>
-</ul>
+<li><p><strong>多GPU并行训练</strong>：AlexNet是首个利用多GPU并行训练的网络，通过将模型分布到两个GPU上，减小了每个GPU的计算负担，从而使得深层网络的训练更加可行。</p>
 </li>
-</ul>
-<h1 id="机器学习算法过程"><a href="#机器学习算法过程" class="headerlink" title="机器学习算法过程"></a>机器学习算法过程</h1><p>识别尿沉中的红白细胞</p>
-<p><style>.wsumfulplgnt{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520000512315.png" srcset="/img/loading.gif" lazyload class="wsumfulplgnt" alt="image-20240520000512315"></p>
-<p>可能被观察到的区别</p>
-<ul>
-<li>平均来说，白细胞面积比红细胞大</li>
-<li>白细胞没有红细胞圆</li>
-<li>白细胞内部纹理比红细胞粗糙</li>
-</ul>
-<h2 id="第一步：提取特征"><a href="#第一步：提取特征" class="headerlink" title="第一步：提取特征"></a>第一步：提取特征</h2><p>通过训练样本获得的，对机器学习任务有帮助的多维度的特征数据</p>
-<p>很重要，提取了好的特征，（即使算法不是很好）也能获得不错的性能</p>
-<p>提取了差的特征，不可能获得好的性能</p>
-<p><strong>细胞的面积</strong>    <strong>圆形度</strong>    <strong>表面粗糙程度</strong></p>
-<h3 id="提取面积特征方法"><a href="#提取面积特征方法" class="headerlink" title="提取面积特征方法"></a>提取面积特征方法</h3><p><style>.vcdqplhaglzh{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520001815389.png" srcset="/img/loading.gif" lazyload class="vcdqplhaglzh" alt="image-20240520001815389"></p>
-<h2 id="第二步：特征选择"><a href="#第二步：特征选择" class="headerlink" title="第二步：特征选择"></a>第二步：特征选择</h2><p>只选择面积与周长作为区分，来构建机器学习系统，后面归一化一下</p>
-<p><style>.yqlgiakjdjmp{zoom:50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002610676.png" srcset="/img/loading.gif" lazyload class="yqlgiakjdjmp" alt="image-20240520002610676"></p>
-<p><style>.vvyhwtsoogmx{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520002746171.png" srcset="/img/loading.gif" lazyload class="vvyhwtsoogmx" alt="image-20240520002746171"></p>
-<h2 id="第三步：设计算法"><a href="#第三步：设计算法" class="headerlink" title="第三步：设计算法"></a>第三步：设计算法</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><ul>
-<li>线性内核</li>
-<li>多项式内核</li>
-<li>高斯径向基函数核</li>
-</ul>
-<p><style>.srhxrzmgugzu{zoom: 50%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003916270.png" srcset="/img/loading.gif" lazyload class="srhxrzmgugzu" alt="image-20240520003916270"></p>
-<h2 id="第四步：训练结果"><a href="#第四步：训练结果" class="headerlink" title="第四步：训练结果"></a>第四步：训练结果</h2><p>获得训练库准确率</p>
-<p><style>.irquspklbmqo{zoom:67%;}</style><img src="/2024/05/19/20240519_MachineLearning_Introduction/image-20240520003934456.png" srcset="/img/loading.gif" lazyload class="irquspklbmqo" alt="image-20240520003934456"></p>
-<h1 id="机器学习算法比较"><a href="#机器学习算法比较" class="headerlink" title="机器学习算法比较"></a>机器学习算法比较</h1><h2 id="没有免费午餐定理"><a href="#没有免费午餐定理" class="headerlink" title="没有免费午餐定理"></a>没有免费午餐定理</h2><p>​    任何一个预测函数，如果在一些训练样本上表现好，那么必然在另一些训练样本上表现不好，如果不对数据在特征空间的先验分布有一定假设，那么表现好于表现不好的情况一样多。</p>
-<p>​    在设计机器学习算法的时候有一个假设：在特征空间上距离接近的样本，他们属于同一个类别的概率会更高。</p>
-<p>​    道理是从以前的事实中来的。通过类比推广到对未来的预测。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    不对特征空间的先验分布有假设，所有算法的表现都一样。</p>
-<p>​    机器学习的本质：从有限的已知数据，在复杂的高维特征空间中预测未知样本的属性和类别。<strong>然而</strong>，我们不知道未知样本在哪里、性质如何，因此，再好的算法也存在犯错误的风险。</p>
-<h1 id="机器学习作业"><a href="#机器学习作业" class="headerlink" title="机器学习作业"></a>机器学习作业</h1><p>编程大作业</p>
-<ul>
-<li>人脸识别</li>
-</ul>
-<ul>
-<li>人脸性别年龄估计</li>
-</ul>
-<ul>
-<li>五子棋对战程序</li>
-</ul>
-<ul>
-<li>水果识别</li>
-</ul>
-<ul>
-<li>人脸特征点检测</li>
-</ul>
-<ul>
-<li>语种识别</li>
-</ul>
-<ul>
-<li>视频行为识别</li>
-</ul>
+</ol>
+<h1 id="AlexNet的优点"><a href="#AlexNet的优点" class="headerlink" title="AlexNet的优点"></a>AlexNet的优点</h1><ol>
+<li><strong>强大的特征提取能力</strong>：通过更深的层次结构和更宽的网络设计，AlexNet能够捕捉更加丰富和复杂的图像特征，使其在识别复杂图像内容上有更高的精度。</li>
+<li><strong>解决了梯度消失问题</strong>：使用ReLU激活函数，AlexNet有效地缓解了梯度消失问题，加快了网络的训练速度，使得深层网络在大规模数据集上变得更加可行。</li>
+<li><strong>高效的正则化方法</strong>：AlexNet引入了Dropout正则化，降低了过拟合风险，显著提高了模型的泛化能力。</li>
+<li><strong>并行化计算</strong>：AlexNet通过利用多GPU并行训练，加速了训练过程，为之后的深度学习模型开创了多GPU加速的先河。</li>
+<li><strong>数据增强技术</strong>：数据增强（如随机裁剪、翻转和颜色通道扰动）使得模型对不同环境的图像更具鲁棒性，有效增强了模型的泛化能力。</li>
+</ol>
 
                 
               </div>
@@ -423,7 +348,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -440,9 +365,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/AI/" class="print-no-link">#AI</a>
+        <a href="/tags/%E6%A8%A1%E5%9E%8B/" class="print-no-link">#模型</a>
       
     </div>
   
@@ -454,8 +379,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>机器学习引言</div>
-      <div>http://example.com/2024/05/19/20240519_MachineLearning_Introduction/</div>
+      <div>AlexNet</div>
+      <div>http://example.com/2024/11/07/20241107_AlexNet/</div>
     </div>
     <div class="license-meta">
       
@@ -467,7 +392,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月19日</div>
+          <div>2024年11月7日</div>
         </div>
       
       
@@ -499,9 +424,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/21/20240521_MachineLearning_SupportVectorMachines/" title="支持向量机">
+                      <a href="/2024/11/10/20241110_VGG/" title="VGG">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">支持向量机</span>
+                        <span class="hidden-mobile">VGG</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -509,8 +434,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/17/20240517_Pandas/" title="Pandas库入门">
-                        <span class="hidden-mobile">Pandas库入门</span>
+                      <a href="/2024/11/06/20241106_LeNet/" title="LeNet">
+                        <span class="hidden-mobile">LeNet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
