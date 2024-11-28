@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="XuanYa">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="整合tif图与geojson数据">
+<meta property="og:url" content="http://example.com/2024/11/19/20241119_%E6%95%B4%E5%90%88tif%E5%9B%BE%E4%B8%8Egeojson%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="冯宝宝">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-19T07:34:17.727Z">
+<meta property="article:modified_time" content="2024-11-19T09:42:45.980Z">
+<meta property="article:author" content="XuanYa">
+<meta property="article:tag" content="pyton">
+<meta property="article:tag" content="地理信息绘图">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>整合tif图与geojson数据 - 冯宝宝</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>轩的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="整合tif图与geojson数据"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-19 15:34" pubdate>
+          2024年11月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">整合tif图与geojson数据</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> rasterio<br><span class="hljs-keyword">import</span> rasterio.plot<br><span class="hljs-keyword">from</span> rasterio.mask <span class="hljs-keyword">import</span> mask<br><span class="hljs-keyword">from</span> rasterio.warp <span class="hljs-keyword">import</span> reproject, calculate_default_transform, Resampling <span class="hljs-keyword">as</span> WarpResampling<br><span class="hljs-keyword">import</span> geopandas <span class="hljs-keyword">as</span> gpd<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> matplotlib.colors <span class="hljs-keyword">import</span> ListedColormap<br><span class="hljs-keyword">from</span> shapely.geometry <span class="hljs-keyword">import</span> box<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib<br><br><span class="hljs-comment"># 设置中文字体（需要系统中有相应的字体）</span><br>matplotlib.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>]  <span class="hljs-comment"># 使用黑体</span><br>matplotlib.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>    <span class="hljs-comment"># 正常显示负号</span><br><br><span class="hljs-comment"># 1. 定义函数1：读取 base.tif 文件</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_base_tif</span>(<span class="hljs-params">file_path</span>):<br>    <span class="hljs-keyword">with</span> rasterio.<span class="hljs-built_in">open</span>(file_path) <span class="hljs-keyword">as</span> src:<br>        data = src.read(<span class="hljs-number">1</span>)  <span class="hljs-comment"># 读取第一波段</span><br>        profile = src.profile.copy()  <span class="hljs-comment"># 获取元数据</span><br>        transform = src.transform  <span class="hljs-comment"># 地理变换信息</span><br>        crs = src.crs  <span class="hljs-comment"># 坐标参考系</span><br>        bounds = src.bounds  <span class="hljs-comment"># 图像范围</span><br>    <span class="hljs-keyword">return</span> data, profile, transform, crs, bounds<br><br><span class="hljs-comment"># 2. 定义函数2：读取 intensity.tif 文件</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_intensity_tif</span>(<span class="hljs-params">file_path</span>):<br>    <span class="hljs-keyword">with</span> rasterio.<span class="hljs-built_in">open</span>(file_path) <span class="hljs-keyword">as</span> src:<br>        data = src.read(<span class="hljs-number">1</span>)<br>        profile = src.profile.copy()<br>        transform = src.transform<br>        crs = src.crs<br>        bounds = src.bounds<br>    <span class="hljs-keyword">return</span> data, profile, transform, crs, bounds<br><br><span class="hljs-comment"># 3. 读取并合并 GeoJSON 文件</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_geojson_files</span>(<span class="hljs-params">file_list</span>):<br>    gdf_list = []<br>    <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> file_list:<br>        gdf = gpd.read_file(file)<br>        gdf_list.append(gdf)<br>    combined_gdf = pd.concat(gdf_list, ignore_index=<span class="hljs-literal">True</span>)<br>    combined_gdf = gpd.GeoDataFrame(combined_gdf)<br>    <span class="hljs-keyword">return</span> combined_gdf<br><br><span class="hljs-comment"># 5. 截取 base.tif 与 intensity.tif 重叠的部分</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_overlapping_region</span>(<span class="hljs-params">base_data, base_transform, base_crs, base_bounds,</span><br><span class="hljs-params">                               intensity_data, intensity_transform, intensity_crs, intensity_bounds</span>):<br>    <span class="hljs-comment"># 确保坐标参考系一致</span><br>    <span class="hljs-keyword">if</span> base_crs != intensity_crs:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;base.tif 和 intensity.tif 的坐标参考系不一致，请进行坐标转换。&quot;</span>)<br><br>    <span class="hljs-comment"># 计算重叠区域</span><br>    base_geom = box(*base_bounds)<br>    intensity_geom = box(*intensity_bounds)<br>    overlap_geom = base_geom.intersection(intensity_geom)<br><br>    <span class="hljs-keyword">if</span> overlap_geom.is_empty:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;base.tif 和 intensity.tif 没有重叠区域。&quot;</span>)<br><br>    <span class="hljs-comment"># 将重叠区域转换为 GeoJSON 格式</span><br>    overlap_geojson = [overlap_geom.__geo_interface__]<br><br>    <span class="hljs-comment"># 裁剪 base_data</span><br>    <span class="hljs-keyword">with</span> rasterio.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;base.tif&#x27;</span>) <span class="hljs-keyword">as</span> src:<br>        base_overlap_data, base_overlap_transform = mask(src, overlap_geojson, crop=<span class="hljs-literal">True</span>)<br>        base_overlap_meta = src.meta.copy()<br>        base_overlap_meta.update(&#123;<br>            <span class="hljs-string">&quot;height&quot;</span>: base_overlap_data.shape[<span class="hljs-number">1</span>],<br>            <span class="hljs-string">&quot;width&quot;</span>: base_overlap_data.shape[<span class="hljs-number">2</span>],<br>            <span class="hljs-string">&quot;transform&quot;</span>: base_overlap_transform<br>        &#125;)<br><br>    <span class="hljs-comment"># 裁剪 intensity_data</span><br>    <span class="hljs-keyword">with</span> rasterio.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;intensity.tif&#x27;</span>) <span class="hljs-keyword">as</span> src:<br>        intensity_overlap_data, intensity_overlap_transform = mask(src, overlap_geojson, crop=<span class="hljs-literal">True</span>)<br>        intensity_overlap_meta = src.meta.copy()<br>        intensity_overlap_meta.update(&#123;<br>            <span class="hljs-string">&quot;height&quot;</span>: intensity_overlap_data.shape[<span class="hljs-number">1</span>],<br>            <span class="hljs-string">&quot;width&quot;</span>: intensity_overlap_data.shape[<span class="hljs-number">2</span>],<br>            <span class="hljs-string">&quot;transform&quot;</span>: intensity_overlap_transform<br>        &#125;)<br><br>    <span class="hljs-comment"># 重采样 base_overlap_data 以匹配 intensity_overlap_data</span><br>    base_overlap_resampled = np.empty_like(intensity_overlap_data, dtype=base_overlap_data.dtype)<br><br>    reproject(<br>        source=base_overlap_data,<br>        destination=base_overlap_resampled,<br>        src_transform=base_overlap_transform,<br>        src_crs=base_crs,<br>        dst_transform=intensity_overlap_transform,<br>        dst_crs=intensity_crs,<br>        resampling=WarpResampling.nearest<br>    )<br><br>    <span class="hljs-keyword">return</span> base_overlap_resampled[<span class="hljs-number">0</span>], intensity_overlap_data[<span class="hljs-number">0</span>], intensity_overlap_transform, intensity_crs<br><br><span class="hljs-comment"># 6. 根据给定公式计算风险概率</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_risk_probability</span>(<span class="hljs-params">intensity, base</span>):<br>    <span class="hljs-comment"># intensity 是仪器烈度，如 6、7、8 等</span><br>    <span class="hljs-comment"># base 是底图层</span><br>    <span class="hljs-comment"># 计算 A = 0.00250165038535077 * e^(0.6931 * intensity)</span><br>    A = <span class="hljs-number">0.00250165038535077</span> * np.exp(<span class="hljs-number">0.6931</span> * intensity)<br><br>    <span class="hljs-comment"># 计算指数 exponent = - (A + base)</span><br>    exponent = - (A + base)<br><br>    <span class="hljs-comment"># 计算风险概率 result = 1 / (1 + e^(exponent))</span><br>    <span class="hljs-keyword">with</span> np.errstate(over=<span class="hljs-string">&#x27;ignore&#x27;</span>, invalid=<span class="hljs-string">&#x27;ignore&#x27;</span>):<br>        result = <span class="hljs-number">1</span> / (<span class="hljs-number">1</span> + np.exp(exponent))<br><br>    result = np.nan_to_num(result, nan=<span class="hljs-number">0.0</span>, posinf=<span class="hljs-number">0.0</span>, neginf=<span class="hljs-number">0.0</span>)<br>    <span class="hljs-keyword">return</span> result<br><br><span class="hljs-comment"># 7. 根据概率值对风险级别进行分类</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">classify_risk_levels</span>(<span class="hljs-params">probability</span>):<br>    risk_levels = np.zeros_like(probability, dtype=np.uint8)<br><br>    <span class="hljs-comment"># 风险级别从 1 到 5，对应五种颜色，1 表示低风险</span><br>    risk_levels[probability &gt;= <span class="hljs-number">0.1</span>] = <span class="hljs-number">5</span>  <span class="hljs-comment"># 高风险（红色）</span><br>    risk_levels[(probability &gt;= <span class="hljs-number">0.01</span>) &amp; (probability &lt; <span class="hljs-number">0.1</span>)] = <span class="hljs-number">4</span>  <span class="hljs-comment"># 中高风险（橙色）</span><br>    risk_levels[(probability &gt;= <span class="hljs-number">0.001</span>) &amp; (probability &lt; <span class="hljs-number">0.01</span>)] = <span class="hljs-number">3</span>  <span class="hljs-comment"># 中风险（黄色）</span><br>    risk_levels[(probability &gt;= <span class="hljs-number">0.0001</span>) &amp; (probability &lt; <span class="hljs-number">0.001</span>)] = <span class="hljs-number">2</span>  <span class="hljs-comment"># 中低风险（蓝色）</span><br>    risk_levels[probability &lt; <span class="hljs-number">0.0001</span>] = <span class="hljs-number">1</span>  <span class="hljs-comment"># 低风险（白色）</span><br><br>    <span class="hljs-keyword">return</span> risk_levels<br><br><span class="hljs-comment"># 8. 叠加区县信息并可视化</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">visualize_risk</span>(<span class="hljs-params">risk_levels, transform, crs, combined_gdf</span>):<br>    <span class="hljs-comment"># 生成颜色映射</span><br>    colors = [<span class="hljs-string">&#x27;white&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-string">&#x27;yellow&#x27;</span>, <span class="hljs-string">&#x27;orange&#x27;</span>, <span class="hljs-string">&#x27;red&#x27;</span>]<br>    cmap = ListedColormap(colors)<br><br>    fig, ax = plt.subplots(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">8</span>))<br><br>    <span class="hljs-comment"># 显示风险等级图</span><br>    rasterio.plot.show(risk_levels, transform=transform, cmap=cmap, ax=ax)<br>    ax.set_title(<span class="hljs-string">&quot;次生地质灾害风险概率图&quot;</span>)<br>    ax.set_xlabel(<span class="hljs-string">&#x27;经度&#x27;</span>)<br>    ax.set_ylabel(<span class="hljs-string">&#x27;纬度&#x27;</span>)<br><br>    <span class="hljs-comment"># 添加图例</span><br>    labels = [<span class="hljs-string">&#x27;低风险&#x27;</span>, <span class="hljs-string">&#x27;中低风险&#x27;</span>, <span class="hljs-string">&#x27;中风险&#x27;</span>, <span class="hljs-string">&#x27;中高风险&#x27;</span>, <span class="hljs-string">&#x27;高风险&#x27;</span>]<br>    patches = [plt.plot([], [], marker=<span class="hljs-string">&quot;s&quot;</span>, ms=<span class="hljs-number">10</span>, ls=<span class="hljs-string">&quot;&quot;</span>, mec=<span class="hljs-literal">None</span>, color=colors[i], label=<span class="hljs-string">&quot;&#123;:s&#125;&quot;</span>.<span class="hljs-built_in">format</span>(labels[i]))[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(colors))]<br>    ax.legend(handles=patches, bbox_to_anchor=(<span class="hljs-number">1.05</span>, <span class="hljs-number">1</span>), loc=<span class="hljs-string">&#x27;upper left&#x27;</span>)<br><br>    <span class="hljs-comment"># 确保坐标参考系一致</span><br>    <span class="hljs-keyword">if</span> combined_gdf.crs != crs:<br>        combined_gdf = combined_gdf.to_crs(crs)<br><br>    <span class="hljs-comment"># 裁剪区县数据到重叠区域</span><br>    width = risk_levels.shape[<span class="hljs-number">1</span>]<br>    height = risk_levels.shape[<span class="hljs-number">0</span>]<br>    left, top = transform * (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br>    right, bottom = transform * (width, height)<br>    overlap_geom = box(left, bottom, right, top)<br>    overlap_gdf = gpd.GeoDataFrame(geometry=[overlap_geom], crs=crs)<br>    clipped_gdf = gpd.overlay(combined_gdf, overlap_gdf, how=<span class="hljs-string">&#x27;intersection&#x27;</span>)<br><br>    <span class="hljs-comment"># 绘制区县边界</span><br>    clipped_gdf.boundary.plot(ax=ax, edgecolor=<span class="hljs-string">&#x27;black&#x27;</span>, linewidth=<span class="hljs-number">0.5</span>)<br><br>    <span class="hljs-comment"># 添加区县名称标签</span><br>    <span class="hljs-keyword">for</span> idx, row <span class="hljs-keyword">in</span> clipped_gdf.iterrows():<br>        centroid = row[<span class="hljs-string">&#x27;geometry&#x27;</span>].centroid<br>        ax.text(centroid.x, centroid.y, row.get(<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;未知&#x27;</span>), fontsize=<span class="hljs-number">6</span>, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;center&#x27;</span>, color=<span class="hljs-string">&#x27;black&#x27;</span>)<br><br>    plt.show()<br><br>    <span class="hljs-comment"># 保存结果为 TIFF 文件</span><br>    plt.savefig(<span class="hljs-string">&#x27;final_result.tif&#x27;</span>, dpi=<span class="hljs-number">300</span>, bbox_inches=<span class="hljs-string">&#x27;tight&#x27;</span>, <span class="hljs-built_in">format</span>=<span class="hljs-string">&#x27;tif&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;风险概率图已成功保存为 &#x27;final_result.tif&#x27;。&quot;</span>)<br><br><br><br><span class="hljs-comment"># 9. 主程序</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 读取 base.tif 文件</span><br>    base_data, base_profile, base_transform, base_crs, base_bounds = read_base_tif(<span class="hljs-string">&#x27;base.tif&#x27;</span>)<br><br>    <span class="hljs-comment"># 读取 intensity.tif 文件</span><br>    intensity_data, intensity_profile, intensity_transform, intensity_crs, intensity_bounds = read_intensity_tif(<span class="hljs-string">&#x27;intensity.tif&#x27;</span>)<br><br>    <span class="hljs-comment"># 读取 GeoJSON 文件</span><br>    sichuan_json_files = [<span class="hljs-string">&#x27;阿坝藏族羌族自治州.json&#x27;</span>, <span class="hljs-string">&#x27;成都市.json&#x27;</span>, <span class="hljs-string">&#x27;德阳市.json&#x27;</span>, <span class="hljs-string">&#x27;甘孜藏族自治州.json&#x27;</span>,<br>                          <span class="hljs-string">&#x27;乐山市.json&#x27;</span>, <span class="hljs-string">&#x27;凉山彝族自治州.json&#x27;</span>, <span class="hljs-string">&#x27;眉山市.json&#x27;</span>, <span class="hljs-string">&#x27;绵阳市.json&#x27;</span>,<br>                          <span class="hljs-string">&#x27;内江市.json&#x27;</span>, <span class="hljs-string">&#x27;遂宁市.json&#x27;</span>, <span class="hljs-string">&#x27;雅安市.json&#x27;</span>, <span class="hljs-string">&#x27;宜宾市.json&#x27;</span>,<br>                          <span class="hljs-string">&#x27;资阳市.json&#x27;</span>, <span class="hljs-string">&#x27;自贡市.json&#x27;</span>]<br>    xizang_json_files = [<span class="hljs-string">&#x27;昌都市.json&#x27;</span>, <span class="hljs-string">&#x27;那曲市.json&#x27;</span>, <span class="hljs-string">&#x27;日喀则市.json&#x27;</span>, <span class="hljs-string">&#x27;山南市.json&#x27;</span>, <span class="hljs-string">&#x27;林芝市.json&#x27;</span>]<br>    all_json_files = sichuan_json_files + xizang_json_files<br><br>    combined_gdf = read_geojson_files(all_json_files)<br><br>    <span class="hljs-comment"># 截取重叠区域</span><br>    base_overlap_data, intensity_overlap_data, overlap_transform, overlap_crs = extract_overlapping_region(<br>        base_data, base_transform, base_crs, base_bounds,<br>        intensity_data, intensity_transform, intensity_crs, intensity_bounds<br>    )<br><br>    <span class="hljs-comment"># 计算风险概率</span><br>    risk_probability = calculate_risk_probability(intensity_overlap_data, base_overlap_data)<br><br>    <span class="hljs-comment"># 对结果进行分级</span><br>    risk_levels = classify_risk_levels(risk_probability)<br><br>    <span class="hljs-comment"># 保存风险等级为 TIFF 文件</span><br>    out_meta = base_profile.copy()<br>    out_meta.update(&#123;<br>        <span class="hljs-string">&quot;driver&quot;</span>: <span class="hljs-string">&quot;GTiff&quot;</span>,<br>        <span class="hljs-string">&quot;height&quot;</span>: risk_levels.shape[<span class="hljs-number">0</span>],<br>        <span class="hljs-string">&quot;width&quot;</span>: risk_levels.shape[<span class="hljs-number">1</span>],<br>        <span class="hljs-string">&quot;transform&quot;</span>: overlap_transform,<br>        <span class="hljs-string">&quot;crs&quot;</span>: overlap_crs,<br>        <span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-number">1</span>,<br>        <span class="hljs-string">&quot;dtype&quot;</span>: <span class="hljs-string">&#x27;uint8&#x27;</span>,<br>        <span class="hljs-string">&quot;nodata&quot;</span>: <span class="hljs-number">0</span><br>    &#125;)<br>    <span class="hljs-keyword">with</span> rasterio.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;risk_level.tif&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>, **out_meta) <span class="hljs-keyword">as</span> dest:<br>        dest.write(risk_levels, <span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># 可视化结果并叠加区县信息</span><br>    visualize_risk(risk_levels, overlap_transform, overlap_crs, combined_gdf)<br><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/" class="category-chain-item">地理信息处理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" class="category-chain-item">图片处理</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pyton/" class="print-no-link">#pyton</a>
+      
+        <a href="/tags/%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E7%BB%98%E5%9B%BE/" class="print-no-link">#地理信息绘图</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>整合tif图与geojson数据</div>
+      <div>http://example.com/2024/11/19/20241119_整合tif图与geojson数据/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>XuanYa</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/22/20241122_%E7%BB%84%E4%BC%9A/" title="1124组会">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1124组会</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/12/20241112_%E6%8F%92%E5%80%BC%E6%B3%95/" title="插值法">
+                        <span class="hidden-mobile">插值法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

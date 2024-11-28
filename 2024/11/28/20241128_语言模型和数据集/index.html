@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="XuanYa">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="马尔可夫模型和n元语法1. 背景：马尔可夫性假设 马尔可夫性假设是语言建模中的核心思想之一。  假设序列中当前状态只依赖于有限个历史状态，可以减少计算复杂性。  公式中提到的分布：  P(x_{t+1} \mid x_t, x_{t-1}, \dots, x_1)根据马尔可夫性假设简化为：   P(x_{t+1} \mid x_t), 即，序列的下一个状态只依赖于当前状态，而与更久远的历史无关。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语言模型和数据集">
+<meta property="og:url" content="http://example.com/2024/11/28/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/index.html">
+<meta property="og:site_name" content="冯宝宝">
+<meta property="og:description" content="马尔可夫模型和n元语法1. 背景：马尔可夫性假设 马尔可夫性假设是语言建模中的核心思想之一。  假设序列中当前状态只依赖于有限个历史状态，可以减少计算复杂性。  公式中提到的分布：  P(x_{t+1} \mid x_t, x_{t-1}, \dots, x_1)根据马尔可夫性假设简化为：   P(x_{t+1} \mid x_t), 即，序列的下一个状态只依赖于当前状态，而与更久远的历史无关。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/11/28/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128153852275.png">
+<meta property="og:image" content="http://example.com/2024/11/28/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128162424131.png">
+<meta property="og:image" content="http://example.com/2024/11/28/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128163004487.png">
+<meta property="article:published_time" content="2024-11-28T07:04:17.621Z">
+<meta property="article:modified_time" content="2024-11-28T13:25:10.901Z">
+<meta property="article:author" content="XuanYa">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="数据处理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/11/28/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128153852275.png">
+  
+  
+  
+  <title>语言模型和数据集 - 冯宝宝</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>轩的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="语言模型和数据集"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-28 15:04" pubdate>
+          2024年11月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">语言模型和数据集</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="马尔可夫模型和n元语法"><a href="#马尔可夫模型和n元语法" class="headerlink" title="马尔可夫模型和n元语法"></a>马尔可夫模型和n元语法</h1><h3 id="1-背景：马尔可夫性假设"><a href="#1-背景：马尔可夫性假设" class="headerlink" title="1. 背景：马尔可夫性假设"></a><strong>1. 背景：马尔可夫性假设</strong></h3><ul>
+<li><p>马尔可夫性假设是语言建模中的核心思想之一。</p>
+</li>
+<li><p>假设<strong>序列中当前状态只依赖于有限个历史状态</strong>，可以减少计算复杂性。</p>
+</li>
+<li><p>公式中提到的分布：</p>
+<script type="math/tex; mode=display">
+P(x_{t+1} \mid x_t, x_{t-1}, \dots, x_1)</script><p>根据马尔可夫性假设简化为： </p>
+<script type="math/tex; mode=display">
+P(x_{t+1} \mid x_t)</script><p>, 即，<strong>序列的下一个状态只依赖于当前状态</strong>，而与更久远的历史无关。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-公式解析与语法模型"><a href="#2-公式解析与语法模型" class="headerlink" title="2. 公式解析与语法模型"></a><strong>2. 公式解析与语法模型</strong></h3><h4 id="1-通用的链式法则"><a href="#1-通用的链式法则" class="headerlink" title="(1) 通用的链式法则"></a><strong>(1) 通用的链式法则</strong></h4><ul>
+<li>根据链式法则，任意序列 <script type="math/tex; mode=display">
+P(x_1, x_2, x_3, x_4)</script>可以展开为：<script type="math/tex; mode=display">
+P(x_1, x_2, x_3, x_4) = P(x_1) P(x_2 \mid x_1) P(x_3 \mid x_1, x_2) P(x_4 \mid x_1, x_2, x_3)</script></li>
+</ul>
+<ul>
+<li>这是最完整的公式，假设每个词都可能依赖于前面所有的词。</li>
+</ul>
+<h4 id="2-简化公式：马尔可夫假设"><a href="#2-简化公式：马尔可夫假设" class="headerlink" title="(2) 简化公式：马尔可夫假设"></a><strong>(2) 简化公式：马尔可夫假设</strong></h4><p>根据不同阶的马尔可夫性假设，可以逐步简化：</p>
+<ol>
+<li><p><strong>一元语法（unigram）模型</strong>：</p>
+<ul>
+<li><script type="math/tex; mode=display">
+假设每个词 x_t独立于其他词，即：</script><script type="math/tex; mode=display">
+P(x_1, x_2, x_3, x_4) = P(x_1) P(x_2) P(x_3) P(x_4)</script></li>
+<li><p><strong>意义</strong>：忽略词与词之间的关系，适合简单统计和快速计算。</p>
+</li>
+<li><p><strong>缺点</strong>：不能捕捉词与词之间的语法或上下文关系。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>二元语法（bigram）模型</strong>：</p>
+<ul>
+<li><script type="math/tex; mode=display">
+假设每个词 x_t 只依赖于前一个词 x_{t-1}，即： P(x_1, x_2, x_3, x_4) = P(x_1) P(x_2 \mid x_1) P(x_3 \mid x_2) P(x_4 \mid x_3)</script></li>
+<li><p><strong>意义</strong>：只考虑词对之间的关系，比如捕捉到「deep learning」这种词对的依赖性。</p>
+</li>
+<li><p><strong>优点</strong>：比一元模型更能反映词之间的语法关系。</p>
+</li>
+<li><p><strong>缺点</strong>：无法捕捉更长的上下文依赖。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>三元语法（trigram）模型</strong>：</p>
+<ul>
+<li><script type="math/tex; mode=display">
+假设每个词 x_t 只依赖于前两个词 x_{t-2}, x_{t-1}，即： P(x_1, x_2, x_3, x_4) = P(x_1) P(x_2 \mid x_1) P(x_3 \mid x_1, x_2) P(x_4 \mid x_2, x_3)</script></li>
+<li><p><strong>意义</strong>：能够捕捉三元词组之间的依赖性，比如「state of the」。</p>
+</li>
+<li><p><strong>优点</strong>：能捕捉更长的依赖。</p>
+</li>
+<li><p><strong>缺点</strong>：当序列长度较大时，计算复杂度仍然较高，且数据稀疏性更严重。</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a><strong>3. 示例</strong></h3><p>假设序列为：「I love deep learning」，概率计算如下：</p>
+<h4 id="一元语法模型："><a href="#一元语法模型：" class="headerlink" title="一元语法模型："></a><strong>一元语法模型</strong>：</h4><ul>
+<li><script type="math/tex; mode=display">
+假设每个词独立： P(\text{I love deep learning}) = P(\text{I}) P(\text{love}) P(\text{deep}) P(\text{learning})</script></li>
+</ul>
+<h4 id="二元语法模型："><a href="#二元语法模型：" class="headerlink" title="二元语法模型："></a><strong>二元语法模型</strong>：</h4><ul>
+<li><script type="math/tex; mode=display">
+假设每个词只依赖前一个词： P(\text{I love deep learning}) = P(\text{I}) P(\text{love} \mid \text{I}) P(\text{deep} \mid \text{love}) P(\text{learning} \mid \text{deep})</script></li>
+</ul>
+<h4 id="三元语法模型："><a href="#三元语法模型：" class="headerlink" title="三元语法模型："></a><strong>三元语法模型</strong>：</h4><ul>
+<li><script type="math/tex; mode=display">
+假设每个词依赖前两个词： P(\text{I love deep learning}) = P(\text{I}) P(\text{love} \mid \text{I}) P(\text{deep} \mid \text{I, love}) P(\text{learning} \mid \text{love, deep})</script></li>
+</ul>
+<hr>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a><strong>4. 总结</strong></h3><ul>
+<li>一元语法假设独立性，计算简单，但无法捕捉任何上下文信息。</li>
+<li>二元语法假设当前词只依赖前一个词，适合捕捉词对关系，计算效率较高。</li>
+<li>三元语法扩展了依赖范围，但面临计算复杂度和数据稀疏的问题。</li>
+</ul>
+<h1 id="自然语言统计"><a href="#自然语言统计" class="headerlink" title="自然语言统计"></a>自然语言统计</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br>tokens = d2l.tokenize(d2l.read_time_machine())<br><span class="hljs-comment"># 因为每个文本行不一定是一个句子或一个段落，因此我们把所有文本行拼接到一起</span><br>corpus = [token <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> tokens <span class="hljs-keyword">for</span> token <span class="hljs-keyword">in</span> line]<br>vocab = d2l.Vocab(corpus)<br>vocab.token_freqs[:<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">######</span><br>[(<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-number">2261</span>),<br> (<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-number">1267</span>),<br> (<span class="hljs-string">&#x27;and&#x27;</span>, <span class="hljs-number">1245</span>),<br> (<span class="hljs-string">&#x27;of&#x27;</span>, <span class="hljs-number">1155</span>),<br> (<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-number">816</span>),<br> (<span class="hljs-string">&#x27;to&#x27;</span>, <span class="hljs-number">695</span>),<br> (<span class="hljs-string">&#x27;was&#x27;</span>, <span class="hljs-number">552</span>),<br> (<span class="hljs-string">&#x27;in&#x27;</span>, <span class="hljs-number">541</span>),<br> (<span class="hljs-string">&#x27;that&#x27;</span>, <span class="hljs-number">443</span>),<br> (<span class="hljs-string">&#x27;my&#x27;</span>, <span class="hljs-number">440</span>)]<br></code></pre></td></tr></table></figure>
+<p>正如我们所看到的，最流行的词看起来很无聊， 这些词通常被称为<em>停用词</em>（stop words），因此可以被过滤掉。 尽管如此，它们本身仍然是有意义的，我们仍然会在模型中使用它们。 此外，还有个明显的问题是词频衰减的速度相当地快。 例如，最常用单词的词频对比，第10个还不到第1个的1/5。 为了更好地理解，我们可以画出的词频图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">freqs = [freq <span class="hljs-keyword">for</span> token, freq <span class="hljs-keyword">in</span> vocab.token_freqs]<br>d2l.plot(freqs, xlabel=<span class="hljs-string">&#x27;token: x&#x27;</span>, ylabel=<span class="hljs-string">&#x27;frequency: n(x)&#x27;</span>,<br>         xscale=<span class="hljs-string">&#x27;log&#x27;</span>, yscale=<span class="hljs-string">&#x27;log&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p><img src="20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128153852275.png" srcset="/img/loading.gif" lazyload alt="image-20241128153852275"></p>
+<h3 id="齐普夫定律-Zipf’s-Law"><a href="#齐普夫定律-Zipf’s-Law" class="headerlink" title="齐普夫定律 (Zipf’s Law)"></a><strong>齐普夫定律 (Zipf’s Law)</strong></h3><p>齐普夫定律是一种描述<strong>自然语言中的词频分布规律</strong>的经验法则，它由语言学家乔治·齐普夫 (George Zipf) 提出。这一定律表明，在一段文本或语料中，单词的出现频率与其频率排名成反比。</p>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a><strong>公式</strong></h4><script type="math/tex; mode=display">
+f(r) \propto \frac{1}{r^s}</script><p>其中：</p>
+<ul>
+<li>f(r)：单词的出现频率（词频）。</li>
+<li>r：单词的频率排名。</li>
+<li>s：幂指数（通常在自然语言中约为 1）。</li>
+<li>∝：表示“成正比”。</li>
+</ul>
+<p>可以简单表达为：</p>
+<script type="math/tex; mode=display">
+f(r) \cdot r^s = \text{常数}</script><h4 id="直观解释"><a href="#直观解释" class="headerlink" title="直观解释"></a><strong>直观解释</strong></h4><ul>
+<li>自然语言文本中的单词分布非常不均匀。</li>
+<li><strong>高频词</strong>（如“the”、“of”、“and”）出现的次数远远多于低频词。</li>
+<li>齐普夫定律的核心观点<ul>
+<li>排名为第 1 的单词（最高频单词）的出现次数，约等于排名第 2 的单词的 2 倍，约等于排名第 3 的单词的 3 倍，依此类推。</li>
+<li>例如：<ul>
+<li>最高频单词出现 1000 次；</li>
+<li>排名第 2 的单词出现约 500 次；</li>
+<li>排名第 3 的单词出现约 333 次。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="自然语言中的应用"><a href="#自然语言中的应用" class="headerlink" title="自然语言中的应用"></a><em>自然语言中的应用</em></h4><h5 id="1-高频词与低频词"><a href="#1-高频词与低频词" class="headerlink" title="(1) 高频词与低频词"></a><strong>(1) 高频词与低频词</strong></h5><ul>
+<li>自然语言中，大量的单词只出现过一次或几次（称为“长尾单词”）。</li>
+<li>高频词如“the”、“is”、“of”占据了语料库的大部分词频，但信息量较少。</li>
+<li>低频词信息丰富，但在整个语料库中数量很少。</li>
+</ul>
+<h5 id="2-词汇覆盖问题"><a href="#2-词汇覆盖问题" class="headerlink" title="(2) 词汇覆盖问题"></a><strong>(2) 词汇覆盖问题</strong></h5><ul>
+<li>齐普夫定律表明，用少量的高频词可以覆盖大部分的语料。</li>
+<li>示例：<ul>
+<li>前 1000 个高频单词可能覆盖文本中 80% 的单词出现次数。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-数据稀疏问题"><a href="#3-数据稀疏问题" class="headerlink" title="(3) 数据稀疏问题"></a><strong>(3) 数据稀疏问题</strong></h5><ul>
+<li>长尾单词的存在使得构建语言模型时会面临<strong>数据稀疏问题</strong>，许多低频词甚至在训练集中没有出现。</li>
+</ul>
+<h4 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h4><ul>
+<li>不能解释所有语言中的词频分布规律</li>
+<li>对长尾单词的预测能力有限</li>
+<li>无法直接量化单词的语义贡献</li>
+</ul>
+<h4 id="等价于"><a href="#等价于" class="headerlink" title="等价于"></a>等价于</h4><script type="math/tex; mode=display">
+logn_i=−αlogi+c</script><p>其中α是刻画分布的指数，c是常数。 这告诉我们想要通过计数统计和平滑来建模单词是不可行的， 因为这样建模的结果会大大高估尾部单词的频率，也就是所谓的不常用单词。 那么其他的词元组合，比如二元语法、三元语法等等，又会如何呢？ 我们来看看二元语法的频率是否与一元语法的频率表现出相同的行为方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">bigram_tokens = [pair <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(corpus[:-<span class="hljs-number">1</span>], corpus[<span class="hljs-number">1</span>:])]<br>bigram_vocab = d2l.Vocab(bigram_tokens)<br>bigram_vocab.token_freqs[:<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">######</span><br>[((<span class="hljs-string">&#x27;of&#x27;</span>, <span class="hljs-string">&#x27;the&#x27;</span>), <span class="hljs-number">309</span>),<br> ((<span class="hljs-string">&#x27;in&#x27;</span>, <span class="hljs-string">&#x27;the&#x27;</span>), <span class="hljs-number">169</span>),<br> ((<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;had&#x27;</span>), <span class="hljs-number">130</span>),<br> ((<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;was&#x27;</span>), <span class="hljs-number">112</span>),<br> ((<span class="hljs-string">&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;the&#x27;</span>), <span class="hljs-number">109</span>),<br> ((<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;time&#x27;</span>), <span class="hljs-number">102</span>),<br> ((<span class="hljs-string">&#x27;it&#x27;</span>, <span class="hljs-string">&#x27;was&#x27;</span>), <span class="hljs-number">99</span>),<br> ((<span class="hljs-string">&#x27;to&#x27;</span>, <span class="hljs-string">&#x27;the&#x27;</span>), <span class="hljs-number">85</span>),<br> ((<span class="hljs-string">&#x27;as&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>), <span class="hljs-number">78</span>),<br> ((<span class="hljs-string">&#x27;of&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), <span class="hljs-number">73</span>)]<br></code></pre></td></tr></table></figure>
+<p>这里值得注意：在十个最频繁的词对中，有九个是由两个停用词组成的， 只有一个与“the time”有关。 我们再进一步看看三元语法的频率是否表现出相同的行为方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python">trigram_tokens = [triple <span class="hljs-keyword">for</span> triple <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<br>    corpus[:-<span class="hljs-number">2</span>], corpus[<span class="hljs-number">1</span>:-<span class="hljs-number">1</span>], corpus[<span class="hljs-number">2</span>:])]<br>trigram_vocab = d2l.Vocab(trigram_tokens)<br>trigram_vocab.token_freqs[:<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">######</span><br>[((<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;time&#x27;</span>, <span class="hljs-string">&#x27;traveller&#x27;</span>), <span class="hljs-number">59</span>),<br> ((<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;time&#x27;</span>, <span class="hljs-string">&#x27;machine&#x27;</span>), <span class="hljs-number">30</span>),<br> ((<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;medical&#x27;</span>, <span class="hljs-string">&#x27;man&#x27;</span>), <span class="hljs-number">24</span>),<br> ((<span class="hljs-string">&#x27;it&#x27;</span>, <span class="hljs-string">&#x27;seemed&#x27;</span>, <span class="hljs-string">&#x27;to&#x27;</span>), <span class="hljs-number">16</span>),<br> ((<span class="hljs-string">&#x27;it&#x27;</span>, <span class="hljs-string">&#x27;was&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), <span class="hljs-number">15</span>),<br> ((<span class="hljs-string">&#x27;here&#x27;</span>, <span class="hljs-string">&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;there&#x27;</span>), <span class="hljs-number">15</span>),<br> ((<span class="hljs-string">&#x27;seemed&#x27;</span>, <span class="hljs-string">&#x27;to&#x27;</span>, <span class="hljs-string">&#x27;me&#x27;</span>), <span class="hljs-number">14</span>),<br> ((<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;did&#x27;</span>, <span class="hljs-string">&#x27;not&#x27;</span>), <span class="hljs-number">14</span>),<br> ((<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;saw&#x27;</span>, <span class="hljs-string">&#x27;the&#x27;</span>), <span class="hljs-number">13</span>),<br> ((<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;began&#x27;</span>, <span class="hljs-string">&#x27;to&#x27;</span>), <span class="hljs-number">13</span>)]<br></code></pre></td></tr></table></figure>
+<p>最后，我们直观地对比三种模型中的词元频率：一元语法、二元语法和三元语法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">bigram_freqs = [freq <span class="hljs-keyword">for</span> token, freq <span class="hljs-keyword">in</span> bigram_vocab.token_freqs]<br>trigram_freqs = [freq <span class="hljs-keyword">for</span> token, freq <span class="hljs-keyword">in</span> trigram_vocab.token_freqs]<br>d2l.plot([freqs, bigram_freqs, trigram_freqs], xlabel=<span class="hljs-string">&#x27;token: x&#x27;</span>,<br>         ylabel=<span class="hljs-string">&#x27;frequency: n(x)&#x27;</span>, xscale=<span class="hljs-string">&#x27;log&#x27;</span>, yscale=<span class="hljs-string">&#x27;log&#x27;</span>,<br>         legend=[<span class="hljs-string">&#x27;unigram&#x27;</span>, <span class="hljs-string">&#x27;bigram&#x27;</span>, <span class="hljs-string">&#x27;trigram&#x27;</span>])<br></code></pre></td></tr></table></figure>
+<p><img src="20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128162424131.png" srcset="/img/loading.gif" lazyload alt="image-20241128162424131"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li>除了一元语法词，单词序列似乎也遵循齐普夫定律</li>
+<li>词表中n元组的数量并没有那么大，这说明语言中存在相当多的结构， 这些结构给了我们应用模型的希望</li>
+<li>很多n元组很少出现，这使得拉普拉斯平滑非常不适合语言建模。 作为代替，我们将使用基于深度学习的模型</li>
+</ol>
+<h2 id="读取长序列数据"><a href="#读取长序列数据" class="headerlink" title="读取长序列数据"></a>读取长序列数据</h2><p><img src="20241128_%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86/image-20241128163004487.png" srcset="/img/loading.gif" lazyload alt="image-20241128163004487"></p>
+<h4 id="随机采样"><a href="#随机采样" class="headerlink" title="随机采样"></a>随机采样</h4><p>在随机采样中，每个样本都是在原始的长序列上任意捕获的子序列。 在迭代过程中，来自两个相邻的、随机的、小批量中的子序列不一定在原始序列上相邻。 对于语言建模，目标是基于到目前为止我们看到的词元来预测下一个词元， 因此标签是移位了一个词元的原始序列。</p>
+<p>缺点：</p>
+<ul>
+<li>缺乏上下文连续性</li>
+<li>数据冗余问题</li>
+<li>训练样本分布不均匀</li>
+<li>时间序列的顺序性丢失</li>
+<li>不适合生成式任务</li>
+<li>模型收敛较慢</li>
+<li>随机性可能导致结果不稳定</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#从数据中随机生成一个小批量。 在这里，参数batch_size指定了每个小批量中子序列样本的数目， 参数num_steps是每个子序列中预定义的时间步数。</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">seq_data_iter_random</span>(<span class="hljs-params">corpus, batch_size, num_steps</span>):  <span class="hljs-comment">#@save</span><br>    <span class="hljs-string">&quot;&quot;&quot;使用随机抽样生成一个小批量子序列&quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 从随机偏移量开始对序列进行分区，随机范围包括num_steps-1</span><br>    corpus = corpus[random.randint(<span class="hljs-number">0</span>, num_steps - <span class="hljs-number">1</span>):]<br>    <span class="hljs-comment"># 减去1，是因为我们需要考虑标签</span><br>    num_subseqs = (<span class="hljs-built_in">len</span>(corpus) - <span class="hljs-number">1</span>) // num_steps<br>    <span class="hljs-comment"># 长度为num_steps的子序列的起始索引</span><br>    initial_indices = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, num_subseqs * num_steps, num_steps))<br>    <span class="hljs-comment"># 在随机抽样的迭代过程中，</span><br>    <span class="hljs-comment"># 来自两个相邻的、随机的、小批量中的子序列不一定在原始序列上相邻</span><br>    random.shuffle(initial_indices)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">data</span>(<span class="hljs-params">pos</span>):<br>        <span class="hljs-comment"># 返回从pos位置开始的长度为num_steps的序列</span><br>        <span class="hljs-keyword">return</span> corpus[pos: pos + num_steps]<br><br>    num_batches = num_subseqs // batch_size<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, batch_size * num_batches, batch_size):<br>        <span class="hljs-comment"># 在这里，initial_indices包含子序列的随机起始索引</span><br>        initial_indices_per_batch = initial_indices[i: i + batch_size]<br>        X = [data(j) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> initial_indices_per_batch]<br>        Y = [data(j + <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> initial_indices_per_batch]<br>        <span class="hljs-keyword">yield</span> torch.tensor(X), torch.tensor(Y)<br>        <br>        <br>my_seq = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">35</span>))<br><span class="hljs-keyword">for</span> X, Y <span class="hljs-keyword">in</span> seq_data_iter_random(my_seq, batch_size=<span class="hljs-number">2</span>, num_steps=<span class="hljs-number">5</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;X: &#x27;</span>, X, <span class="hljs-string">&#x27;\nY:&#x27;</span>, Y)<br>    <br><span class="hljs-comment">######</span><br>X:  tensor([[<span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">17</span>],<br>        [<span class="hljs-number">28</span>, <span class="hljs-number">29</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">32</span>]])<br>Y: tensor([[<span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>],<br>        [<span class="hljs-number">29</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">32</span>, <span class="hljs-number">33</span>]])<br>X:  tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],<br>        [<span class="hljs-number">18</span>, <span class="hljs-number">19</span>, <span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>]])<br>Y: tensor([[ <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],<br>        [<span class="hljs-number">19</span>, <span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>]])<br>X:  tensor([[ <span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],<br>        [<span class="hljs-number">23</span>, <span class="hljs-number">24</span>, <span class="hljs-number">25</span>, <span class="hljs-number">26</span>, <span class="hljs-number">27</span>]])<br>Y: tensor([[ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>],<br>        [<span class="hljs-number">24</span>, <span class="hljs-number">25</span>, <span class="hljs-number">26</span>, <span class="hljs-number">27</span>, <span class="hljs-number">28</span>]])<br></code></pre></td></tr></table></figure>
+<h5 id="封装类"><a href="#封装类" class="headerlink" title="封装类"></a>封装类</h5><p><strong>随机采样</strong>：用于需要数据多样性、上下文依赖性较低的任务。</p>
+<p><strong>顺序采样</strong>：用于需要捕获序列上下文的任务，例如语言建模或时间序列预测。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#提供一个统一接口，用于加载和生成序列数据。</span><br><span class="hljs-comment">#支持随机采样和顺序采样两种数据生成方式。</span><br><span class="hljs-comment">#自动处理语料的加载、预处理和子序列划分</span><br><span class="hljs-comment">#可以通过扩展 data_iter_fn 来支持更多类型的采样策略，例如带权重的随机采样或滑动窗口采样。</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SeqDataLoader</span>:  <span class="hljs-comment">#@save</span><br>    <span class="hljs-string">&quot;&quot;&quot;加载序列数据的迭代器&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, batch_size, num_steps, use_random_iter, max_tokens</span>):<br>        <span class="hljs-keyword">if</span> use_random_iter:<br>            self.data_iter_fn = d2l.seq_data_iter_random<br>        <span class="hljs-keyword">else</span>:<br>            self.data_iter_fn = d2l.seq_data_iter_sequential<br>        self.corpus, self.vocab = d2l.load_corpus_time_machine(max_tokens)<br>        self.batch_size, self.num_steps = batch_size, num_steps<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> self.data_iter_fn(self.corpus, self.batch_size, self.num_steps)<br></code></pre></td></tr></table></figure>
+<h5 id="封装类-1"><a href="#封装类-1" class="headerlink" title="封装类"></a>封装类</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#返回值：数据迭代器：生成训练用的小批量数据。词汇表：用于词元和索引的映射。</span><br><span class="hljs-comment">#提供统一接口，加载语料并生成数据迭代器。</span><br><span class="hljs-comment">#支持随机采样和顺序采样两种方式。</span><br><span class="hljs-comment">#随机采样适合多样性较高的任务，顺序采样适合上下文依赖性较强的任务。</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_data_time_machine</span>(<span class="hljs-params">batch_size, num_steps,  <span class="hljs-comment">#@save</span></span><br><span class="hljs-params">                           use_random_iter=<span class="hljs-literal">False</span>, max_tokens=<span class="hljs-number">10000</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;返回时光机器数据集的迭代器和词表&quot;&quot;&quot;</span><br>    data_iter = SeqDataLoader(<br>        batch_size, num_steps, use_random_iter, max_tokens)<br>    <span class="hljs-keyword">return</span> data_iter, data_iter.vocab<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="print-no-link">#数据处理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>语言模型和数据集</div>
+      <div>http://example.com/2024/11/28/20241128_语言模型和数据集/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>XuanYa</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/28/20241128_%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="循环神经网络">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">循环神经网络</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/28/20241128_%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86/" title="文本预处理">
+                        <span class="hidden-mobile">文本预处理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
